@@ -1,0 +1,846 @@
+/*
+Theme Name: Simple Dental
+Description: A clean, modern WordPress theme for Simple Dental practice in Las Vegas. Features transparent pricing, honest messaging, and earth-tone design aesthetic.
+Version: 1.0
+Author: Simple Dental Development Team
+*/
+
+/* ==========================================================================
+   CSS Reset and Base Styles
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.7;
+    color: #2c2c2c;
+    background-color: #ffffff;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Color Variables - Gray and Earth Tones
+   ========================================================================== */
+
+:root {
+    --primary-brown: #8B7355;
+    --brown-hover: #7A6249;
+    --brown-light: #A68B5B;
+    --dark-gray: #2c2c2c;
+    --medium-gray: #6b6b6b;
+    --light-gray: #f3f4f6;
+    --border-gray: #e5e7eb;
+    --off-white: #fafafa;
+    --white: #ffffff;
+    --warm-beige: #f5f2ed;
+    --sage-green: #9CAF88;
+    --soft-taupe: #D4C4B0;
+    --charcoal: #3a3a3a;
+    --text-dark: #2c2c2c;
+    --text-medium: #4a4a4a;
+    --text-light: #737373;
+    --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.025em;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.875rem;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-medium);
+}
+
+a {
+    color: var(--primary-brown);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: var(--brown-hover);
+}
+
+/* ==========================================================================
+   Layout and Structure
+   ========================================================================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 60px 0;
+}
+
+.section-alt {
+    background-color: var(--warm-beige);
+}
+
+/* ==========================================================================
+   Header Styles
+   ========================================================================== */
+
+.site-header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-light);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    min-height: 80px;
+}
+
+.site-branding {
+    flex: 0 0 auto;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.site-title a {
+    color: var(--text-dark);
+    font-weight: inherit;
+}
+
+.site-title a:hover {
+    color: var(--primary-brown);
+}
+
+.custom-logo-wrapper img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+}
+
+.main-navigation {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.main-navigation a {
+    color: var(--text-medium);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.75rem 0;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.main-navigation a:hover,
+.main-navigation a.active {
+    color: var(--primary-brown);
+}
+
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-brown);
+    transition: width 0.2s ease;
+}
+
+.main-navigation a:hover::after,
+.main-navigation a.active::after {
+    width: 100%;
+}
+
+.header-cta {
+    flex: 0 0 auto;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+
+.hero {
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--white) 100%);
+    padding: 140px 0 100px;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(139, 115, 85, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.75rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+}
+
+.hero .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-medium);
+    margin-bottom: 3rem;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    min-height: 48px;
+    box-shadow: var(--shadow-light);
+}
+
+.btn-primary {
+    background-color: var(--primary-brown);
+    color: var(--white);
+    border: 2px solid var(--primary-brown);
+}
+
+.btn-primary:hover {
+    background-color: var(--brown-hover);
+    border-color: var(--brown-hover);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--primary-brown);
+    border: 2px solid var(--primary-brown);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-brown);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* ==========================================================================
+   Services/Pricing Section
+   ========================================================================== */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-brown), var(--brown-light));
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-brown);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-title {
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.service-price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-brown);
+    margin-bottom: 1rem;
+    letter-spacing: -0.025em;
+}
+
+.service-description {
+    color: var(--text-medium);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Contact Section
+   ========================================================================== */
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.contact-card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.contact-card h4 {
+    color: var(--accent-teal);
+    margin-bottom: 15px;
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+    background-color: var(--text-dark);
+    color: var(--light-gray);
+    padding: 40px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section a {
+    color: var(--light-gray);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--medium-gray);
+    padding-top: 20px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+/* ==========================================================================
+   Coming Soon Banner
+   ========================================================================== */
+
+.coming-soon-banner {
+    background: linear-gradient(90deg, var(--primary-brown) 0%, var(--brown-hover) 100%);
+    color: var(--white);
+    padding: 0.75rem 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.025em;
+}
+
+.banner-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.banner-text::before {
+    content: '🎉';
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   Contact Form Styles
+   ========================================================================== */
+
+.simple-contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.simple-contact-form .form-row {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.simple-contact-form .form-row input,
+.simple-contact-form .form-row textarea {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.simple-contact-form .form-row input:focus,
+.simple-contact-form .form-row textarea:focus {
+    outline: none;
+    border-color: var(--primary-brown);
+}
+
+.simple-contact-form .form-row:last-child {
+    text-align: center;
+}
+
+.contact-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+}
+
+.contact-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+/* ==========================================================================
+   Scroll Animations
+   ========================================================================== */
+
+.service-card, .contact-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-card.fade-in, .contact-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Header Scroll Effects
+   ========================================================================== */
+
+.site-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Mobile Menu Toggle */
+.menu-toggle,
+button.menu-toggle {
+    display: none;
+    background: none !important;
+    border: none !important;
+    padding: 0.75rem;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Clean Hamburger Menu Styling */
+.hamburger {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    background-color: var(--primary-brown) !important;
+    margin: 3px 0 !important;
+    transition: all 0.2s ease !important;
+    border-radius: 1px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Clean X Icon */
+.close-icon {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: var(--primary-brown) !important;
+    line-height: 1 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+    z-index: 10 !important;
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1) !important;
+    opacity: 0;
+}
+
+/* Hamburger to X animation */
+.menu-toggle.active .hamburger {
+    transform: scale(0) !important;
+    opacity: 0 !important;
+    transition: all 0.25s ease !important;
+}
+
+.menu-toggle.active .close-icon {
+    transform: translate(-50%, -50%) scale(1) !important;
+    opacity: 1 !important;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* CRITICAL: Force mobile menu visibility on smaller screens */
+@media screen and (max-width: 768px) {
+    .site-header .menu-toggle,
+    .header-content .menu-toggle,
+    .main-navigation .menu-toggle,
+    button.menu-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 99999 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px solid var(--primary-brown) !important;
+        border-radius: 6px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    }
+    
+    .menu-toggle .hamburger,
+    button.menu-toggle .hamburger {
+        display: block !important;
+        background-color: var(--primary-brown) !important;
+        width: 28px !important;
+        height: 3px !important;
+        margin: 3px 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    /* HERO SECTION - Calculate actual header height */
+    .hero {
+        padding-top: 450px !important;
+        padding-bottom: 80px;
+        margin-top: 0 !important;
+        position: relative !important;
+    }
+    
+    .hero h1 {
+        font-size: 2.75rem;
+        line-height: 1.15;
+    }
+    
+    .hero .subtitle {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* MOBILE HEADER LAYOUT */
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        position: relative;
+    }
+    
+    .site-branding {
+        flex: 1;
+        text-align: left;
+    }
+    
+    /* SHOW HAMBURGER MENU */
+    .menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid var(--primary-brown) !important;
+        border-radius: 6px !important;
+        padding: 0.625rem !important;
+        cursor: pointer;
+        width: 44px !important;
+        height: 44px !important;
+        position: relative !important;
+        z-index: 9999 !important;
+        order: 999 !important;
+        margin-left: auto !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* COMPACT MOBILE MENU DESIGN */
+    .main-navigation ul {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 8px;
+        width: 170px !important;
+        max-width: 170px !important;
+        background: var(--white);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        border-radius: 6px;
+        z-index: 999;
+        flex-direction: column;
+        padding: 0.25rem 0;
+        margin: 0;
+        list-style: none;
+        border: 1px solid var(--border-gray);
+        
+        /* Initial hidden state */
+        display: flex;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px) scale(0.9);
+        pointer-events: none;
+        
+        /* Smooth animation properties */
+        transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    visibility 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    /* SHOW MOBILE MENU WHEN ACTIVE */
+    .main-navigation ul.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
+    }
+    
+    .main-navigation li {
+        border-bottom: 1px solid var(--off-white);
+        margin: 0;
+    }
+    
+    .main-navigation li:last-child {
+        border-bottom: none;
+    }
+    
+    .main-navigation a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    
+    .main-navigation a:hover {
+        background-color: var(--primary-brown);
+        color: var(--white);
+    }
+    
+    /* HIDE DESKTOP CTA */
+    .header-cta {
+        display: none;
+    }
+    
+    .site-title {
+        font-size: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.25rem;
+    }
+    
+    .hero .subtitle {
+        font-size: 1rem;
+    }
+    
+    .site-title {
+        font-size: 1.25rem;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+    
+    .service-card {
+        padding: 1.25rem;
+    }
+    
+    .service-price {
+        font-size: 1.75rem;
+    }
+    
+    /* Contact form mobile styles */
+    .simple-contact-form .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .simple-contact-form .form-row input,
+    .simple-contact-form .form-row textarea {
+        margin-bottom: 15px;
+    }
+}
