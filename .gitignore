@@ -1,0 +1,31 @@
+# FTP Configuration Files (contains sensitive credentials)
+# Note: deploy-robust.py contains hardcoded credentials - should be refactored
+# for production use with environment variables or separate config file
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+
+# WordPress Uploads (if any)
+uploads/
+wp-content/uploads/
+
+# Backup Files
+*.bak
+*.backup
