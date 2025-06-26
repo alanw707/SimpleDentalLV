@@ -1,6 +1,5 @@
 # FTP Configuration Files (contains sensitive credentials)
-# Note: deploy-robust.py contains hardcoded credentials - should be refactored
-# for production use with environment variables or separate config file
+deployconfig.py
 
 # Python Cache
 __pycache__/

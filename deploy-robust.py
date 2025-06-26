@@ -9,12 +9,19 @@ import sys
 import time
 from pathlib import Path
 
-FTP_CONFIG = {
-    'host': 'simpledentallv.com',
-    'username': 'u659513315.simpledentallv.com',
-    'password': 'Ilovebibi920#1',
-    'remote_path': '/public_html/wp-content/themes/'
-}
+# Import FTP configuration from external file
+try:
+    from deployconfig import FTP_CONFIG
+except ImportError:
+    print("❌ Error: deployconfig.py not found!")
+    print("Create deployconfig.py with your FTP credentials:")
+    print("FTP_CONFIG = {")
+    print("    'host': 'your-host.com',")
+    print("    'username': 'your-username',")
+    print("    'password': 'your-password',")
+    print("    'remote_path': '/public_html/wp-content/themes/'")
+    print("}")
+    sys.exit(1)
 
 def connect_ftp():
     """Create FTP connection with retry"""
