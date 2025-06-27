@@ -26,43 +26,12 @@ get_header();
         <section class="about-section section">
             <div class="container">
                 
-                <!-- Main Story -->
-                <div class="about-story">
-                    <h2>What Simple Dental Stands For</h2>
-                    <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
-                    
-                    <p>With digital tools and efficient systems, we make your visit fast, comfortable, and transparent. This isn't about fancy amenities or high-pressure sales — it's about delivering honest, quality dental care that working families can afford.</p>
-                </div>
-
-                <!-- Practice Philosophy -->
-                <div class="about-philosophy">
-                    <div class="philosophy-content">
-                        <h2>How We're Different</h2>
-                        <div class="philosophy-grid">
-                            <div class="philosophy-item">
-                                <div class="philosophy-icon">🩺</div>
-                                <h3>One Doctor, Always</h3>
-                                <p>You'll see the same experienced dentist every visit. No rotating providers, no bait-and-switch.</p>
-                            </div>
-                            
-                            <div class="philosophy-item">
-                                <div class="philosophy-icon">💰</div>
-                                <h3>Transparent Pricing</h3>
-                                <p>Know exactly what you'll pay before treatment begins. No surprise bills, no hidden fees.</p>
-                            </div>
-                            
-                            <div class="philosophy-item">
-                                <div class="philosophy-icon">⚡</div>
-                                <h3>Modern Efficiency</h3>
-                                <p>Same-day crowns, digital technology, and streamlined systems for better outcomes.</p>
-                            </div>
-                            
-                            <div class="philosophy-item">
-                                <div class="philosophy-icon">🤝</div>
-                                <h3>No Pressure</h3>
-                                <p>We recommend only what you truly need. Just honest recommendations based on your dental health.</p>
-                            </div>
-                        </div>
+                <!-- Doctor Biography Section - To be updated with client content -->
+                <div class="doctor-bio-section">
+                    <h2>Meet Your Dentist</h2>
+                    <div class="bio-placeholder">
+                        <p><em>Doctor biography and credentials will be added here when provided by the client.</em></p>
+                        <p><em>This section will include the doctor's background, education, experience, and personal approach to dental care.</em></p>
                     </div>
                 </div>
 
@@ -183,83 +152,33 @@ get_header();
     font-weight: 400;
 }
 
-.about-story {
-    max-width: 700px;
+.doctor-bio-section {
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
     padding: 2rem 0;
 }
 
-.about-story h2 {
+.doctor-bio-section h2 {
     color: var(--primary-brown);
     margin-bottom: 1.5rem;
     font-size: 2.25rem;
 }
 
-.about-story p {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    color: var(--text-medium);
-}
-
-.about-philosophy {
-    background-color: var(--warm-beige);
-    padding: 4rem 2rem;
-    margin: 4rem 0;
-    border-radius: 1rem;
-}
-
-.philosophy-content {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.philosophy-content h2 {
-    text-align: center;
-    color: var(--text-dark);
-    margin-bottom: 3rem;
-    font-size: 2rem;
-}
-
-.philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.philosophy-item {
-    background: var(--white);
+.bio-placeholder {
+    background: var(--warm-beige);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: var(--shadow-light);
-    text-align: center;
-    border: 1px solid var(--border-gray);
-    transition: all 0.2s ease;
+    border: 2px dashed var(--border-gray);
 }
 
-.philosophy-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-    border-color: var(--primary-brown);
-}
-
-.philosophy-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.philosophy-item h3 {
-    color: var(--primary-brown);
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-}
-
-.philosophy-item p {
+.bio-placeholder p {
     color: var(--text-medium);
-    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 1rem;
 }
+
+/* Philosophy styles removed - now on homepage */
 
 .about-details {
     margin: 4rem 0;
@@ -401,10 +320,6 @@ get_header();
         font-size: 1.2rem;
     }
     
-    .philosophy-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .details-grid {
         grid-template-columns: 1fr;
     }
@@ -418,9 +333,8 @@ get_header();
         padding: 2rem 1.5rem;
     }
     
-    .about-philosophy {
-        padding: 3rem 1.5rem;
-        margin: 3rem 0;
+    .bio-placeholder {
+        padding: 1.5rem;
     }
 }
 </style>
