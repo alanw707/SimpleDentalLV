@@ -734,6 +734,163 @@ a:hover {
     border: 1px solid #f5c6cb;
 }
 
+.contact-error ul {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+}
+
+.contact-error li {
+    margin: 5px 0;
+}
+
+.contact-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    font-size: 1.1rem;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+}
+
+/* Enhanced Contact Form Styles */
+.simple-contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.simple-contact-form .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.simple-contact-form .form-row input,
+.simple-contact-form .form-row textarea {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--border-gray);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: var(--white);
+}
+
+.simple-contact-form .form-row input:focus,
+.simple-contact-form .form-row textarea:focus {
+    outline: none;
+    border-color: var(--primary-brown);
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+.simple-contact-form .form-row textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+.captcha-row {
+    justify-content: center;
+    align-items: center;
+}
+
+.form-note {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-note small {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+/* AJAX Contact Form Loading States */
+#contact-submit-btn {
+    position: relative;
+    min-width: 160px;
+    transition: all 0.3s ease;
+}
+
+#contact-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-loading {
+    display: inline-block;
+}
+
+.btn-loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Form Messages Styling */
+#contact-form-messages {
+    margin-bottom: 20px;
+}
+
+#contact-form-messages .contact-success,
+#contact-form-messages .contact-error {
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Focus States for AJAX Form */
+.simple-contact-form input:focus,
+.simple-contact-form textarea:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.15), 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+/* reCAPTCHA Styling */
+.g-recaptcha {
+    margin: 0 auto;
+    display: inline-block;
+}
+
+/* Mobile Contact Form Improvements */
+@media (max-width: 768px) {
+    .simple-contact-form .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .simple-contact-form .form-row input,
+    .simple-contact-form .form-row textarea {
+        margin-bottom: 15px;
+    }
+    
+    .simple-contact-form .form-row:last-child input,
+    .simple-contact-form .form-row:last-child textarea {
+        margin-bottom: 0;
+    }
+}
+
 /* ==========================================================================
    Scroll Animations
    ========================================================================== */
