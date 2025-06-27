@@ -45,6 +45,9 @@ body {
     --white: #ffffff;
     --warm-beige: #f5f2ed;
     --sage-green: #9CAF88;
+    --soft-sage: #9CAF88;
+    --warm-coral: #B5967A;
+    --coral-hover: #A68867;
     --soft-taupe: #D4C4B0;
     --charcoal: #3a3a3a;
     --text-dark: #2c2c2c;
@@ -53,6 +56,8 @@ body {
     --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --success-green: var(--soft-sage);
+    --accent-coral: var(--warm-coral);
 }
 
 /* ==========================================================================
@@ -313,6 +318,119 @@ a:hover {
     box-shadow: var(--shadow-medium);
 }
 
+.btn-coral {
+    background-color: var(--warm-coral);
+    color: var(--white);
+    border: 2px solid var(--warm-coral);
+}
+
+.btn-coral:hover {
+    background-color: var(--coral-hover);
+    border-color: var(--coral-hover);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* ==========================================================================
+   New Patient Special
+   ========================================================================== */
+
+.new-patient-special {
+    background: linear-gradient(135deg, var(--warm-coral) 0%, var(--coral-hover) 100%);
+    color: var(--white);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-large);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.new-patient-special::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.special-badge {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: var(--white);
+    padding: 0.625rem 1.25rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.new-patient-special h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.special-price {
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 1rem 0;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: -0.025em;
+}
+
+.new-patient-special p {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.special-features {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0 2rem 0;
+    flex-wrap: wrap;
+}
+
+.special-features .feature {
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+.new-patient-special .btn {
+    background-color: var(--white);
+    color: var(--warm-coral);
+    border-color: var(--white);
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+.new-patient-special .btn:hover {
+    background-color: var(--off-white);
+    color: var(--coral-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
 /* ==========================================================================
    Services/Pricing Section
    ========================================================================== */
@@ -376,6 +494,92 @@ a:hover {
     color: var(--text-medium);
     line-height: 1.6;
     font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Services by Category
+   ========================================================================== */
+
+.services-by-category {
+    margin: 2rem 0;
+}
+
+.service-category {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.service-category:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.category-title {
+    font-size: 2rem;
+    color: var(--primary-brown);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-brown), var(--soft-sage));
+    border-radius: 2px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.category-card {
+    border-left: 4px solid var(--border-gray);
+    transition: all 0.3s ease;
+}
+
+.service-category[data-category="preventive"] .category-card {
+    border-left-color: var(--soft-sage);
+}
+
+.service-category[data-category="restorative"] .category-card {
+    border-left-color: var(--primary-brown);
+}
+
+.service-category[data-category="extraction"] .category-card {
+    border-left-color: var(--warm-coral);
+}
+
+.service-category[data-category="endodontics"] .category-card {
+    border-left-color: var(--brown-light);
+}
+
+.service-category[data-category="prosthetics"] .category-card {
+    border-left-color: var(--soft-taupe);
+}
+
+.service-category[data-category="other"] .category-card {
+    border-left-color: var(--medium-gray);
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.category-card .service-title {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
 }
 
 /* ==========================================================================
@@ -842,5 +1046,41 @@ body.menu-open {
     .simple-contact-form .form-row input,
     .simple-contact-form .form-row textarea {
         margin-bottom: 15px;
+    }
+    
+    /* New Patient Special mobile */
+    .new-patient-special {
+        padding: 2rem 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .special-badge {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        letter-spacing: 0.025em;
+    }
+    
+    .special-price {
+        font-size: 2.5rem;
+    }
+    
+    .special-features {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+    
+    .new-patient-special h3 {
+        font-size: 1.5rem;
+    }
+    
+    /* Category services mobile */
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .category-title {
+        font-size: 1.75rem;
     }
 }

@@ -52,7 +52,6 @@ get_header();
     position: relative;
     text-align: center;
     padding: 240px 0 160px;
-    margin-top: 90px;
     min-height: 56vh; /* Account for fixed header */
     background-size: cover;
     background-position: center;
@@ -156,7 +155,6 @@ get_header();
     .page-header {
         padding-top: 430px !important;
         padding-bottom: 120px;
-        margin-top: 0 !important;
         min-height: 48vh;
         position: relative !important;
     }

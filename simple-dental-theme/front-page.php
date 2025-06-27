@@ -44,8 +44,8 @@ get_header();
                             <p>Know exactly what you'll pay before treatment</p>
                         </div>
                         <div class="feature">
-                            <h4>Same-Day Crowns</h4>
-                            <p>Complete crown restoration in one appointment</p>
+                            <h4>Modern Technology</h4>
+                            <p>Advanced digital tools for comfortable, efficient care</p>
                         </div>
                     </div>
                     
@@ -55,16 +55,33 @@ get_header();
         </div>
     </section>
 
+    <!-- New Patient Special Section -->
+    <section class="section" style="background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2>Start Your Journey to Better Oral Health</h2>
+                <p style="font-size: 1.125rem; color: var(--text-medium); max-width: 600px; margin: 0 auto;">
+                    New to Simple Dental? We're offering a comprehensive introduction to our practice.
+                </p>
+            </div>
+            
+            <?php echo do_shortcode('[new_patient_special]'); ?>
+        </div>
+    </section>
+
     <!-- Services Preview Section -->
     <section class="section section-alt" id="services">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px;">Our Services - Clear, Honest Pricing</h2>
+            <h2 style="text-align: center; margin-bottom: 40px;">Our Most Popular Services</h2>
+            <p style="text-align: center; margin-bottom: 2rem; font-size: 1.125rem; color: var(--text-medium);">
+                Transparent pricing on the services our patients need most
+            </p>
             
-            <?php echo do_shortcode('[simple_dental_services]'); ?>
+            <?php echo do_shortcode('[featured_services]'); ?>
             
             <div style="text-align: center; margin-top: 40px;">
                 <p><strong>No surprises. No hidden fees.</strong> Patients know upfront what to expect.</p>
-                <a href="<?php echo esc_url(home_url('/services/')); ?>" class="btn btn-primary">View All Services</a>
+                <a href="<?php echo esc_url(home_url('/services/')); ?>" class="btn btn-primary">View All Services & Pricing</a>
             </div>
         </div>
     </section>
@@ -163,11 +180,11 @@ get_header();
     }
     
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
     
     .hero .subtitle {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
 }
 

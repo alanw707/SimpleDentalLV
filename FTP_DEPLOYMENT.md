@@ -6,10 +6,10 @@
 1. Edit `deploy.py` and update the FTP_CONFIG section:
 ```python
 FTP_CONFIG = {
-    'host': 'your-actual-hostname.hostinger.com',
-    'username': 'your-ftp-username',
-    'password': 'your-ftp-password',
-    'remote_path': '/public_html/wp-content/themes/'
+    'host': 'ftp://simpledentallv.com',           # Your Hostinger FTP hostname
+    'username': 'u659513315.simpledentallv.com',         # Your FTP username
+    'password': 'Ilovebibi920#1',         # Your FTP password
+    'remote_path': '/public_html/wp-content/themes/'  # Path to WordPress themes directory
 }
 ```
 

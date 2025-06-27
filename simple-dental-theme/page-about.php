@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://plus.unsplash.com/premium_photo-1672922646298-3afc6c6397c9?w=1200&q=80'); background-size: cover; background-position: center;">
+        <header class="page-header section" style="background-image: url('https://plus.unsplash.com/premium_photo-1672922646298-3afc6c6397c9?w=1200&q=80'); background-size: cover; background-position: center 30%;">
             <div class="page-header-overlay">
                 <div class="container">
                     <h1 class="page-title">About Simple Dental</h1>
@@ -105,7 +105,7 @@ get_header();
                                 <div class="feature-list">
                                     <div class="feature-item">
                                         <span class="feature-check">✓</span>
-                                        <span>Same-day crown technology</span>
+                                        <span>Advanced digital technology</span>
                                     </div>
                                     <div class="feature-item">
                                         <span class="feature-check">✓</span>
@@ -143,7 +143,6 @@ get_header();
     position: relative;
     text-align: center;
     padding: 240px 0 160px;
-    margin-top: 90px;
     min-height: 56vh;
     background-size: cover;
     background-position: center;
@@ -387,6 +386,21 @@ get_header();
 }
 
 @media (max-width: 768px) {
+    .page-header {
+        padding-top: 470px !important;
+        padding-bottom: 120px;
+        min-height: 48vh;
+        position: relative !important;
+    }
+    
+    .page-title {
+        font-size: 2.1rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1.2rem;
+    }
+    
     .philosophy-grid {
         grid-template-columns: 1fr;
     }

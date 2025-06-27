@@ -24,14 +24,15 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li>Exam & Cleaning - $189</li>
-                        <li>Same-Day Crowns - $899</li>
-                        <li>Root Canals - $850</li>
-                        <li>Extractions - $220</li>
-                        <li>Deep Cleaning - $225/quad</li>
-                    </ul>
+                    <h4>Common Questions</h4>
+                    <div class="footer-faq-item">
+                        <p><strong>Do you accept insurance?</strong><br>
+                        We accept most major insurance plans and will verify your benefits.</p>
+                    </div>
+                    <div class="footer-faq-item">
+                        <p><strong>One doctor, always?</strong><br>
+                        Yes, you'll see the same experienced doctor every visit.</p>
+                    </div>
                 </div>
             </div>
 
@@ -48,6 +49,11 @@
         </div>
     </footer><!-- #colophon -->
 </div><!-- #page -->
+
+<!-- Scroll to Top Button -->
+<button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+    <span class="scroll-arrow">↑</span>
+</button>
 
 <!-- Mobile Menu Overlay -->
 <div class="mobile-menu-overlay"></div>
@@ -70,6 +76,68 @@
 .footer-section ul li {
     padding: 3px 0;
     color: var(--light-gray);
+}
+
+.footer-faq-item {
+    margin-bottom: 12px;
+}
+
+.footer-faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.footer-faq-item p {
+    margin-bottom: 0;
+    line-height: 1.5;
+    color: var(--light-gray);
+}
+
+.footer-faq-item strong {
+    color: var(--white);
+    font-weight: 600;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-brown);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    outline: none;
+}
+
+.scroll-to-top:hover {
+    background-color: var(--brown-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-arrow {
+    line-height: 1;
+    font-size: 18px;
 }
 
 .menu-toggle {
@@ -144,6 +212,18 @@
     .footer-bottom-content {
         flex-direction: column;
         text-align: center;
+    }
+    
+    /* Scroll to top button mobile adjustments */
+    .scroll-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .scroll-arrow {
+        font-size: 16px;
     }
 }
 
