@@ -27,30 +27,48 @@ get_header();
     <!-- About Preview Section -->
     <section class="section">
         <div class="container">
-            <div class="about-preview">
-                <div class="about-content">
-                    <h2>What Simple Dental Stands For</h2>
-                    <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
-                    
-                    <p>With digital tools like same-day crowns and efficient systems, we make your visit fast, comfortable, and transparent. No hidden fees, no pressure, just honest care for everyday working families.</p>
-                    
-                    <div class="about-features">
-                        <div class="feature">
-                            <h4>One Doctor, Always</h4>
-                            <p>You'll see the same experienced dentist every visit</p>
+            <!-- Main Story -->
+            <div class="about-story">
+                <h2>What Simple Dental Stands For</h2>
+                <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
+                
+                <p>With digital tools and efficient systems, we make your visit fast, comfortable, and transparent. This isn't about fancy amenities or high-pressure sales — it's about delivering honest, quality dental care that working families can afford.</p>
+            </div>
+
+            <!-- Practice Philosophy -->
+            <div class="about-philosophy">
+                <div class="philosophy-content">
+                    <h2>How We're Different</h2>
+                    <div class="philosophy-grid">
+                        <div class="philosophy-item">
+                            <div class="philosophy-icon">🩺</div>
+                            <h3>One Doctor, Always</h3>
+                            <p>You'll see the same experienced dentist every visit. No rotating providers, no bait-and-switch.</p>
                         </div>
-                        <div class="feature">
-                            <h4>Transparent Pricing</h4>
-                            <p>Know exactly what you'll pay before treatment</p>
+                        
+                        <div class="philosophy-item">
+                            <div class="philosophy-icon">💰</div>
+                            <h3>Transparent Pricing</h3>
+                            <p>Know exactly what you'll pay before treatment begins. No surprise bills, no hidden fees.</p>
                         </div>
-                        <div class="feature">
-                            <h4>Modern Technology</h4>
-                            <p>Advanced digital tools for comfortable, efficient care</p>
+                        
+                        <div class="philosophy-item">
+                            <div class="philosophy-icon">⚡</div>
+                            <h3>Modern Efficiency</h3>
+                            <p>Same-day crowns, digital technology, and streamlined systems for better outcomes.</p>
+                        </div>
+                        
+                        <div class="philosophy-item">
+                            <div class="philosophy-icon">🤝</div>
+                            <h3>No Pressure</h3>
+                            <p>We recommend only what you truly need. Just honest recommendations based on your dental health.</p>
                         </div>
                     </div>
-                    
-                    <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn-primary">Learn More About Us</a>
                 </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn-primary">Learn More About Our Practice</a>
             </div>
         </div>
     </section>
@@ -213,10 +231,82 @@ get_header();
     flex-wrap: wrap;
 }
 
-.about-preview {
-    max-width: 800px;
+.about-story {
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
+    padding: 2rem 0;
+}
+
+.about-story h2 {
+    color: var(--primary-brown);
+    margin-bottom: 1.5rem;
+    font-size: 2.25rem;
+}
+
+.about-story p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--text-medium);
+}
+
+.about-philosophy {
+    background-color: var(--warm-beige);
+    padding: 4rem 2rem;
+    margin: 4rem 0;
+    border-radius: 1rem;
+}
+
+.philosophy-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.philosophy-content h2 {
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.philosophy-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    border: 1px solid var(--border-gray);
+    transition: all 0.2s ease;
+}
+
+.philosophy-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-brown);
+}
+
+.philosophy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.philosophy-item h3 {
+    color: var(--primary-brown);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.philosophy-item p {
+    color: var(--text-medium);
+    line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -225,8 +315,13 @@ get_header();
         align-items: center;
     }
     
-    .about-features {
+    .philosophy-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .about-philosophy {
+        padding: 3rem 1.5rem;
+        margin: 3rem 0;
     }
 }
 </style>

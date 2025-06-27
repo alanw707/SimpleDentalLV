@@ -37,9 +37,6 @@ get_header();
                     <p>At Simple Dental, we believe you should know exactly what you're paying for. Below are our transparent prices for all dental procedures we offer. No games, no hidden fees — just honest pricing from an experienced doctor.</p>
                 </div>
 
-                <!-- All Services by Category -->
-                <?php echo do_shortcode('[services_by_category]'); ?>
-
                 <!-- Same-Day Crown Technology Section -->
                 <div class="technology-section">
                     <div class="container">
@@ -104,6 +101,9 @@ get_header();
                         </div>
                     </div>
                 </div>
+                
+                <!-- All Services by Category -->
+                <?php echo do_shortcode('[services_by_category]'); ?>
                 
                 <!-- Practice Advantages -->
                 <div class="services-additional">
