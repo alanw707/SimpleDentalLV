@@ -98,6 +98,43 @@
 
         // Header scroll styles are now in CSS file
 
+        // Scroll to Top Button functionality
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        
+        if (scrollToTopBtn) {
+            // Show/hide button based on scroll position
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            // Smooth scroll to top on click
+            scrollToTopBtn.addEventListener('click', function() {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, {
+                    duration: 800,
+                    easing: 'swing'
+                });
+            });
+            
+            // Keyboard accessibility
+            scrollToTopBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, {
+                        duration: 800,
+                        easing: 'swing'
+                    });
+                }
+            });
+        }
+
     });
 
 })(jQuery);

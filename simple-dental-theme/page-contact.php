@@ -120,8 +120,8 @@ get_header();
                     </div>
                     
                     <div class="faq-item">
-                        <h4>Do you offer same-day crowns?</h4>
-                        <p>Yes! Our advanced digital technology allows us to create and place crowns in a single visit.</p>
+                        <h4>What technology do you use?</h4>
+                        <p>We use modern digital tools and equipment to make your visit more comfortable and efficient, including digital X-rays and intraoral scanners.</p>
                     </div>
                     
                     <div class="faq-item">
@@ -146,7 +146,6 @@ get_header();
     position: relative;
     text-align: center;
     padding: 240px 0 160px;
-    margin-top: 90px;
     min-height: 56vh;
     background-size: cover;
     background-position: center;
@@ -308,16 +307,33 @@ get_header();
 }
 
 .faq-item h4 {
-    color: var(--accent-teal);
+    color: var(--primary-brown);
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .faq-item p {
     margin: 0;
     line-height: 1.6;
+    color: var(--text-medium);
 }
 
 @media (max-width: 768px) {
+    .page-header {
+        padding-top: 470px !important;
+        padding-bottom: 120px;
+        min-height: 48vh;
+        position: relative !important;
+    }
+    
+    .page-title {
+        font-size: 2.1rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1.2rem;
+    }
+    
     .contact-info {
         grid-template-columns: 1fr;
     }

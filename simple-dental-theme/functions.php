@@ -331,26 +331,77 @@ function simple_dental_contact_form() {
 add_shortcode('simple_dental_contact', 'simple_dental_contact_form');
 
 /**
- * Services display shortcode
+ * Get comprehensive service data
  */
-function simple_dental_services_display($atts) {
-    $page_id = get_the_ID();
-    $services = get_post_meta($page_id, '_simple_dental_services', true);
-    
-    if (empty($services)) {
-        // Default services if none set
-        $services = array(
-            array('name' => 'Exam & Cleaning', 'price' => '$189', 'description' => 'Comprehensive dental exam and professional cleaning'),
-            array('name' => 'Deep Cleaning', 'price' => '$225 per quad', 'description' => 'Deep scaling and root planing treatment'),
-            array('name' => 'Same-Day Crown', 'price' => '$899', 'description' => 'Complete crown restoration in one visit'),
-            array('name' => 'Extraction', 'price' => '$220', 'description' => 'Simple tooth extraction procedure'),
-            array('name' => 'Root Canal', 'price' => '$850', 'description' => 'Root canal therapy treatment'),
-        );
-    }
+function get_dental_services_data() {
+    return array(
+        'preventive' => array(
+            'title' => 'Preventive & Diagnostic',
+            'services' => array(
+                array('name' => 'New Patient Exam + X-rays', 'price' => '$149', 'description' => 'Comprehensive initial examination with digital X-rays'),
+                array('name' => 'Routine Exam + 4 X-rays', 'price' => '$149', 'description' => 'Regular checkup with limited X-ray series'),
+                array('name' => 'Adult Cleaning', 'price' => '$150', 'description' => 'Professional teeth cleaning and polishing'),
+                array('name' => 'Deep Cleaning (per quadrant)', 'price' => '$225', 'description' => 'Deep scaling and root planing treatment'),
+                array('name' => 'Fluoride Treatment', 'price' => '$39', 'description' => 'Professional fluoride application for cavity prevention'),
+            )
+        ),
+        'restorative' => array(
+            'title' => 'Restorative Dentistry',
+            'services' => array(
+                array('name' => 'Tooth-Colored Filling', 'price' => '$180-250', 'description' => 'Composite fillings depending on surfaces treated'),
+                array('name' => 'Same-Day Crown (Ceramic)', 'price' => '$899', 'description' => 'Complete crown restoration in one visit'),
+                array('name' => 'Core Buildup (if needed)', 'price' => '$150', 'description' => 'Foundation preparation for crown placement'),
+            )
+        ),
+        'extraction' => array(
+            'title' => 'Tooth Removal',
+            'services' => array(
+                array('name' => 'Simple Extraction', 'price' => '$180', 'description' => 'Routine tooth removal procedure'),
+                array('name' => 'Surgical Extraction', 'price' => '$280', 'description' => 'Complex tooth removal requiring surgical technique'),
+            )
+        ),
+        'endodontics' => array(
+            'title' => 'Root Canals',
+            'services' => array(
+                array('name' => 'Front Tooth', 'price' => '$650', 'description' => 'Root canal therapy for anterior teeth'),
+                array('name' => 'Premolar', 'price' => '$800', 'description' => 'Root canal therapy for bicuspid teeth'),
+                array('name' => 'Molar', 'price' => '$1000', 'description' => 'Root canal therapy for back teeth'),
+            )
+        ),
+        'prosthetics' => array(
+            'title' => 'Dentures & Partials',
+            'services' => array(
+                array('name' => 'Full Denture (per arch)', 'price' => '$2000', 'description' => 'Complete denture for upper or lower jaw'),
+                array('name' => 'Partial Denture', 'price' => '$1600', 'description' => 'Removable partial denture to replace missing teeth'),
+                array('name' => 'Denture Reline', 'price' => '$250', 'description' => 'Adjusting denture fit for comfort'),
+            )
+        ),
+        'other' => array(
+            'title' => 'Other Services',
+            'services' => array(
+                array('name' => 'Night Guard', 'price' => '$365', 'description' => 'Custom-made night guard for teeth grinding protection'),
+                array('name' => 'Retainers (per arch)', 'price' => '$200', 'description' => 'Custom retainers for maintaining tooth position'),
+            )
+        )
+    );
+}
+
+/**
+ * Featured services for homepage (top 6)
+ */
+function featured_services_display($atts) {
+    $featured = array(
+        array('name' => 'New Patient Exam + X-rays', 'price' => '$149', 'description' => 'Comprehensive initial examination with digital X-rays'),
+        array('name' => 'Adult Cleaning', 'price' => '$150', 'description' => 'Professional teeth cleaning and polishing'),
+        array('name' => 'Tooth-Colored Filling', 'price' => '$180-250', 'description' => 'Composite fillings depending on surfaces treated'),
+        array('name' => 'Same-Day Crown (Ceramic)', 'price' => '$899', 'description' => 'Complete crown restoration in one visit'),
+        array('name' => 'Simple Extraction', 'price' => '$180', 'description' => 'Routine tooth removal procedure'),
+        array('name' => 'Front Tooth Root Canal', 'price' => '$650', 'description' => 'Root canal therapy for anterior teeth'),
+    );
     
     ob_start();
     echo '<div class="services-grid">';
-    foreach ($services as $service) {
+    foreach ($featured as $service) {
         echo '<div class="service-card">';
         echo '<h3 class="service-title">' . esc_html($service['name']) . '</h3>';
         echo '<div class="service-price">' . esc_html($service['price']) . '</div>';
@@ -359,6 +410,69 @@ function simple_dental_services_display($atts) {
     }
     echo '</div>';
     return ob_get_clean();
+}
+add_shortcode('featured_services', 'featured_services_display');
+
+/**
+ * New Patient Special callout
+ */
+function new_patient_special_display($atts) {
+    ob_start();
+    ?>
+    <div class="new-patient-special">
+        <div class="special-badge">New Patient Special</div>
+        <h3>Complete Checkup & Cleaning</h3>
+        <div class="special-price">$199</div>
+        <p>Comprehensive exam, professional cleaning, and peace of mind for new patients</p>
+        <div class="special-features">
+            <span class="feature">✓ Full Examination</span>
+            <span class="feature">✓ Professional Cleaning</span>
+            <span class="feature">✓ X-rays if needed</span>
+        </div>
+        <a href="tel:7023024787" class="btn btn-coral">Book Your Visit</a>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('new_patient_special', 'new_patient_special_display');
+
+/**
+ * Services by category for full services page
+ */
+function services_by_category_display($atts) {
+    $services_data = get_dental_services_data();
+    
+    ob_start();
+    echo '<div class="services-by-category">';
+    
+    foreach ($services_data as $category_key => $category) {
+        echo '<div class="service-category" data-category="' . esc_attr($category_key) . '">';
+        echo '<h3 class="category-title">' . esc_html($category['title']) . '</h3>';
+        echo '<div class="services-grid category-grid">';
+        
+        foreach ($category['services'] as $service) {
+            echo '<div class="service-card category-card">';
+            echo '<h4 class="service-title">' . esc_html($service['name']) . '</h4>';
+            echo '<div class="service-price">' . esc_html($service['price']) . '</div>';
+            echo '<p class="service-description">' . esc_html($service['description']) . '</p>';
+            echo '</div>';
+        }
+        
+        echo '</div>';
+        echo '</div>';
+    }
+    
+    echo '</div>';
+    return ob_get_clean();
+}
+add_shortcode('services_by_category', 'services_by_category_display');
+
+/**
+ * Legacy services display shortcode (for backward compatibility)
+ */
+function simple_dental_services_display($atts) {
+    // Use featured services for existing shortcode
+    return featured_services_display($atts);
 }
 add_shortcode('simple_dental_services', 'simple_dental_services_display');
 ?>
