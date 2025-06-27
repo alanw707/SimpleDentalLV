@@ -287,44 +287,239 @@ function simple_dental_remove_comments_admin_menu() {
 add_action('admin_menu', 'simple_dental_remove_comments_admin_menu');
 
 /**
- * Contact form shortcode (simple contact form)
+ * AJAX handler for contact form submission
  */
-function simple_dental_contact_form() {
-    if ($_POST['simple_dental_contact_submit']) {
-        $name = sanitize_text_field($_POST['contact_name']);
-        $email = sanitize_email($_POST['contact_email']);
-        $phone = sanitize_text_field($_POST['contact_phone']);
-        $message = sanitize_textarea_field($_POST['contact_message']);
-        
-        $to = get_option('admin_email');
-        $subject = 'New Contact Form Submission - Simple Dental';
-        $body = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
-        $headers = array('Content-Type: text/plain; charset=UTF-8');
-        
-        if (wp_mail($to, $subject, $body, $headers)) {
-            echo '<div class="contact-success">Thank you! Your message has been sent. We\'ll get back to you soon.</div>';
-        } else {
-            echo '<div class="contact-error">Sorry, there was an error sending your message. Please call us directly at (702) 302-4787.</div>';
+function simple_dental_ajax_contact_form() {
+    // Verify nonce for security
+    if (!wp_verify_nonce($_POST['contact_form_nonce'], 'simple_dental_contact_nonce')) {
+        wp_die(json_encode(array('success' => false, 'message' => 'Security verification failed. Please refresh and try again.')));
+    }
+    
+    $errors = array();
+    
+    // Sanitize input data
+    $name = sanitize_text_field($_POST['contact_name']);
+    $email = sanitize_email($_POST['contact_email']);
+    $phone = sanitize_text_field($_POST['contact_phone']);
+    $message = sanitize_textarea_field($_POST['contact_message']);
+    
+    // Validate required fields
+    if (empty($name)) {
+        $errors[] = 'Name is required.';
+    }
+    if (empty($email) || !is_email($email)) {
+        $errors[] = 'Valid email is required.';
+    }
+    if (empty($message)) {
+        $errors[] = 'Message is required.';
+    }
+    
+    // Verify reCAPTCHA if available
+    if (function_exists('anr_verify_captcha')) {
+        if (!anr_verify_captcha()) {
+            $errors[] = 'Please complete the CAPTCHA verification.';
         }
     }
     
+    // If validation errors, return them
+    if (!empty($errors)) {
+        wp_die(json_encode(array('success' => false, 'errors' => $errors)));
+    }
+    
+    // Get custom email settings
+    $email_settings = simple_dental_get_contact_emails();
+    
+    // Check if notifications are enabled
+    if (!$email_settings['notifications_enabled']) {
+        error_log('Simple Dental Contact Form AJAX - Email notifications disabled');
+        wp_die(json_encode(array('success' => true, 'message' => 'Thank you! Your message has been received. We\'ll get back to you within 24 hours.')));
+    }
+    
+    // Prepare email recipients
+    $to = $email_settings['primary'];
+    $cc_emails = $email_settings['cc'];
+    
+    error_log('Simple Dental Contact Form AJAX - Sending to: ' . $to . (empty($cc_emails) ? '' : ' (CC: ' . implode(', ', $cc_emails) . ')'));
+    
+    // Prepare email subject with custom prefix
+    $subject_prefix = $email_settings['subject_prefix'];
+    $subject = $subject_prefix . ' Contact Form Submission';
+    
+    // Prepare email body
+    $body = "New contact form submission from Simple Dental website:\n\n";
+    $body .= "Name: $name\n";
+    $body .= "Email: $email\n";
+    $body .= "Phone: $phone\n\n";
+    $body .= "Message:\n$message\n\n";
+    $body .= "---\n";
+    $body .= "Submitted: " . date('Y-m-d H:i:s') . "\n";
+    $body .= "IP Address: " . $_SERVER['REMOTE_ADDR'] . "\n";
+    
+    // Prepare email headers
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: Simple Dental Website <' . $to . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>'
+    );
+    
+    // Add CC headers if CC emails are specified
+    if (!empty($cc_emails)) {
+        foreach ($cc_emails as $cc_email) {
+            $headers[] = 'Cc: ' . $cc_email;
+        }
+    }
+    
+    // Attempt to send email
+    $mail_sent = wp_mail($to, $subject, $body, $headers);
+    
+    if ($mail_sent) {
+        error_log('Simple Dental Contact Form AJAX - Email sent successfully');
+        wp_die(json_encode(array('success' => true, 'message' => 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.')));
+    } else {
+        error_log('Simple Dental Contact Form AJAX - Email failed to send to: ' . $to);
+        // Provide helpful error message with contact alternatives
+        $error_message = 'Sorry, there was an error sending your message. Please try one of these alternatives:';
+        $error_message .= '\n• Call us directly at (702) 302-4787';
+        $error_message .= '\n• Email us at ' . $to;
+        if (!empty($cc_emails)) {
+            $error_message .= ' or ' . implode(', ', $cc_emails);
+        }
+        wp_die(json_encode(array('success' => false, 'message' => $error_message)));
+    }
+}
+add_action('wp_ajax_simple_dental_contact', 'simple_dental_ajax_contact_form');
+add_action('wp_ajax_nopriv_simple_dental_contact', 'simple_dental_ajax_contact_form');
+
+/**
+ * Contact form shortcode (enhanced with AJAX and CAPTCHA)
+ */
+function simple_dental_contact_form() {
     ob_start();
     ?>
-    <form method="post" class="simple-contact-form">
+    <div id="contact-form-messages"></div>
+    
+    <form id="simple-contact-form" class="simple-contact-form">
+        <?php wp_nonce_field('simple_dental_contact_nonce', 'contact_form_nonce'); ?>
+        
         <div class="form-row">
-            <input type="text" name="contact_name" placeholder="Your Name" required>
-            <input type="email" name="contact_email" placeholder="Your Email" required>
+            <input type="text" name="contact_name" id="contact_name" placeholder="Your Name*" required>
+            <input type="email" name="contact_email" id="contact_email" placeholder="Your Email*" required>
         </div>
+        
         <div class="form-row">
-            <input type="tel" name="contact_phone" placeholder="Your Phone Number">
+            <input type="tel" name="contact_phone" id="contact_phone" placeholder="Your Phone Number">
         </div>
+        
         <div class="form-row">
-            <textarea name="contact_message" placeholder="Your Message" rows="5" required></textarea>
+            <textarea name="contact_message" id="contact_message" placeholder="Your Message*" rows="5" required></textarea>
         </div>
+        
+        <?php if (function_exists('anr_captcha_form_field')) : ?>
+        <div class="form-row captcha-row">
+            <?php anr_captcha_form_field(); ?>
+        </div>
+        <?php endif; ?>
+        
         <div class="form-row">
-            <button type="submit" name="simple_dental_contact_submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" id="contact-submit-btn" class="btn btn-primary">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loading" style="display: none;">Sending...</span>
+            </button>
+        </div>
+        
+        <div class="form-row form-note">
+            <small><strong>*</strong> Required fields | We respect your privacy and will never share your information.</small>
         </div>
     </form>
+    
+    <script>
+    jQuery(document).ready(function($) {
+        $('#simple-contact-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            var submitBtn = $('#contact-submit-btn');
+            var btnText = submitBtn.find('.btn-text');
+            var btnLoading = submitBtn.find('.btn-loading');
+            var messagesDiv = $('#contact-form-messages');
+            
+            // Show loading state
+            submitBtn.prop('disabled', true);
+            btnText.hide();
+            btnLoading.show();
+            messagesDiv.empty();
+            
+            // Collect form data
+            var formData = {
+                action: 'simple_dental_contact',
+                contact_name: $('#contact_name').val(),
+                contact_email: $('#contact_email').val(),
+                contact_phone: $('#contact_phone').val(),
+                contact_message: $('#contact_message').val(),
+                contact_form_nonce: $('input[name="contact_form_nonce"]').val()
+            };
+            
+            // Add reCAPTCHA response if available
+            if (typeof grecaptcha !== 'undefined') {
+                var captchaResponse = grecaptcha.getResponse();
+                if (captchaResponse) {
+                    formData['g-recaptcha-response'] = captchaResponse;
+                }
+            }
+            
+            // Submit via AJAX
+            $.ajax({
+                url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        // Show success message
+                        messagesDiv.html('<div class="contact-success">✅ <strong>Thank you!</strong> ' + response.message + '</div>');
+                        // Reset form
+                        $('#simple-contact-form')[0].reset();
+                        // Reset reCAPTCHA if available
+                        if (typeof grecaptcha !== 'undefined') {
+                            grecaptcha.reset();
+                        }
+                        // Scroll to success message
+                        $('html, body').animate({
+                            scrollTop: messagesDiv.offset().top - 100
+                        }, 500);
+                    } else {
+                        // Show error message(s)
+                        var errorHtml = '<div class="contact-error">';
+                        if (response.errors && response.errors.length > 0) {
+                            errorHtml += '<strong>Please correct the following:</strong><ul>';
+                            response.errors.forEach(function(error) {
+                                errorHtml += '<li>' + error + '</li>';
+                            });
+                            errorHtml += '</ul>';
+                        } else {
+                            errorHtml += response.message || 'An error occurred. Please try again.';
+                        }
+                        errorHtml += '</div>';
+                        messagesDiv.html(errorHtml);
+                        
+                        // Scroll to error message
+                        $('html, body').animate({
+                            scrollTop: messagesDiv.offset().top - 100
+                        }, 500);
+                    }
+                },
+                error: function() {
+                    messagesDiv.html('<div class="contact-error">Connection error. Please try again or call us directly at (702) 302-4787.</div>');
+                },
+                complete: function() {
+                    // Reset button state
+                    submitBtn.prop('disabled', false);
+                    btnText.show();
+                    btnLoading.hide();
+                }
+            });
+        });
+    });
+    </script>
     <?php
     return ob_get_clean();
 }
@@ -475,4 +670,139 @@ function simple_dental_services_display($atts) {
     return featured_services_display($atts);
 }
 add_shortcode('simple_dental_services', 'simple_dental_services_display');
+
+/**
+ * WordPress Customizer Settings for Contact Form
+ */
+function simple_dental_customizer_settings($wp_customize) {
+    // Add Contact Form Settings Section
+    $current_settings = simple_dental_get_contact_emails();
+    $settings_info = 'Current settings: Primary email: ' . $current_settings['primary'];
+    if (!empty($current_settings['cc'])) {
+        $settings_info .= ' | CC: ' . implode(', ', $current_settings['cc']);
+    }
+    $settings_info .= ' | Subject prefix: ' . $current_settings['subject_prefix'];
+    
+    $wp_customize->add_section('simple_dental_contact_settings', array(
+        'title' => 'Contact Form Settings',
+        'description' => 'Configure email settings for contact form submissions. ' . $settings_info,
+        'priority' => 30,
+    ));
+    
+    // Primary Contact Email Setting
+    $wp_customize->add_setting('contact_form_primary_email', array(
+        'default' => get_option('admin_email'),
+        'sanitize_callback' => 'sanitize_email',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('contact_form_primary_email', array(
+        'label' => 'Primary Contact Email',
+        'description' => 'Main email address to receive contact form submissions. Defaults to WordPress admin email.',
+        'section' => 'simple_dental_contact_settings',
+        'type' => 'email',
+        'priority' => 10,
+    ));
+    
+    // Additional CC Emails Setting
+    $wp_customize->add_setting('contact_form_cc_emails', array(
+        'default' => '',
+        'sanitize_callback' => 'simple_dental_sanitize_email_list',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('contact_form_cc_emails', array(
+        'label' => 'Additional Recipients (CC)',
+        'description' => 'Additional email addresses to CC on contact forms. Separate multiple emails with commas. Example: email1@domain.com, email2@domain.com',
+        'section' => 'simple_dental_contact_settings',
+        'type' => 'textarea',
+        'priority' => 20,
+    ));
+    
+    // Email Subject Prefix Setting
+    $wp_customize->add_setting('contact_form_subject_prefix', array(
+        'default' => '[Simple Dental Website]',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('contact_form_subject_prefix', array(
+        'label' => 'Email Subject Prefix',
+        'description' => 'Text to prepend to contact form email subjects. Helps identify website emails.',
+        'section' => 'simple_dental_contact_settings',
+        'type' => 'text',
+        'priority' => 30,
+    ));
+    
+    // Email Notifications Toggle
+    $wp_customize->add_setting('contact_form_notifications_enabled', array(
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('contact_form_notifications_enabled', array(
+        'label' => 'Enable Email Notifications',
+        'description' => 'Turn on/off email notifications for contact form submissions.',
+        'section' => 'simple_dental_contact_settings',
+        'type' => 'checkbox',
+        'priority' => 40,
+    ));
+}
+add_action('customize_register', 'simple_dental_customizer_settings');
+
+/**
+ * Sanitize email list (comma-separated emails)
+ */
+function simple_dental_sanitize_email_list($input) {
+    if (empty($input)) {
+        return '';
+    }
+    
+    // Split by comma and sanitize each email
+    $emails = array_map('trim', explode(',', $input));
+    $valid_emails = array();
+    
+    foreach ($emails as $email) {
+        $sanitized_email = sanitize_email($email);
+        if (!empty($sanitized_email) && is_email($sanitized_email)) {
+            $valid_emails[] = $sanitized_email;
+        }
+    }
+    
+    return implode(', ', $valid_emails);
+}
+
+/**
+ * Get contact form email settings with fallbacks
+ */
+function simple_dental_get_contact_emails() {
+    $primary_email = get_theme_mod('contact_form_primary_email', get_option('admin_email'));
+    $cc_emails = get_theme_mod('contact_form_cc_emails', '');
+    
+    // Validate primary email
+    if (empty($primary_email) || !is_email($primary_email)) {
+        $primary_email = get_option('admin_email');
+        error_log('Simple Dental Contact Form - Invalid primary email, using admin email: ' . $primary_email);
+    }
+    
+    // Process CC emails
+    $cc_email_array = array();
+    if (!empty($cc_emails)) {
+        $cc_emails_list = array_map('trim', explode(',', $cc_emails));
+        foreach ($cc_emails_list as $email) {
+            if (!empty($email) && is_email($email)) {
+                $cc_email_array[] = $email;
+            }
+        }
+    }
+    
+    return array(
+        'primary' => $primary_email,
+        'cc' => $cc_email_array,
+        'subject_prefix' => get_theme_mod('contact_form_subject_prefix', '[Simple Dental Website]'),
+        'notifications_enabled' => get_theme_mod('contact_form_notifications_enabled', true)
+    );
+}
+
 ?>
