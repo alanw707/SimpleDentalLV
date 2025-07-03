@@ -18,7 +18,7 @@
     <!-- Coming Soon Banner -->
     <div class="coming-soon-banner">
         <div class="container">
-            <span class="banner-text">Opening September 2025 | Las Vegas, Nevada</span>
+            <span class="banner-text">🎉 Coming September 2025! | Modern Dental Care in Las Vegas</span>
         </div>
     </div>
     <?php endif; ?>

@@ -48,6 +48,10 @@ get_header();
                             <p>204 S Jones Blvd<br>Las Vegas, NV 89149</p>
                         </div>
                         <div class="contact-detail">
+                            <h4>🚗 Easy Access from Highway 95</h4>
+                            <p>Just off Highway 95 at the Jones exit — you'll be at our door in seconds! Convenient for Summerlin, Centennial Hills, and central Las Vegas.</p>
+                        </div>
+                        <div class="contact-detail">
                             <h4>Opening</h4>
                             <p>September 2025</p>
                         </div>
@@ -93,7 +97,9 @@ get_header();
                     </iframe>
                 </div>
                 <div class="map-info">
-                    <p><strong>Coming September 2025</strong> - We're excited to serve the Las Vegas community with honest, straightforward dental care.</p>
+                    <p><strong>🎉 Coming September 2025!</strong></p>
+                    <p>We're excited to announce that Simple Dental will be opening in September. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free.</p>
+                    <p><strong>Stay tuned for updates — we can't wait to welcome you soon!</strong></p>
                 </div>
             </div>
         </section>
@@ -206,11 +212,11 @@ get_header();
 }
 
 .primary-contact {
-    border: 3px solid var(--accent-teal);
+    border: 3px solid var(--primary-brown);
 }
 
 .contact-card h3 {
-    color: var(--accent-teal);
+    color: var(--primary-brown);
     margin-bottom: 20px;
 }
 
@@ -232,12 +238,12 @@ get_header();
 .phone-link {
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--accent-teal);
+    color: var(--primary-brown);
     text-decoration: none;
 }
 
 .phone-link:hover {
-    color: var(--primary-brown);
+    color: var(--brown-hover);
 }
 
 .contact-form-section {

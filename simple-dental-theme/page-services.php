@@ -31,12 +31,6 @@ get_header();
                     <?php echo do_shortcode('[new_patient_special]'); ?>
                 </div>
 
-                <!-- Introduction -->
-                <div class="services-intro">
-                    <h2>Complete Service Menu</h2>
-                    <p>At Simple Dental, we believe you should know exactly what you're paying for. Below are our transparent prices for all dental procedures we offer. No games, no hidden fees — just honest pricing from an experienced doctor.</p>
-                </div>
-
                 <!-- Same-Day Crown Technology Section -->
                 <div class="technology-section">
                     <div class="container">
@@ -102,6 +96,26 @@ get_header();
                     </div>
                 </div>
                 
+                <!-- Introduction -->
+                <div class="services-intro">
+                    <h2>Complete Service Menu</h2>
+                    <p>At Simple Dental, we believe you should know exactly what you're paying for. Below are our transparent prices for all dental procedures we offer. No games, no hidden fees — just honest pricing from an experienced doctor.</p>
+                </div>
+
+                <!-- Insurance Notice -->
+                <div class="insurance-notice">
+                    <h3>💡 Transparent Pricing Notice</h3>
+                    <div class="notice-content">
+                        <p>The prices listed on our website are our cash fees, designed for patients without dental insurance or those who prefer to pay directly.</p>
+                        
+                        <p>If you have dental insurance and we are in-network, your cost will be determined by your specific insurance plan's benefits and contracted rates.</p>
+                        
+                        <p>If we are out-of-network with your insurance, we are happy to help you submit claims to your insurance company to maximize your reimbursement.</p>
+                        
+                        <p><strong>Our team is always available to help you understand your coverage and provide an estimate before treatment, so there are no surprises.</strong></p>
+                    </div>
+                </div>
+
                 <!-- All Services by Category -->
                 <?php echo do_shortcode('[services_by_category]'); ?>
                 
@@ -210,6 +224,35 @@ get_header();
     font-size: 1.125rem;
     line-height: 1.7;
     color: var(--text-medium);
+}
+
+.insurance-notice {
+    background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%);
+    border: 1px solid var(--border-gray);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 3rem auto;
+    max-width: 900px;
+    box-shadow: var(--shadow-light);
+}
+
+.insurance-notice h3 {
+    color: var(--primary-brown);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.notice-content p {
+    color: var(--text-medium);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 1.0625rem;
+}
+
+.notice-content p:last-child {
+    margin-bottom: 0;
+    text-align: center;
 }
 
 .services-additional {
@@ -463,6 +506,19 @@ get_header();
     .services-info-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+    
+    .insurance-notice {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .insurance-notice h3 {
+        font-size: 1.25rem;
+    }
+    
+    .notice-content p {
+        font-size: 1rem;
     }
     
     .info-card {
