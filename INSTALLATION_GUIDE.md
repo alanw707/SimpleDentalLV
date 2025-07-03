@@ -1,5 +1,25 @@
 # Simple Dental WordPress Theme - Installation Guide
 
+## Prerequisites
+
+### Required WordPress Plugins
+Install these plugins before setting up the theme:
+
+**1. SMTP Email Plugin (Choose One):**
+- **Brevo (Recommended)**: Official Brevo plugin for WordPress
+- **WP Mail SMTP**: By WPForms (free version supports Brevo)
+- **Easy WP SMTP**: Simple SMTP configuration
+
+**2. Google reCAPTCHA Plugin:**
+- **Advanced Google reCAPTCHA**: For contact form spam protection
+- Alternative: **reCAPTCHA for WooCommerce** (works with any form)
+
+### Plugin Installation Steps
+1. Go to **Plugins → Add New**
+2. Search for "Brevo" and "Advanced Google reCAPTCHA"
+3. Install and activate both plugins
+4. Configure as described in Step 7 below
+
 ## Quick Setup for Hostinger
 
 ### Step 1: Upload Theme
@@ -62,40 +82,144 @@ Create these pages in **Pages > Add New**:
 1. Go to **Settings > General**
 2. Update Site Title: "Simple Dental"
 3. Update Tagline: "Straightforward dentistry from one experienced doctor"
-4. Verify admin email address (contact form emails go here)
+4. Verify admin email address (this is the fallback for contact forms)
 5. Save Changes
+
+### Step 7: Configure Email & Security Plugins
+
+**A. Setup Brevo SMTP:**
+1. Sign up for free Brevo account at brevo.com
+2. Get your SMTP credentials from Brevo dashboard
+3. Go to **Settings > Brevo** or **Settings > WP Mail SMTP**
+4. Enter your Brevo SMTP settings:
+   - SMTP Host: smtp-relay.brevo.com
+   - Port: 587
+   - Encryption: TLS
+   - Username: Your Brevo login email
+   - Password: Your Brevo SMTP key
+5. Send a test email to verify setup
+
+**B. Setup Google reCAPTCHA:**
+1. Visit console.developers.google.com
+2. Create a new project or select existing
+3. Enable reCAPTCHA API
+4. Create reCAPTCHA v3 credentials for your domain
+5. Go to **Settings > Advanced Google reCAPTCHA**
+6. Enter your Site Key and Secret Key
+7. Configure to work with contact forms
+
+### Step 8: Configure Contact Form Email Settings
+1. Go to **Appearance > Customize > Contact Form Settings**
+2. Set **Primary Contact Email** (where contact forms go)
+3. Add **Additional Recipients** if needed (comma-separated)
+4. Set **Email Subject Prefix** (e.g., "[Simple Dental Contact]")
+5. Ensure **Enable Email Notifications** is checked
+6. Save & Publish
 
 ## Customization Options
 
-### Update Service Pricing
-1. Edit the Services page
-2. Scroll to "Service Pricing" section
-3. Modify prices and descriptions
-4. Update page
+### Service Pricing Management
+Services are now managed through theme shortcodes with preset pricing:
+- **Featured Services**: Top 6 services displayed on homepage
+- **Complete Service Menu**: All 20+ services in 6 categories
+- **New Patient Special**: $199 promotion prominently displayed
 
-### Contact Information
-Update these in the theme files if needed:
-- Phone number: (702) 302-4787
-- Address: 204 S Jones Blvd, Las Vegas, NV 89149
-- Hours: Mon-Fri 8AM-4PM
+To modify service pricing, edit the `get_dental_services_data()` function in `functions.php`
+
+### Contact Information Updates
+Contact information is hardcoded in multiple theme files. Update these locations if needed:
+- **Phone**: functions.php, footer.php, header.php, contact page
+- **Address**: footer.php, about page, contact page
+- **Hours**: footer.php, contact page
+- **Google Maps**: page-contact.php (update embed URL with actual location)
 
 ### Colors (Optional)
 To change colors, edit the `:root` section in Appearance > Theme Editor > style.css
 
 ## Testing Checklist
-- [ ] Homepage displays with hero section
-- [ ] All menu links work
-- [ ] Services page shows pricing
-- [ ] Contact form sends test email
-- [ ] Map displays correctly
-- [ ] Mobile menu works on phone
+
+### Basic Functionality
+- [ ] Homepage displays with hero section and philosophy cards
+- [ ] All menu links work properly
+- [ ] Services page shows all categorized pricing
+- [ ] Same-day crown technology section displays
+- [ ] New Patient Special appears prominently
+- [ ] About page shows placeholder for doctor bio
+- [ ] Mobile menu works on phone with smooth animations
 - [ ] Logo appears in header
+- [ ] Scroll-to-top button functions
 
-## Support
-If you need any customizations or have issues:
-1. Check all pages are created with correct templates
-2. Verify menu is set up properly
-3. Test contact form with your email
-4. Ensure logo is uploaded and displays
+### Contact Form Testing
+- [ ] Contact form displays without errors
+- [ ] reCAPTCHA widget appears
+- [ ] Form submits via AJAX (no page refresh)
+- [ ] Success message displays after submission
+- [ ] Email received at configured address
+- [ ] Error handling works (try submitting empty form)
+- [ ] Loading animation appears during submission
 
-Your website will be ready for your September 2025 opening!
+### Email System Verification
+- [ ] Brevo SMTP test email successful
+- [ ] Contact form emails delivered to primary address
+- [ ] CC recipients receive copies (if configured)
+- [ ] Email subject includes custom prefix
+- [ ] Reply-To header set correctly to sender
+
+### Mobile & Performance
+- [ ] Mobile typography readable and properly sized
+- [ ] Contact form works on mobile devices
+- [ ] All animations smooth on mobile
+- [ ] No JavaScript console errors
+- [ ] Page loads quickly on mobile
+
+## Troubleshooting
+
+### Contact Form Issues
+**Problem**: Contact form not sending emails
+**Solutions**:
+1. Check Brevo SMTP configuration
+2. Verify WordPress Admin Email in Settings > General
+3. Check Contact Form Settings in Customizer
+4. Test Brevo connection with plugin test email feature
+5. Check WordPress error logs for email failures
+
+**Problem**: reCAPTCHA not appearing
+**Solutions**:
+1. Verify reCAPTCHA plugin is activated
+2. Check Site Key and Secret Key configuration
+3. Ensure domain matches reCAPTCHA settings
+4. Clear any caching plugins
+
+### Email Delivery Issues
+**Problem**: Emails going to spam
+**Solutions**:
+1. Configure SPF/DKIM records with your hosting provider
+2. Use a professional email address as sender
+3. Add your domain to safe senders list
+4. Check Brevo sender reputation
+
+### Performance Issues
+**Problem**: Slow loading
+**Solutions**:
+1. Enable caching plugin (WP Rocket, W3 Total Cache)
+2. Optimize images
+3. Check hosting server performance
+4. Minimize plugin usage
+
+## Support Resources
+
+### Documentation Files
+- **CLAUDE.md**: Comprehensive project documentation
+- **PROJECT_STATUS.md**: Current project status and completion
+- **TECHNICAL_REFERENCE.md**: Detailed technical documentation
+- **FTP_DEPLOYMENT.md**: Deployment instructions
+
+### Contact Form Email Configuration
+All email settings can be managed through:
+**WordPress Admin → Appearance → Customize → Contact Form Settings**
+
+### Plugin Support
+- **Brevo Support**: brevo.com/support
+- **reCAPTCHA Documentation**: developers.google.com/recaptcha
+
+Your website is now ready for your September 2025 opening with professional contact management and spam protection!

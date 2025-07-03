@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://plus.unsplash.com/premium_photo-1672922646298-3afc6c6397c9?w=1200&q=80'); background-size: cover; background-position: center 30%;">
+        <header class="page-header section" style="background-image: url('https://images.pexels.com/photos/287237/pexels-photo-287237.jpeg'); background-size: cover; background-position: center 30%;">
             <div class="page-header-overlay">
                 <div class="container">
                     <h1 class="page-title">About Simple Dental</h1>
@@ -26,12 +26,23 @@ get_header();
         <section class="about-section section">
             <div class="container">
                 
-                <!-- Doctor Biography Section - To be updated with client content -->
+                <!-- Doctor Biography Section -->
                 <div class="doctor-bio-section">
-                    <h2>Meet Your Dentist</h2>
-                    <div class="bio-placeholder">
-                        <p><em>Doctor biography and credentials will be added here when provided by the client.</em></p>
-                        <p><em>This section will include the doctor's background, education, experience, and personal approach to dental care.</em></p>
+                    <h2>Meet Dr. Charles Chang</h2>
+                    <div class="doctor-bio-content">
+                        <div class="doctor-image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Charles-Portrait-1.jpg" alt="Dr. Charles Chang, DDS, MS, AFAAID" />
+                        </div>
+                        <div class="doctor-bio-text">
+                            <h3>🦷 Dr. Charles Chang, DDS, MS, AFAAID</h3>
+                            <p>Dr. Charles Chang is a highly experienced and trusted dentist who believes that dental care should be simple, honest, and stress-free. With over 15 years of clinical experience, Dr. Chang has advanced training in implants, oral surgery, endodontics, and same-day crowns. He takes pride in offering essential, high-quality treatments without unnecessary upselling or surprises.</p>
+
+                            <p>After practicing in New York and Seattle, Dr. Chang and his family moved to Las Vegas to build Simple Dental, a modern, patient-focused practice designed to make dental visits easier and more comfortable. His practice philosophy emphasizes efficiency, transparency, and respect for patients' time — including convenient same-day crowns and clear, upfront pricing.</p>
+
+                            <p>Outside of the office, Dr. Chang enjoys spending time with his wife and daughter, exploring local parks and restaurants, and caring for their two dogs. As a dedicated father and family man, he understands the importance of balance and brings that same thoughtful, caring approach to each patient he treats.</p>
+
+                            <p>Dr. Chang looks forward to welcoming you to Simple Dental, where you can expect straightforward, compassionate care in a warm and welcoming environment.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -66,9 +77,16 @@ get_header();
                     <div class="location-content">
                         <div class="location-info">
                             <h2>Coming to Las Vegas</h2>
-                            <h3>New Location Opening September 2025</h3>
+                            <h3>🎉 Opening September 2025!</h3>
                             <p class="address"><strong>204 S Jones Blvd, Las Vegas, NV 89149</strong></p>
-                            <p>We're excited to bring our straightforward approach to dental care to the Las Vegas community. Our new practice is being designed from the ground up to deliver efficient, comfortable, and transparent dental care.</p>
+                            
+                            <div class="location-highlight">
+                                <p><strong>🚗 We're seconds away from Highway 95!</strong></p>
+                                <p>Simple Dental is conveniently located just off Highway 95 at the Jones exit — you'll be at our door in seconds! Whether you're coming from Summerlin, Centennial Hills, or central Las Vegas, getting here is quick and easy.</p>
+                                <p>Look for us right off Jones Blvd, and enjoy stress-free parking and easy access — because your visit should start simple before you even step inside.</p>
+                            </div>
+                            
+                            <p>We're excited to announce that Simple Dental will be opening in September. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free.</p>
                             
                             <div class="opening-features">
                                 <div class="feature-list">
@@ -153,29 +171,46 @@ get_header();
 }
 
 .doctor-bio-section {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    text-align: center;
     padding: 2rem 0;
 }
 
 .doctor-bio-section h2 {
     color: var(--primary-brown);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     font-size: 2.25rem;
+    text-align: center;
 }
 
-.bio-placeholder {
-    background: var(--warm-beige);
-    padding: 2rem;
+.doctor-bio-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.doctor-image img {
+    width: 100%;
     border-radius: 1rem;
-    border: 2px dashed var(--border-gray);
+    box-shadow: var(--shadow-medium);
 }
 
-.bio-placeholder p {
+.doctor-bio-text h3 {
+    color: var(--primary-brown);
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+}
+
+.doctor-bio-text p {
     color: var(--text-medium);
-    font-style: italic;
-    margin-bottom: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 1.0625rem;
+}
+
+.doctor-bio-text p:last-child {
+    margin-bottom: 0;
 }
 
 /* Philosophy styles removed - now on homepage */
@@ -256,6 +291,22 @@ get_header();
     line-height: 1.6;
 }
 
+.location-highlight {
+    background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--accent-teal);
+}
+
+.location-highlight p {
+    margin-bottom: 0.75rem;
+}
+
+.location-highlight p:last-child {
+    margin-bottom: 0;
+}
+
 .address {
     color: var(--text-dark) !important;
     font-size: 1.125rem;
@@ -333,8 +384,18 @@ get_header();
         padding: 2rem 1.5rem;
     }
     
-    .bio-placeholder {
-        padding: 1.5rem;
+    .doctor-bio-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .doctor-image {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .doctor-bio-text h3 {
+        font-size: 1.5rem;
     }
 }
 </style>
