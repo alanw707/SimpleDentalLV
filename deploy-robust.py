@@ -162,5 +162,42 @@ def remove_directory_safe(ftp, path):
     except:
         pass
 
+def deploy_file(filename):
+    """Deploy a single file to the remote theme directory"""
+    theme_dir = 'simple-dental-theme'
+    local_path = os.path.join(theme_dir, filename)
+    if not os.path.isfile(local_path):
+        print(f"❌ File not found: {local_path}")
+        sys.exit(1)
+    print(f"🚀 Deploying single file: {filename}")
+    try:
+        print(f"📡 Connecting to {FTP_CONFIG['host']}...")
+        ftp = connect_ftp()
+        print("✅ Connected!")
+        print(f"📁 In: {FTP_CONFIG['remote_path']}")
+        # Ensure remote theme directory exists and change into it
+        try:
+            ftp.cwd('simple-dental-theme')
+        except ftplib.error_perm:
+            print("📁 Creating theme directory...")
+            ftp.mkd('simple-dental-theme')
+            ftp.cwd('simple-dental-theme')
+        # Upload the file (just the filename, not with the theme dir prefix)
+        remote_file = filename
+        if upload_file_with_retry(ftp, local_path, remote_file):
+            print(f"✅ Uploaded {filename}")
+        else:
+            print(f"❌ Failed to upload {filename}")
+        try:
+            ftp.quit()
+        except:
+            pass
+        print("🎉 File deployment completed!")
+    except Exception as e:
+        print(f"❌ Error: {e}")
+
 if __name__ == "__main__":
-    deploy_theme()
+    if len(sys.argv) == 2:
+        deploy_file(sys.argv[1])
+    else:
+        deploy_theme()
