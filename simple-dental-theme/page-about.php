@@ -13,12 +13,12 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://images.pexels.com/photos/287237/pexels-photo-287237.jpeg'); background-size: cover; background-position: center 30%;">
+        <header class="page-header section" style="background-image: url('https://images.pexels.com/photos/287237/pexels-photo-287237.jpeg'); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
-                <div class="container">
-                    <h1 class="page-title">About Simple Dental</h1>
-                    <p class="page-subtitle">Straightforward dentistry you can trust</p>
-                </div>
+            <div class="container">
+            <h1 class="page-title">About Simple Dental</h1>
+            <p class="page-subtitle">Straightforward dentistry you can trust</p>
+            </div>
             </div>
         </header>
 
