@@ -75,8 +75,12 @@ function simple_dental_scripts() {
     // Google Fonts
     wp_enqueue_style('simple-dental-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
     
+    // Feather Icons
+    wp_enqueue_style('feather-icons', 'https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css', array(), '4.28.0');
+
     // Custom JavaScript (if needed)
     wp_enqueue_script('simple-dental-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('feather-icons-script', 'https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js', array(), '4.28.0', true);
     
     // Responsive navigation script for mobile - DISABLED to prevent conflicts
     // wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array(), '1.0.0', true);
@@ -90,6 +94,15 @@ class Simple_Dental_Walker_Nav_Menu extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
+
+        // Find icon class
+        $icon_class = '';
+        foreach ($classes as $class) {
+            if (strpos($class, 'icon-') === 0) {
+                $icon_class = str_replace('icon-', '', $class);
+                break;
+            }
+        }
         
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
@@ -106,13 +119,44 @@ class Simple_Dental_Walker_Nav_Menu extends Walker_Nav_Menu {
         
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes .'>';
-        $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
+
+        // Add icon if it exists
+        if (!empty($icon_class)) {
+            $item_output .= '<i data-feather="' . esc_attr($icon_class) . '" class="menu-icon"></i> ';
+        }
+
+        $item_output .= '<span class="menu-text">' . apply_filters('the_title', $item->title, $item->ID) . '</span>';
+        $item_output .= (isset($args->link_after) ? $args->link_after : '');
         $item_output .= '</a>';
         $item_output .= isset($args->after) ? $args->after : '';
         
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
     }
 }
+
+function simple_dental_activate_feather_icons() {
+    ?>
+    <script>
+    function initFeatherIcons() {
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        } else {
+            // If feather is not loaded, try again shortly
+            setTimeout(initFeatherIcons, 100);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFeatherIcons);
+    } else {
+        // DOM is already ready, so run it now
+        initFeatherIcons();
+    }
+    </script>
+    <?php
+}
+
+add_action('wp_footer', 'simple_dental_activate_feather_icons');
 
 /**
  * Add custom fields for services pricing

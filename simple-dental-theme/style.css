@@ -188,6 +188,25 @@ a:hover {
     padding: 0;
 }
 
+/* --- Menu Item & Icon Alignment --- */
+.main-navigation a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem; /* Slightly increased gap for better spacing */
+}
+
+.menu-icon {
+    width: 16px; /* Adjusted size for better balance */
+    height: 16px;
+    stroke-width: 2.5; /* Bolder stroke */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    margin-top: -2px; /* Fine-tune vertical alignment */
+}
+
+.menu-text {
+    line-height: 1; /* Ensure text has a clean line-height */
+}
+
 .main-navigation a {
     color: var(--text-medium);
     font-weight: 500;
