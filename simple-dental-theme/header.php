@@ -550,7 +550,8 @@
     // Check for redirect immediately
     if (checkForTranslateRedirect()) {
         // If redirecting, don't initialize translation
-        return;
+        console.log('🔄 Page redirecting - skipping translation initialization');
+        // No return here - we're not in a function
     }
 
     // Check if we've already attempted initialization in this session
