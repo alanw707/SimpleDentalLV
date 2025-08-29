@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     
-    <!-- Enhanced Google Translate Implementation -->
+    <!-- Rate-Limit Optimized Google Translate Implementation -->
     <script type="text/javascript">
     class SimpleDentalTranslator {
         constructor() {
@@ -18,8 +18,10 @@
                 'zh-CN': '简体中文'
             };
             this.initializationAttempts = 0;
-            this.maxAttempts = 5;
+            this.maxAttempts = 2; // Reduced from 5 to prevent rate limiting
             this.debounceTimeout = null;
+            this.initializationStarted = false; // Prevent dual initialization
+            this.baseDelay = 2000; // Longer initial delay
             
             // Bind methods to maintain context
             this.init = this.init.bind(this);
@@ -29,40 +31,56 @@
 
         // Initialize Google Translate (called by Google's callback)
         init() {
+            // Prevent duplicate initializations
+            if (this.initializationStarted) {
+                return;
+            }
+            this.initializationStarted = true;
+
             try {
                 if (typeof google === 'undefined' || !google.translate || !google.translate.TranslateElement) {
                     if (this.initializationAttempts < this.maxAttempts) {
                         this.initializationAttempts++;
-                        console.log(`⏳ Google Translate API loading... (${this.initializationAttempts}/${this.maxAttempts})`);
-                        setTimeout(() => this.init(), 1500); // Increased delay for API load
+                        // Exponential backoff to prevent rate limiting
+                        const delay = this.baseDelay * Math.pow(2, this.initializationAttempts - 1);
+                        console.log(`⏳ Google Translate API loading... (${this.initializationAttempts}/${this.maxAttempts}) - waiting ${delay}ms`);
+                        
+                        setTimeout(() => {
+                            this.initializationStarted = false; // Allow retry
+                            this.init();
+                        }, delay);
                     } else {
-                        console.warn('⚠️ Google Translate API failed to load - using fallback mode');
-                        this.showFallbackMessage();
+                        console.warn('⚠️ Google Translate API failed to load after rate-limit safe retries - using fallback mode');
+                        this.enableFallbackMode();
                     }
                     return;
                 }
 
-                // Create Google Translate instance
+                // Create Google Translate instance with rate-limit friendly settings
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
                     includedLanguages: 'en,es,zh-TW,zh-CN',
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                     multilanguagePage: true,
                     autoDisplay: false,
-                    gaTrack: false // Disable tracking
+                    gaTrack: false, // Disable tracking to reduce API calls
+                    gaId: null // Explicitly disable Google Analytics integration
                 }, 'google_translate_element_hidden');
 
-                // Wait for Google Translate to be ready
+                // Wait for Google Translate to be ready with rate-limit awareness
                 this.waitForGoogleTranslateReady();
                 
             } catch (error) {
                 console.error('Google Translate initialization error:', error);
-                this.showFallbackMessage();
+                this.enableFallbackMode();
             }
         }
 
-        // Wait for Google Translate widget to be ready
+        // Wait for Google Translate widget to be ready with exponential backoff
         waitForGoogleTranslateReady() {
+            let attempts = 0;
+            const maxWaitAttempts = 3; // Further reduced attempts
+            
             const checkReady = () => {
                 const selectElement = document.querySelector('#google_translate_element_hidden select.goog-te-combo');
                 
@@ -70,17 +88,62 @@
                     this.isInitialized = true;
                     this.setupCustomLanguageSelector();
                     console.log('✅ Google Translate initialized successfully');
-                } else if (this.initializationAttempts < this.maxAttempts) {
-                    this.initializationAttempts++;
-                    console.log(`⏳ Google Translate loading... (${this.initializationAttempts}/${this.maxAttempts})`);
-                    setTimeout(checkReady, 800); // Increased delay
+                } else if (attempts < maxWaitAttempts) {
+                    attempts++;
+                    // Exponential backoff for widget ready checks
+                    const delay = 1000 * Math.pow(1.5, attempts);
+                    console.log(`⏳ Google Translate widget loading... (${attempts}/${maxWaitAttempts}) - waiting ${delay}ms`);
+                    setTimeout(checkReady, delay);
                 } else {
-                    console.warn('⚠️ Google Translate widget initialization timeout - using fallback');
-                    this.showFallbackMessage();
+                    console.warn('⚠️ Google Translate widget failed to initialize - enabling fallback mode');
+                    this.enableFallbackMode();
                 }
             };
             
-            setTimeout(checkReady, 500);
+            // Initial check with delay to avoid immediate API stress
+            setTimeout(checkReady, 1000);
+        }
+
+        // Enhanced fallback mode with native translation support
+        enableFallbackMode() {
+            const customSelect = document.getElementById('custom-language-select');
+            if (!customSelect) return;
+
+            // Enable basic native translation via URL parameters
+            customSelect.removeEventListener('change', this.handleCustomSelectChange);
+            customSelect.addEventListener('change', this.handleNativeFallback);
+            
+            // Add fallback indicator
+            const fallbackIndicator = document.createElement('span');
+            fallbackIndicator.textContent = ' (Basic)';
+            fallbackIndicator.style.fontSize = '10px';
+            fallbackIndicator.style.opacity = '0.7';
+            fallbackIndicator.style.marginLeft = '4px';
+            
+            const langLabel = document.querySelector('.language-label span:last-child');
+            if (langLabel && !langLabel.querySelector('.fallback-indicator')) {
+                fallbackIndicator.className = 'fallback-indicator';
+                langLabel.appendChild(fallbackIndicator);
+            }
+
+            console.log('📱 Fallback mode enabled - basic translation via page reload');
+        }
+
+        // Handle language changes in fallback mode
+        handleNativeFallback(event) {
+            const selectedLang = event.target.value;
+            
+            if (selectedLang === 'en') {
+                // For English, reload without translation parameters
+                if (window.location.search.includes('tl=') || document.body.classList.contains('translated-')) {
+                    window.location.href = window.location.pathname;
+                }
+            } else {
+                // For other languages, use URL-based Google Translate
+                const currentUrl = window.location.href.split('?')[0];
+                const translateUrl = `https://translate.google.com/translate?sl=auto&tl=${selectedLang}&u=${encodeURIComponent(currentUrl)}`;
+                window.location.href = translateUrl;
+            }
         }
 
         // Setup custom language selector
@@ -98,7 +161,7 @@
             // Set initial state
             this.updateCustomSelectValue();
             
-            // Monitor for translation changes
+            // Monitor for translation changes with throttling
             this.observeTranslationChanges();
         }
 
@@ -111,23 +174,25 @@
                 clearTimeout(this.debounceTimeout);
             }
             
-            // Debounce language changes
+            // Debounce language changes to prevent rapid API calls
             this.debounceTimeout = setTimeout(() => {
                 this.changeLanguage(selectedLang);
-            }, 150);
+            }, 300); // Increased debounce delay
         }
 
-        // Change language using Google Translate
+        // Change language using Google Translate with rate-limit protection
         changeLanguage(langCode) {
             if (!this.isInitialized) {
-                console.warn('Google Translate not initialized yet');
+                console.warn('Google Translate not initialized - using fallback');
+                this.handleNativeFallback({target: {value: langCode}});
                 return;
             }
 
             const googleSelect = document.querySelector('#google_translate_element_hidden select.goog-te-combo');
             
             if (!googleSelect) {
-                console.error('Google Translate select element not found');
+                console.warn('Google Translate select element not found - using fallback');
+                this.handleNativeFallback({target: {value: langCode}});
                 return;
             }
 
@@ -153,11 +218,13 @@
                 }
 
                 if (!foundOption) {
-                    console.warn(`Language ${langCode} not found in Google Translate options`);
+                    console.warn(`Language ${langCode} not available - trying fallback`);
+                    this.handleNativeFallback({target: {value: langCode}});
                 }
 
             } catch (error) {
-                console.error('Error changing language:', error);
+                console.error('Error changing language via Google Translate:', error);
+                this.handleNativeFallback({target: {value: langCode}});
             }
         }
 
@@ -181,7 +248,7 @@
             }
         }
 
-        // Observe translation changes in the body element
+        // Observe translation changes in the body element with throttling
         observeTranslationChanges() {
             if (typeof MutationObserver === 'undefined') return;
 
@@ -196,11 +263,11 @@
                 });
 
                 if (shouldUpdate) {
-                    // Debounce updates
+                    // Increased debounce to reduce API stress
                     clearTimeout(this.debounceTimeout);
                     this.debounceTimeout = setTimeout(() => {
                         this.syncLanguageState();
-                    }, 300);
+                    }, 500);
                 }
             });
 
@@ -233,24 +300,6 @@
                 }
             }
         }
-
-        // Show fallback message when Google Translate fails
-        showFallbackMessage() {
-            const customSelect = document.getElementById('custom-language-select');
-            if (customSelect) {
-                customSelect.disabled = true;
-                customSelect.style.opacity = '0.6';
-                
-                // Add error message
-                const errorMsg = document.createElement('small');
-                errorMsg.textContent = 'Translation temporarily unavailable';
-                errorMsg.style.color = '#d32f2f';
-                errorMsg.style.fontSize = '11px';
-                errorMsg.style.display = 'block';
-                errorMsg.style.marginTop = '4px';
-                customSelect.parentNode.appendChild(errorMsg);
-            }
-        }
     }
 
     // Global instance
@@ -261,14 +310,20 @@
         window.simpleDentalTranslator.init();
     }
 
-    // Initialize when DOM is ready
+    // Session storage to prevent repeated initialization attempts
+    const TRANSLATE_SESSION_KEY = 'gt_init_attempted';
+    
+    // Check if we've already attempted initialization in this session
     document.addEventListener('DOMContentLoaded', function() {
-        // Small delay to ensure everything is loaded
+        const alreadyAttempted = sessionStorage.getItem(TRANSLATE_SESSION_KEY);
+        
+        // Only attempt DOM-based initialization if callback hasn't fired and we haven't tried yet
         setTimeout(() => {
-            if (!window.simpleDentalTranslator.isInitialized) {
+            if (!window.simpleDentalTranslator.isInitialized && !alreadyAttempted) {
+                sessionStorage.setItem(TRANSLATE_SESSION_KEY, 'true');
                 window.simpleDentalTranslator.init();
             }
-        }, 1000);
+        }, 2000); // Increased delay to give callback priority
     });
     </script>
     
@@ -413,6 +468,12 @@
         display: block;
     }
     
+    /* Fallback mode indicator */
+    .fallback-indicator {
+        color: #666;
+        font-weight: normal;
+    }
+    
     @media (max-width: 768px) {
         .language-switcher {
             margin: 8px 0;
@@ -468,8 +529,8 @@
     }
     </style>
     
-    <!-- Google Translate Script - Load only once here -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en" async defer></script>
+    <!-- Google Translate Script with rate-limit friendly loading -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en" async defer onerror="console.warn('Google Translate script failed to load - fallback mode will be used')"></script>
     
     <?php wp_head(); ?>
 </head>
@@ -534,7 +595,7 @@
                     ?>
                 </nav><!-- #site-navigation -->
 
-                <!-- Enhanced Language Switcher -->
+                <!-- Enhanced Language Switcher with Fallback Support -->
                 <div class="language-switcher">
                     <div class="language-label">
                         <span>🌍</span>
