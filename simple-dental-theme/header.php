@@ -30,13 +30,13 @@
         // Initialize Google Translate (called by Google's callback)
         init() {
             try {
-                if (typeof google === 'undefined' || !google.translate) {
-                    console.warn('Google Translate not available, retrying...');
+                if (typeof google === 'undefined' || !google.translate || !google.translate.TranslateElement) {
                     if (this.initializationAttempts < this.maxAttempts) {
                         this.initializationAttempts++;
-                        setTimeout(this.init, 1000);
+                        console.log(`⏳ Google Translate API loading... (${this.initializationAttempts}/${this.maxAttempts})`);
+                        setTimeout(() => this.init(), 1500); // Increased delay for API load
                     } else {
-                        console.error('Google Translate failed to load after maximum attempts');
+                        console.warn('⚠️ Google Translate API failed to load - using fallback mode');
                         this.showFallbackMessage();
                     }
                     return;
@@ -72,9 +72,10 @@
                     console.log('✅ Google Translate initialized successfully');
                 } else if (this.initializationAttempts < this.maxAttempts) {
                     this.initializationAttempts++;
-                    setTimeout(checkReady, 500);
+                    console.log(`⏳ Google Translate loading... (${this.initializationAttempts}/${this.maxAttempts})`);
+                    setTimeout(checkReady, 800); // Increased delay
                 } else {
-                    console.error('❌ Google Translate widget failed to initialize');
+                    console.warn('⚠️ Google Translate widget initialization timeout - using fallback');
                     this.showFallbackMessage();
                 }
             };
