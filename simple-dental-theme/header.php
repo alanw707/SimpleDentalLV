@@ -56,15 +56,20 @@
                     return;
                 }
 
-                // Create Google Translate instance with rate-limit friendly settings
+                // Create Google Translate instance with URL redirection prevention
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
                     includedLanguages: 'en,es,zh-TW,zh-CN',
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                     multilanguagePage: true,
                     autoDisplay: false,
-                    gaTrack: false, // Disable tracking to reduce API calls
-                    gaId: null // Explicitly disable Google Analytics integration
+                    gaTrack: false,
+                    gaId: null,
+                    // CRITICAL: Force widget-only translation, prevent URL fallback
+                    floatPosition: google.translate.TranslateElement.FloatPosition.TOP_LEFT,
+                    // Additional options to prevent URL-based fallback
+                    tabSize: 0,
+                    domain: 'www.simpledentallv.com'
                 }, 'google_translate_element_hidden');
 
                 // Wait for Google Translate to be ready with rate-limit awareness
@@ -129,21 +134,108 @@
             console.log('📱 Fallback mode enabled - basic translation via page reload');
         }
 
-        // Handle language changes in fallback mode
+        // Handle language changes in fallback mode - use in-page translation only
         handleNativeFallback(event) {
             const selectedLang = event.target.value;
             
             if (selectedLang === 'en') {
-                // For English, reload without translation parameters
-                if (window.location.search.includes('tl=') || document.body.classList.contains('translated-')) {
-                    window.location.href = window.location.pathname;
+                // For English, restore original page if translated
+                if (document.body.classList.contains('translated-ltr')) {
+                    // Try to restore original content
+                    this.restoreOriginalContent();
+                } else if (window.location.search.includes('tl=')) {
+                    // Remove translation parameters from URL
+                    const cleanUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+                    window.history.replaceState({}, document.title, cleanUrl);
                 }
             } else {
-                // For other languages, use URL-based Google Translate
-                const currentUrl = window.location.href.split('?')[0];
-                const translateUrl = `https://translate.google.com/translate?sl=auto&tl=${selectedLang}&u=${encodeURIComponent(currentUrl)}`;
-                window.location.href = translateUrl;
+                // For other languages, show user-friendly message instead of redirecting
+                this.showTranslationNotice(selectedLang);
             }
+        }
+
+        // Restore original content when switching back to English
+        restoreOriginalContent() {
+            // Remove all translation-related body classes
+            const bodyClasses = document.body.className;
+            const cleanClasses = bodyClasses.replace(/\btranslated-\w+\b/g, '').replace(/\s+/g, ' ').trim();
+            document.body.className = cleanClasses;
+            
+            // Try to trigger Google Translate to restore original content
+            const googleSelect = document.querySelector('#google_translate_element_hidden select.goog-te-combo');
+            if (googleSelect) {
+                // Set to original language (empty value)
+                for (let i = 0; i < googleSelect.options.length; i++) {
+                    if (googleSelect.options[i].value === '') {
+                        googleSelect.selectedIndex = i;
+                        googleSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        break;
+                    }
+                }
+            }
+            
+            console.log('🔄 Restored original English content');
+        }
+
+        // Show translation notice for unsupported languages in fallback mode
+        showTranslationNotice(langCode) {
+            const customSelect = document.getElementById('custom-language-select');
+            if (!customSelect) return;
+            
+            // Reset to English
+            customSelect.value = 'en';
+            
+            // Create or update notice
+            let notice = document.querySelector('.translation-notice');
+            if (!notice) {
+                notice = document.createElement('div');
+                notice.className = 'translation-notice';
+                notice.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #f8f9fa;
+                    border: 2px solid #8B7355;
+                    border-radius: 8px;
+                    padding: 12px 16px;
+                    max-width: 300px;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    font-family: 'Inter', sans-serif;
+                    font-size: 14px;
+                    line-height: 1.4;
+                `;
+                document.body.appendChild(notice);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (notice && notice.parentNode) {
+                        notice.parentNode.removeChild(notice);
+                    }
+                }, 5000);
+            }
+            
+            const langName = this.supportedLanguages[langCode] || langCode;
+            notice.innerHTML = `
+                <div style="color: #8B7355; font-weight: 600; margin-bottom: 4px;">
+                    Translation Notice
+                </div>
+                <div style="color: #666; font-size: 13px;">
+                    ${langName} translation is temporarily unavailable. The page will remain in English.
+                </div>
+                <button onclick="this.parentNode.remove()" style="
+                    position: absolute;
+                    top: 8px;
+                    right: 8px;
+                    background: none;
+                    border: none;
+                    font-size: 16px;
+                    cursor: pointer;
+                    color: #999;
+                " aria-label="Close notice">×</button>
+            `;
+            
+            console.log(`ℹ️ Translation notice shown for ${langName}`);
         }
 
         // Setup custom language selector
@@ -180,7 +272,7 @@
             }, 300); // Increased debounce delay
         }
 
-        // Change language using Google Translate with rate-limit protection
+        // Change language using Google Translate with enhanced widget-based protection
         changeLanguage(langCode) {
             if (!this.isInitialized) {
                 console.warn('Google Translate not initialized - using fallback');
@@ -197,6 +289,18 @@
             }
 
             try {
+                // CRITICAL FIX: Ensure we're working with the widget, not causing URL redirects
+                
+                // Prevent any potential URL-based translation triggers
+                const currentUrl = window.location.href;
+                if (currentUrl.includes('translate.google.com') || currentUrl.includes('_x_tr_')) {
+                    console.warn('⚠️ Detected translated URL - restoring original page');
+                    // If we're already on a translated URL, restore the original
+                    const originalUrl = currentUrl.split('?')[0].replace(/^https:\/\/[^\/]*\//, window.location.origin + '/');
+                    window.location.replace(originalUrl);
+                    return;
+                }
+                
                 // Find matching option in Google's select
                 let foundOption = false;
                 for (let i = 0; i < googleSelect.options.length; i++) {
@@ -208,23 +312,78 @@
                         optionValue === langCode ||
                         optionValue.toLowerCase() === langCode.toLowerCase()) {
                         
+                        // CRITICAL: Use proper widget method, not direct DOM manipulation
+                        googleSelect.value = optionValue;
                         googleSelect.selectedIndex = i;
-                        googleSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        
+                        // Trigger change event to activate widget translation
+                        const changeEvent = new Event('change', { 
+                            bubbles: true, 
+                            cancelable: true,
+                            composed: true 
+                        });
+                        googleSelect.dispatchEvent(changeEvent);
+                        
+                        // Also try click event as backup
+                        const clickEvent = new Event('click', {
+                            bubbles: true,
+                            cancelable: true
+                        });
+                        googleSelect.dispatchEvent(clickEvent);
+                        
                         this.currentLanguage = langCode;
                         foundOption = true;
-                        console.log(`🌍 Language changed to: ${this.supportedLanguages[langCode]}`);
+                        console.log(`🌍 Language changed to: ${this.supportedLanguages[langCode]} (widget-based)`);
+                        
+                        // Verify translation actually happened
+                        setTimeout(() => {
+                            this.verifyTranslation(langCode);
+                        }, 1000);
+                        
                         break;
                     }
                 }
 
                 if (!foundOption) {
-                    console.warn(`Language ${langCode} not available - trying fallback`);
+                    console.warn(`Language ${langCode} not available in Google Translate widget`);
                     this.handleNativeFallback({target: {value: langCode}});
                 }
 
             } catch (error) {
-                console.error('Error changing language via Google Translate:', error);
+                console.error('Error changing language via Google Translate widget:', error);
                 this.handleNativeFallback({target: {value: langCode}});
+            }
+        }
+
+        // Verify that translation actually occurred (widget-based, not URL-based)
+        verifyTranslation(expectedLang) {
+            const currentUrl = window.location.href;
+            
+            // Check if we accidentally triggered URL-based translation
+            if (currentUrl.includes('translate.google.com') || currentUrl.includes('_x_tr_')) {
+                console.error('❌ URL-based translation detected - this should not happen!');
+                // Try to recover by going back to original URL
+                const originalUrl = window.location.origin + window.location.pathname;
+                window.location.replace(originalUrl);
+                return;
+            }
+            
+            // Check if translation applied via body classes (widget-based method)
+            const bodyClasses = document.body.className;
+            const isTranslated = bodyClasses.includes('translated-') || bodyClasses.includes('translated-ltr');
+            
+            if (expectedLang === 'en') {
+                if (!isTranslated) {
+                    console.log('✅ English restored successfully (widget-based)');
+                } else {
+                    console.warn('⚠️ English restoration may not be complete');
+                }
+            } else {
+                if (isTranslated) {
+                    console.log(`✅ Translation to ${expectedLang} successful (widget-based)`);
+                } else {
+                    console.warn(`⚠️ Translation to ${expectedLang} may not be complete`);
+                }
             }
         }
 
@@ -309,12 +468,98 @@
     function googleTranslateElementInit() {
         window.simpleDentalTranslator.init();
     }
+    
+    // CRITICAL: Prevent Google Translate URL redirections by intercepting navigation
+    (function preventTranslateRedirects() {
+        // Block any attempts to navigate to translate.google.com URLs
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
+        
+        // Intercept history changes
+        history.pushState = function(state, title, url) {
+            if (url && (String(url).includes('translate.google') || String(url).includes('_x_tr_'))) {
+                console.warn('🚫 Blocked Google Translate URL redirection via pushState:', url);
+                return;
+            }
+            return originalPushState.apply(this, arguments);
+        };
+        
+        history.replaceState = function(state, title, url) {
+            if (url && (String(url).includes('translate.google') || String(url).includes('_x_tr_'))) {
+                console.warn('🚫 Blocked Google Translate URL redirection via replaceState:', url);  
+                return;
+            }
+            return originalReplaceState.apply(this, arguments);
+        };
+        
+        console.log('🛡️ Google Translate URL redirection prevention enabled');
+    })();
 
     // Session storage to prevent repeated initialization attempts
     const TRANSLATE_SESSION_KEY = 'gt_init_attempted';
     
+    // URL redirection detection and recovery
+    function checkForTranslateRedirect() {
+        const currentUrl = window.location.href;
+        
+        // Check if we're on a Google Translate redirect URL
+        if (currentUrl.includes('translate.google.com') || 
+            currentUrl.includes('_x_tr_') || 
+            currentUrl.includes('-com.translate.goog')) {
+            
+            console.warn('🚨 CRITICAL: Google Translate URL redirection detected!');
+            console.log('Current URL:', currentUrl);
+            
+            // Extract original URL and redirect back
+            let originalUrl = window.location.origin + window.location.pathname;
+            
+            // If we have a proper domain in the URL, extract it
+            const urlMatch = currentUrl.match(/https?:\/\/([^\/]*translate\.goog)/);
+            if (urlMatch) {
+                const translateDomain = urlMatch[1];
+                const originalDomain = translateDomain.replace(/^.*?-/, '').replace('.translate.goog', '');
+                originalUrl = 'https://www.' + originalDomain;
+            }
+            
+            console.log('Redirecting to original URL:', originalUrl);
+            
+            // Show user notification
+            const body = document.body;
+            if (body) {
+                const notice = document.createElement('div');
+                notice.style.cssText = `
+                    position: fixed; top: 0; left: 0; right: 0; 
+                    background: #ff6b6b; color: white; padding: 12px; 
+                    text-align: center; z-index: 99999; font-family: Arial, sans-serif;
+                `;
+                notice.innerHTML = '⚠️ Redirecting to original page to fix translation...';
+                body.appendChild(notice);
+            }
+            
+            // Redirect back to original site
+            setTimeout(() => {
+                window.location.replace(originalUrl);
+            }, 1000);
+            
+            return true; // Redirect is happening
+        }
+        
+        return false; // No redirect needed
+    }
+    
+    // Check for redirect immediately
+    if (checkForTranslateRedirect()) {
+        // If redirecting, don't initialize translation
+        return;
+    }
+
     // Check if we've already attempted initialization in this session
     document.addEventListener('DOMContentLoaded', function() {
+        // Double-check for redirect after DOM loads
+        if (checkForTranslateRedirect()) {
+            return;
+        }
+        
         const alreadyAttempted = sessionStorage.getItem(TRANSLATE_SESSION_KEY);
         
         // Only attempt DOM-based initialization if callback hasn't fired and we haven't tried yet
@@ -348,15 +593,21 @@
     }
     
     /* Hide the entire Google Translate element since we're using custom */
+    /* FIXED: Use proper hiding that allows initialization but keeps element invisible */
     #google_translate_element_hidden {
         position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        height: 0 !important;
-        width: 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: 0 !important;
         overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
         z-index: -1 !important;
     }
     
@@ -474,6 +725,24 @@
         font-weight: normal;
     }
     
+    /* Translation notice styling */
+    .translation-notice {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        backdrop-filter: blur(8px) !important;
+        border-radius: 12px !important;
+    }
+    
+    /* Prevent Google Translate from interfering with our page layout */
+    body.translated-ltr {
+        direction: ltr !important;
+    }
+    
+    /* Ensure proper font rendering for translated content */
+    .translated-es {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
     @media (max-width: 768px) {
         .language-switcher {
             margin: 8px 0;
@@ -529,8 +798,30 @@
     }
     </style>
     
-    <!-- Google Translate Script with rate-limit friendly loading -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en" async defer onerror="console.warn('Google Translate script failed to load - fallback mode will be used')"></script>
+    <!-- Google Translate Script with enhanced error handling -->
+    <script type="text/javascript" 
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en" 
+            async defer 
+            onerror="
+                console.warn('⚠️ Google Translate script failed to load - enabling fallback mode');
+                if (window.simpleDentalTranslator) {
+                    window.simpleDentalTranslator.enableFallbackMode();
+                }
+            ">
+    </script>
+    
+    <!-- Fallback detection if Google Translate script never loads -->
+    <script>
+    // Check if Google Translate loaded after reasonable time
+    setTimeout(function() {
+        if (typeof google === 'undefined' || !google.translate) {
+            console.warn('⚠️ Google Translate API not available after 10 seconds - using fallback mode');
+            if (window.simpleDentalTranslator && !window.simpleDentalTranslator.isInitialized) {
+                window.simpleDentalTranslator.enableFallbackMode();
+            }
+        }
+    }, 10000);
+    </script>
     
     <?php wp_head(); ?>
 </head>
