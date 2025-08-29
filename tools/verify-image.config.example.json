@@ -1,0 +1,17 @@
+{
+  "platform": "aca", 
+  "environments": {
+    "prod": {
+      "resourceGroup": "rg-name",
+      "app": "container-app-name",
+      "expected": "v1.2.3",
+      "healthUrl": "https://your-prod.example/health"
+    },
+    "dev": {
+      "resourceGroup": "rg-dev",
+      "app": "container-app-name-dev",
+      "expected": "",
+      "healthUrl": "https://your-dev.example/health"
+    }
+  }
+}

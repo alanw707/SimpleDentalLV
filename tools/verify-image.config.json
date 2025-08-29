@@ -1,0 +1,12 @@
+{
+  "platform": "aca",
+  "environments": {
+    "prod": {
+      "resourceGroup": "aiprofilemaker-v1",
+      "app": "aipm-api-v1",
+      "expected": "",
+      "healthUrl": "https://api.aiprofilephotomaker.com/health"
+    }
+  }
+}
+
