@@ -8,40 +8,7 @@
 
     $(document).ready(function() {
         
-        // Mobile Menu Toggle - Simple approach without animation conflicts
-        $('.menu-toggle').on('click', function() {
-            $(this).toggleClass('active');
-            $('.main-navigation ul').toggleClass('active');
-            $('.mobile-menu-overlay').toggle();
-            $('body').toggleClass('menu-open');
-            
-            // Clean X icon animation using CSS classes
-            if ($(this).hasClass('active')) {
-                if ($(this).find('.close-icon').length === 0) {
-                    $(this).append('<div class="close-icon">✕</div>');
-                }
-            }
-        });
-        
-        // Close mobile menu when clicking outside
-        $(document).on('click', function(e) {
-            if (!$(e.target).closest('.main-navigation, .menu-toggle').length) {
-                $('.menu-toggle').removeClass('active');
-                $('.main-navigation ul').removeClass('active');
-                $('.mobile-menu-overlay').hide();
-                $('body').removeClass('menu-open');
-                // Animations handled by CSS classes
-            }
-        });
-        
-        // Close mobile menu when clicking a link
-        $('.main-navigation a').on('click', function() {
-            $('.menu-toggle').removeClass('active');
-            $('.main-navigation ul').removeClass('active');
-            $('.mobile-menu-overlay').hide();
-            $('body').removeClass('menu-open');
-            // Animations handled by CSS classes
-        });
+        // Mobile menu logic is handled in navigation.js - avoiding duplicate handlers
         
         // Contact form styles are now in CSS file
 

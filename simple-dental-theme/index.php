@@ -17,11 +17,11 @@ get_header();
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1>Straightforward Dentistry from one Experienced Doctor.</h1>
-                <p class="subtitle">No pressure. No upsell. Just honest, transparent dental care with modern technology and fair pricing.</p>
+                <h1><?php echo __t('Welcome to Simple Dental'); ?></h1>
+                <p class="subtitle"><?php echo __t('Quality dental care for the whole family'); ?></p>
                 <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary">View Our Services</a>
-                    <a href="tel:7023024787" class="btn btn-secondary">Call (702) 302-4787</a>
+                    <a href="#services" class="btn btn-primary"><?php echo __t('Our Services'); ?></a>
+                    <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call Us'); ?> (702) 302-4787</a>
                 </div>
             </div>
         </section>
@@ -31,23 +31,23 @@ get_header();
             <div class="container">
                 <div class="about-preview">
                     <div class="about-content">
-                        <h2>What Simple Dental Stands For</h2>
+                        <h2><?php echo __t('Welcome to Simple Dental'); ?></h2>
                         <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
                         
                         <p>With digital tools like same-day crowns and efficient systems, we make your visit fast, comfortable, and transparent. No hidden fees, no pressure, just honest care for everyday working families.</p>
                         
                         <div class="about-features">
                             <div class="feature">
-                                <h4>One Doctor, Always</h4>
-                                <p>You'll see the same experienced dentist every visit</p>
+                                <h4><?php echo __t('Years of Experience'); ?></h4>
+                                <p><?php echo __t('Professional Staff'); ?></p>
                             </div>
                             <div class="feature">
-                                <h4>Transparent Pricing</h4>
-                                <p>Know exactly what you'll pay before treatment</p>
+                                <h4><?php echo __t('Happy Patients'); ?></h4>
+                                <p><?php echo __t('Quality dental care for the whole family'); ?></p>
                             </div>
                             <div class="feature">
-                                <h4>Same-Day Crowns</h4>
-                                <p>Complete crown restoration in one appointment</p>
+                                <h4><?php echo __t('Modern Equipment'); ?></h4>
+                                <p><?php echo __t('Professional Staff'); ?></p>
                             </div>
                         </div>
                         
@@ -60,7 +60,7 @@ get_header();
         <!-- Services Preview Section -->
         <section class="section section-alt" id="services">
             <div class="container">
-                <h2 style="text-align: center; margin-bottom: 40px;">Our Services - Clear, Honest Pricing</h2>
+                <h2 style="text-align: center; margin-bottom: 40px;"><?php echo __t('Our Services'); ?></h2>
                 
                 <?php echo do_shortcode('[simple_dental_services]'); ?>
                 
@@ -74,7 +74,7 @@ get_header();
         <!-- Contact Preview Section -->
         <section class="section">
             <div class="container">
-                <h2 style="text-align: center; margin-bottom: 40px;">Visit Us in Las Vegas</h2>
+                <h2 style="text-align: center; margin-bottom: 40px;"><?php echo __t('Contact'); ?></h2>
                 
                 <div class="contact-info">
                     <div class="contact-card">
@@ -92,10 +92,10 @@ get_header();
                     </div>
                     
                     <div class="contact-card">
-                        <h4>Schedule Appointment</h4>
+                        <h4><?php echo __t('Schedule Appointment'); ?></h4>
                         <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
                         <p>Call to schedule your visit</p>
-                        <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-primary">Contact Us</a>
+                        <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-primary"><?php echo __t('Contact'); ?></a>
                     </div>
                 </div>
             </div>

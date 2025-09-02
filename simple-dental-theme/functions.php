@@ -82,8 +82,8 @@ function simple_dental_scripts() {
     wp_enqueue_script('simple-dental-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
     wp_enqueue_script('feather-icons-script', 'https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js', array(), '4.28.0', true);
     
-    // Responsive navigation script for mobile - DISABLED to prevent conflicts
-    // wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array(), '1.0.0', true);
+    // CRITICAL FIX: Re-enable navigation script for mobile menu functionality
+    wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array('jquery'), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'simple_dental_scripts');
 
@@ -794,6 +794,11 @@ function simple_dental_customizer_settings($wp_customize) {
     ));
 }
 add_action('customize_register', 'simple_dental_customizer_settings');
+
+/**
+ * Load translation system
+ */
+require_once get_template_directory() . '/includes/translator.php';
 
 /**
  * Sanitize email list (comma-separated emails)

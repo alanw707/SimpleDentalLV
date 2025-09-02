@@ -2,10 +2,10 @@
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     
-    <!-- TranslatePress plugin will handle translations -->
+    <!-- Custom lightweight translation system active -->
     
     <!-- Font preloading for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,32 +52,27 @@
                     ?>
                 </div><!-- .site-branding -->
 
-                <nav id="site-navigation" class="main-navigation">
-                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-                        <span class="hamburger"></span>
-                        <span class="hamburger"></span>
-                        <span class="hamburger"></span>
+                <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Main navigation">
+                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle mobile menu">
+                        <span class="hamburger" aria-hidden="true"></span>
+                        <span class="hamburger" aria-hidden="true"></span>
+                        <span class="hamburger" aria-hidden="true"></span>
                         <span class="screen-reader-text"><?php esc_html_e('Menu', 'simple-dental'); ?></span>
                     </button>
                     
                     <?php
-                    wp_nav_menu(
-                        array(
-                            'theme_location' => 'primary',
-                            'menu_id'        => 'primary-menu',
-                            'menu_class'     => 'primary-menu',
-                            'container'      => false,
-                            'walker'         => new Simple_Dental_Walker_Nav_Menu(),
-                            'fallback_cb'    => 'simple_dental_fallback_menu',
-                        )
-                    );
+                    // Force translated fallback menu for multilingual support
+                    simple_dental_fallback_menu();
                     ?>
                 </nav><!-- #site-navigation -->
 
-                <!-- Language switcher will be added by TranslatePress plugin -->
+                <!-- Language switcher for multilingual support -->
+                <div class="language-switcher-wrapper">
+                    <?php echo simple_dental_language_switcher(); ?>
+                </div>
 
                 <div class="header-cta">
-                    <a href="tel:7023024787" class="btn btn-primary">Call Now: (702) 302-4787</a>
+                    <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call Us'); ?>: (702) 302-4787</a>
                 </div>
             </div>
         </div>
@@ -92,10 +87,19 @@
  */
 function simple_dental_fallback_menu() {
     echo '<ul id="primary-menu" class="primary-menu">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/services/')) . '">Services</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
+    // Language switcher for mobile menu
+    echo '<div class="language-switcher-wrapper">';
+    echo '<svg class="menu-icon language-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+    echo '<circle cx="12" cy="12" r="10"/>';
+    echo '<path d="M2 12h20"/>';
+    echo '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>';
+    echo '</svg>';
+    echo simple_dental_language_switcher();
+    echo '</div>';
+    echo '<li><a href="' . esc_url(home_url('/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span class="menu-text">' . __t('Home') . '</span></a></li>';
+    echo '<li><a href="' . esc_url(home_url('/about/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="menu-text">' . __t('About') . '</span></a></li>';
+    echo '<li><a href="' . esc_url(home_url('/services/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="M1 12h6m6 0h6"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span class="menu-text">' . __t('Services') . '</span></a></li>';
+    echo '<li><a href="' . esc_url(home_url('/contact/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="menu-text">' . __t('Contact') . '</span></a></li>';
     echo '</ul>';
 }
 ?>

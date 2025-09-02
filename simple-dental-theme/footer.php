@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Contact Information</h4>
+                    <h4><?php echo __t('Contact'); ?></h4>
                     <p><strong>Address:</strong><br>
                     204 S Jones Blvd<br>
                     Las Vegas, NV 89149</p>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Office Hours</h4>
+                    <h4><?php echo __t('Office Hours', 'footer'); ?></h4>
                     <p><strong>Monday - Friday:</strong><br>
                     8:00 AM - 4:00 PM</p>
                     <p><strong>Saturday & Sunday:</strong><br>

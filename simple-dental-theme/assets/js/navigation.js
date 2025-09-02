@@ -8,41 +8,76 @@
 
     $(document).ready(function() {
         
-        // Mobile menu toggle
-        $('.menu-toggle').on('click', function() {
-            $(this).toggleClass('active');
-            $('.main-navigation ul').toggleClass('active');
-            $('.mobile-menu-overlay').toggle();
-            $('body').toggleClass('menu-open');
+        // Enhanced mobile menu toggle with accessibility and device consistency
+        $('.menu-toggle').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const $toggle = $(this);
+            const $menu = $('.main-navigation ul');
+            const $overlay = $('.mobile-menu-overlay');
+            const $body = $('body');
+            const isOpen = $toggle.hasClass('active');
+            
+            if (isOpen) {
+                // Close menu
+                $toggle.removeClass('active').attr('aria-expanded', 'false');
+                $menu.removeClass('active');
+                $overlay.fadeOut(200);
+                $body.removeClass('menu-open');
+                
+                // Return focus to toggle button
+                $toggle.focus();
+            } else {
+                // Open menu
+                $toggle.addClass('active').attr('aria-expanded', 'true');
+                $menu.addClass('active');
+                $overlay.fadeIn(200);
+                $body.addClass('menu-open');
+                
+                // Focus first menu item for accessibility
+                setTimeout(function() {
+                    $menu.find('a:first').focus();
+                }, 100);
+            }
         });
 
         // Close mobile menu when overlay is clicked
         $('.mobile-menu-overlay').on('click', function() {
-            $('.menu-toggle').removeClass('active');
-            $('.main-navigation ul').removeClass('active');
-            $(this).hide();
-            $('body').removeClass('menu-open');
+            closeMenu();
         });
 
         // Close mobile menu when a menu item is clicked
         $('.main-navigation a').on('click', function() {
             if ($(window).width() <= 768) {
-                $('.menu-toggle').removeClass('active');
-                $('.main-navigation ul').removeClass('active');
-                $('.mobile-menu-overlay').hide();
-                $('body').removeClass('menu-open');
+                closeMenu();
             }
         });
 
-        // Handle window resize
+        // Handle window resize - close menu on desktop
         $(window).resize(function() {
             if ($(window).width() > 768) {
-                $('.menu-toggle').removeClass('active');
-                $('.main-navigation ul').removeClass('active');
-                $('.mobile-menu-overlay').hide();
-                $('body').removeClass('menu-open');
+                closeMenu();
             }
         });
+
+        // Keyboard navigation support
+        $(document).on('keydown', function(e) {
+            if (e.key === 'Escape' && $('.menu-toggle').hasClass('active')) {
+                closeMenu();
+            }
+        });
+
+        // Helper function to close menu consistently
+        function closeMenu() {
+            $('.menu-toggle')
+                .removeClass('active')
+                .attr('aria-expanded', 'false')
+                .focus();
+            $('.main-navigation ul').removeClass('active');
+            $('.mobile-menu-overlay').fadeOut(200);
+            $('body').removeClass('menu-open');
+        }
 
         // Smooth scroll for anchor links
         $('a[href*="#"]:not([href="#"])').click(function() {
