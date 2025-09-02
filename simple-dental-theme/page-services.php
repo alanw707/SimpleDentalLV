@@ -16,7 +16,7 @@ get_header();
         <header class="page-header section" style="background-image: url('https://images.unsplash.com/photo-1516975698824-571e2c952dbd?w=1200&q=80); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
                 <div class="container">
-                    <h1 class="page-title">Complete Dental Services</h1>
+                    <h1 class="page-title"><?php echo __t('Our Services'); ?></h1>
                     <p class="page-subtitle">Transparent pricing for all your dental care needs — no surprises, no hidden fees</p>
                 </div>
             </div>

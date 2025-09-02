@@ -14,11 +14,11 @@ get_header();
     <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&q=80'); background-size: cover; background-position: center;">
         <div class="hero-overlay">
             <div class="container">
-                <h1>Straightforward Dentistry from one Experienced Doctor.</h1>
-                <p class="subtitle">No pressure. No upsell. Just honest, transparent dental care with modern technology and fair pricing.</p>
+                <h1><?php echo __t('Straightforward Dentistry from one Experienced Doctor.'); ?></h1>
+                <p class="subtitle"><?php echo __t('No pressure. No upsell. Just honest, transparent dental care with modern technology and fair pricing.'); ?></p>
                 <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary">View Our Services</a>
-                    <a href="tel:7023024787" class="btn btn-secondary">Call (702) 302-4787</a>
+                    <a href="#services" class="btn btn-primary"><?php echo __t('View Our Services'); ?></a>
+                    <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call (702) 302-4787'); ?></a>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@ get_header();
         <div class="container">
             <!-- Main Story -->
             <div class="about-story">
-                <h2>What Simple Dental Stands For</h2>
+                <h2><?php echo __t('What Simple Dental Stands For'); ?></h2>
                 <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
                 
                 <p>With digital tools and efficient systems, we make your visit fast, comfortable, and transparent. This isn't about fancy amenities or high-pressure sales — it's about delivering honest, quality dental care that working families can afford.</p>
@@ -38,29 +38,29 @@ get_header();
             <!-- Practice Philosophy -->
             <div class="about-philosophy">
                 <div class="philosophy-content">
-                    <h2>How We're Different</h2>
+                    <h2><?php echo __t('How We\'re Different'); ?></h2>
                     <div class="philosophy-grid">
                         <div class="philosophy-item">
                             <div class="philosophy-icon">🩺</div>
-                            <h3>One Doctor, Always</h3>
+                            <h3><?php echo __t('One Doctor, Always'); ?></h3>
                             <p>You'll see the same experienced dentist every visit. No rotating providers, no bait-and-switch.</p>
                         </div>
                         
                         <div class="philosophy-item">
                             <div class="philosophy-icon">💰</div>
-                            <h3>Transparent Pricing</h3>
+                            <h3><?php echo __t('Transparent Pricing'); ?></h3>
                             <p>Know exactly what you'll pay before treatment begins. No surprise bills, no hidden fees.</p>
                         </div>
                         
                         <div class="philosophy-item">
                             <div class="philosophy-icon">⚡</div>
-                            <h3>Modern Efficiency</h3>
+                            <h3><?php echo __t('Modern Efficiency'); ?></h3>
                             <p>Same-day crowns, digital technology, and streamlined systems for better outcomes.</p>
                         </div>
                         
                         <div class="philosophy-item">
                             <div class="philosophy-icon">🤝</div>
-                            <h3>No Pressure</h3>
+                            <h3><?php echo __t('No Pressure'); ?></h3>
                             <p>We recommend only what you truly need. Just honest recommendations based on your dental health.</p>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ get_header();
     <!-- Services Preview Section -->
     <section class="section section-alt" id="services">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px;">Our Most Popular Services</h2>
+            <h2 style="text-align: center; margin-bottom: 40px;"><?php echo __t('Our Most Popular Services'); ?></h2>
             <p style="text-align: center; margin-bottom: 2rem; font-size: 1.125rem; color: var(--text-medium);">
                 Transparent pricing on the services our patients need most
             </p>
@@ -107,25 +107,25 @@ get_header();
     <!-- Contact Preview Section -->
     <section class="section">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px;">Visit Us in Las Vegas</h2>
+            <h2 style="text-align: center; margin-bottom: 40px;"><?php echo __t('Visit Us in Las Vegas'); ?></h2>
             
             <div class="contact-info">
                 <div class="contact-card">
-                    <h4>Our Location</h4>
+                    <h4><?php echo __t('Our Location'); ?></h4>
                     <p><strong>204 S Jones Blvd</strong><br>
                     Las Vegas, NV 89149</p>
                     <p>Convenient location with easy parking</p>
                 </div>
                 
                 <div class="contact-card">
-                    <h4>Office Hours</h4>
+                    <h4><?php echo __t('Office Hours'); ?></h4>
                     <p><strong>Monday - Friday</strong><br>
                     8:00 AM - 4:00 PM</p>
                     <p><strong>Weekends:</strong> Closed</p>
                 </div>
                 
                 <div class="contact-card">
-                    <h4>Schedule Appointment</h4>
+                    <h4><?php echo __t('Schedule Appointment'); ?></h4>
                     <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
                     <p>Call to schedule your visit</p>
                     <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-primary">Contact Us</a>

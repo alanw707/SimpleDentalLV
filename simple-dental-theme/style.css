@@ -188,32 +188,37 @@ a:hover {
     padding: 0;
 }
 
-/* --- Menu Item & Icon Alignment --- */
+/* --- Desktop Menu Item & Icon Alignment --- */
 .main-navigation a {
     display: flex;
     align-items: center;
-    gap: 0.6rem; /* Slightly increased gap for better spacing */
-}
-
-.menu-icon {
-    width: 16px; /* Adjusted size for better balance */
-    height: 16px;
-    stroke-width: 2.5; /* Bolder stroke */
-    flex-shrink: 0; /* Prevent icon from shrinking */
-    margin-top: -2px; /* Fine-tune vertical alignment */
-}
-
-.menu-text {
-    line-height: 1; /* Ensure text has a clean line-height */
-}
-
-.main-navigation a {
+    gap: 0.6rem; /* Desktop spacing */
     color: var(--text-medium);
     font-weight: 500;
     font-size: 1rem;
     padding: 0.75rem 0;
     position: relative;
     transition: all 0.2s ease;
+}
+
+/* Desktop Menu Icons */
+.main-navigation .menu-icon {
+    width: 16px; /* Desktop icon size */
+    height: 16px;
+    stroke-width: 2.5;
+    flex-shrink: 0;
+    margin-top: -2px; /* Fine-tune desktop alignment */
+    opacity: 0.85;
+    transition: all 0.2s ease;
+}
+
+.main-navigation a:hover .menu-icon,
+.main-navigation a.active .menu-icon {
+    opacity: 1;
+}
+
+.main-navigation .menu-text {
+    line-height: 1; /* Clean desktop line-height */
 }
 
 .main-navigation a:hover,
@@ -998,7 +1003,7 @@ button.menu-toggle {
     opacity: 1 !important;
 }
 
-/* Mobile Menu Overlay */
+/* Mobile Menu Overlay - Simplified z-index */
 .mobile-menu-overlay {
     display: none;
     position: fixed;
@@ -1007,7 +1012,8 @@ button.menu-toggle {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+    z-index: 999;
+    backdrop-filter: blur(2px); /* Enhanced visual separation */
 }
 
 body.menu-open {
@@ -1024,7 +1030,7 @@ body.menu-open {
         visibility: visible !important;
         opacity: 1 !important;
         position: relative !important;
-        z-index: 99999 !important;
+        z-index: 1001 !important; /* Above menu and overlay */
         background: rgba(255, 255, 255, 0.95) !important;
         border: 2px solid var(--primary-brown) !important;
         border-radius: 6px !important;
@@ -1092,25 +1098,27 @@ body.menu-open {
         width: 44px !important;
         height: 44px !important;
         position: relative !important;
-        z-index: 9999 !important;
+        z-index: 1001 !important; /* Consistent with main toggle */
         order: 999 !important;
         margin-left: auto !important;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
     }
     
-    /* COMPACT MOBILE MENU DESIGN */
+    /* COMPACT MOBILE MENU DESIGN - Fixed positioning for device consistency */
     .main-navigation ul {
-        position: absolute;
-        top: calc(100% + 8px);
-        right: 8px;
+        position: fixed;
+        top: 70px; /* Fixed distance from viewport top */
+        right: 15px; /* Fixed distance from viewport edge */
         width: 170px !important;
-        max-width: 170px !important;
+        max-width: calc(100vw - 30px); /* Responsive max width */
+        max-height: calc(100vh - 100px); /* Prevent menu from exceeding viewport */
+        overflow-y: auto; /* Enable scrolling for long menus */
         background: var(--white);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        border-radius: 6px;
-        z-index: 999;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        border-radius: 8px;
+        z-index: 1000; /* Simplified z-index hierarchy */
         flex-direction: column;
-        padding: 0.25rem 0;
+        padding: 0.5rem 0;
         margin: 0;
         list-style: none;
         border: 1px solid var(--border-gray);
@@ -1119,13 +1127,17 @@ body.menu-open {
         display: flex;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-15px) scale(0.9);
+        transform: translateY(-10px) scale(0.95);
         pointer-events: none;
         
-        /* Smooth animation properties */
-        transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                    visibility 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* Smooth animation properties - optimized for mobile */
+        transition: opacity 0.25s ease,
+                    visibility 0.25s ease,
+                    transform 0.25s ease;
+                    
+        /* iOS Safari specific fixes */
+        -webkit-overflow-scrolling: touch;
+        transform-origin: top right;
     }
     
     /* SHOW MOBILE MENU WHEN ACTIVE */
@@ -1146,8 +1158,10 @@ body.menu-open {
     }
     
     .main-navigation a {
-        display: block;
-        padding: 0.5rem 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem !important; /* Increased from 0.75rem for more breathing room */
+        padding: 0.75rem 1rem; /* Increased vertical padding for 44px+ touch targets */
         text-align: left;
         color: var(--text-dark);
         text-decoration: none;
@@ -1156,11 +1170,62 @@ body.menu-open {
         transition: all 0.2s ease;
         white-space: nowrap;
         overflow: hidden;
+        min-height: 44px; /* Ensure minimum touch target size */
     }
     
     .main-navigation a:hover {
         background-color: var(--primary-brown);
         color: var(--white);
+    }
+    
+    /* Mobile Menu Icon Styling - Override desktop styles */
+    .main-navigation .menu-icon {
+        width: 16px !important; /* Increased from 14px for better visibility */
+        height: 16px !important;
+        stroke-width: 2.1 !important; /* Slightly reduced for visual balance */
+        flex-shrink: 0;
+        opacity: 0.8;
+        transition: all 0.2s ease;
+        margin-top: 0 !important; /* Reset desktop margin for mobile */
+    }
+    
+    .main-navigation a:hover .menu-icon {
+        opacity: 1;
+        stroke-width: 2.5;
+    }
+    
+    .main-navigation .menu-text {
+        line-height: 1.3; /* Increased from 1.2 for better readability */
+        flex: 1;
+    }
+    
+    /* Mobile menu link spacing is now handled in the main a selector above */
+    
+    /* Language Switcher Icon in Mobile Menu */
+    .main-navigation .language-switcher-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem !important; /* Increased to match menu item spacing */
+        padding: 0.75rem 1rem; /* Increased to match menu item padding */
+        justify-content: center;
+        min-height: 44px; /* Consistent touch target size */
+    }
+    
+    .main-navigation .language-icon {
+        width: 16px; /* Increased to match menu icons */
+        height: 16px;
+        opacity: 0.7;
+        color: var(--primary-brown);
+    }
+    
+    .main-navigation .language-dropdown {
+        font-size: 0.85rem;
+        padding: 0.4rem 2rem 0.4rem 0.6rem;
+        min-width: auto;
+        border: 1px solid var(--border-gray);
+        border-radius: 4px;
+        background-size: 8px 5px;
+        background-position: right 0.5rem center;
     }
     
     /* HIDE DESKTOP CTA */
@@ -1258,5 +1323,286 @@ body.menu-open {
     
     .category-title {
         font-size: 1.75rem;
+    }
+    
+    /* Language switcher mobile */
+    .language-switcher-wrapper {
+        order: -1;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border-gray);
+        padding-bottom: 1rem;
+    }
+    
+    .language-switcher {
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   Language Switcher Dropdown Styles
+   ========================================================================== */
+
+/* Hide mobile menu language switcher on desktop */
+.main-navigation .language-switcher-wrapper {
+    display: none;
+}
+
+.language-switcher-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.language-dropdown {
+    padding: 0.5rem 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--dark-gray);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23666" d="M6 8L0 2h12z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 10px 6px;
+    padding-right: 2.5rem;
+}
+
+.language-dropdown:hover {
+    border-color: var(--primary-brown);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.language-dropdown:focus {
+    border-color: var(--primary-brown);
+    box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.1);
+}
+
+.language-dropdown option {
+    padding: 0.5rem;
+    background: var(--white);
+    color: var(--dark-gray);
+}
+
+@media (max-width: 768px) {
+    /* MOBILE HEADER LAYOUT FIX - Center logo properly */
+    .header-content {
+        display: grid !important;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas: "empty branding menu";
+        align-items: center;
+        justify-items: center;
+        padding: 0.75rem 0;
+        gap: 0.5rem;
+    }
+    
+    .site-branding {
+        grid-area: branding;
+        text-align: center !important;
+        flex: none !important;
+    }
+    
+    .menu-toggle {
+        grid-area: menu;
+        margin-left: 0 !important;
+    }
+    
+    /* Hide language switcher from header on mobile */
+    .language-switcher-wrapper {
+        display: none !important;
+    }
+    
+    /* Show language switcher in mobile menu */
+    .main-navigation ul.toggled .language-switcher-wrapper,
+    .main-navigation ul.active .language-switcher-wrapper {
+        display: block !important;
+        order: -1;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border-gray);
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .main-navigation ul.toggled .language-switcher,
+    .main-navigation ul.active .language-switcher {
+        justify-content: center;
+    }
+    
+    .main-navigation ul.toggled .language-dropdown,
+    .main-navigation ul.active .language-dropdown {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+        padding-right: 2.25rem;
+        min-width: 120px;
+        margin: 0 auto;
+    }
+    
+    /* Hide header CTA on mobile to reduce clutter */
+    .header-cta {
+        display: none;
+    }
+}
+
+/* Extra small mobile optimization */
+@media (max-width: 480px) {
+    .header-content {
+        padding: 0.5rem 0;
+        gap: 0.25rem;
+    }
+    
+    .site-title {
+        font-size: 1.5rem;
+    }
+    
+    /* Very small screens - adjust mobile menu */
+    .main-navigation ul {
+        right: 10px !important;
+        width: 160px !important;
+        top: 65px !important;
+    }
+}
+
+/* Mobile landscape orientation fixes */
+@media (max-width: 768px) and (orientation: landscape) {
+    .main-navigation ul {
+        top: 60px !important; /* Reduced top spacing for landscape */
+        max-height: calc(100vh - 80px) !important; /* More compact for landscape */
+    }
+    
+    .hero {
+        padding-top: 200px !important; /* Reduced hero padding in landscape */
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .main-navigation a {
+        min-height: 48px !important; /* Larger touch targets */
+        padding: 0.875rem 1rem !important;
+    }
+    
+    .menu-toggle {
+        width: 48px !important;
+        height: 48px !important;
+    }
+}
+    
+    .custom-logo-wrapper img {
+        height: 50px;
+        max-width: 180px;
+    }
+    
+    .menu-toggle {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 0.5rem !important;
+    }
+    
+    .main-navigation ul.toggled .language-dropdown,
+    .main-navigation ul.active .language-dropdown {
+        font-size: 0.8rem;
+        min-width: 100px;
+        padding: 0.4rem 0.6rem;
+        padding-right: 2rem;
+    }
+}
+
+/* ==========================================================================
+   CSS-Only Mobile Menu Fallback (JavaScript Failure Protection)
+   ========================================================================== */
+
+/* Hidden checkbox to control menu state - CSS-only solution */
+#mobile-menu-checkbox {
+    display: none;
+}
+
+/* CSS-only fallback for mobile menu - works when JavaScript fails */
+@media (max-width: 768px) {
+    /* Create invisible label over hamburger menu for CSS-only control */
+    .menu-toggle::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 1002;
+    }
+    
+    /* Show menu when checkbox is checked (CSS-only state) */
+    #mobile-menu-checkbox:checked ~ .main-navigation ul {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Show overlay when menu is open (CSS-only) */
+    #mobile-menu-checkbox:checked ~ .mobile-menu-overlay {
+        display: block;
+    }
+    
+    /* Prevent body scroll when menu is open (CSS-only) */
+    #mobile-menu-checkbox:checked ~ body {
+        overflow: hidden;
+    }
+    
+    /* Visual feedback for hamburger when menu is open (CSS-only) */
+    #mobile-menu-checkbox:checked + .menu-toggle .hamburger:first-of-type {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    #mobile-menu-checkbox:checked + .menu-toggle .hamburger:nth-of-type(2) {
+        opacity: 0;
+    }
+    
+    #mobile-menu-checkbox:checked + .menu-toggle .hamburger:last-of-type {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+/* CSS-only menu close functionality - clicking menu items closes menu */
+@media (max-width: 768px) {
+    .main-navigation a {
+        position: relative;
+    }
+    
+    /* Reset checkbox when menu link is clicked (CSS-only close) */
+    .main-navigation a:active {
+        /* This creates a brief visual feedback when tapped */
+        background-color: var(--primary-brown);
+        color: var(--white);
+    }
+}
+
+/* Emergency CSS-Only Menu Display (Ultimate Fallback) */
+@media (max-width: 768px) {
+    /* If all else fails, show menu on focus/hover of toggle button */
+    .menu-toggle:focus + .main-navigation ul,
+    .menu-toggle:hover + .main-navigation ul {
+        opacity: 0.95 !important;
+        visibility: visible !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Keep menu visible while interacting with it */
+    .main-navigation ul:hover {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
     }
 }
