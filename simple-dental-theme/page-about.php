@@ -398,7 +398,7 @@ get_header();
         font-size: 1.5rem;
     }
 }
-</style>
+<!-- Styles moved to style.css (About page section) -->
 
 <?php
 get_footer();
