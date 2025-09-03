@@ -8,44 +8,32 @@
 
     $(document).ready(function() {
         
-        // Enhanced mobile menu toggle with delegation for robustness
+        // Mobile menu toggle (single source of truth: body.menu-open)
         $(document).on('click', '.menu-toggle', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             const $toggle = $(this);
             const $menu = $('.main-navigation ul');
-            const $overlay = $('.mobile-menu-overlay');
             const $body = $('body');
-            const isOpen = $toggle.hasClass('active');
-            
+            const isOpen = $body.hasClass('menu-open');
+
             if (isOpen) {
-                // Close menu
-                $toggle.removeClass('active').attr('aria-expanded', 'false');
-                $menu.removeClass('active');
-                $overlay.fadeOut(200);
                 $body.removeClass('menu-open');
-                
-                // Return focus to toggle button
+                $toggle.removeClass('active').attr('aria-expanded', 'false');
+                $menu.removeClass('active'); // keep for backward-compat CSS
                 $toggle.focus();
             } else {
-                // Open menu
-                $toggle.addClass('active').attr('aria-expanded', 'true');
-                $menu.addClass('active');
-                $overlay.fadeIn(200);
                 $body.addClass('menu-open');
-                
+                $toggle.addClass('active').attr('aria-expanded', 'true');
+                $menu.addClass('active'); // keep for backward-compat CSS
                 // Focus first menu item for accessibility
-                setTimeout(function() {
-                    $menu.find('a:first').focus();
-                }, 100);
+                setTimeout(function() { $menu.find('a:first').trigger('focus'); }, 60);
             }
         });
 
         // Close mobile menu when overlay is clicked
-        $(document).on('click', '.mobile-menu-overlay', function() {
-            closeMenu();
-        });
+        $(document).on('click', '.mobile-menu-overlay', function() { closeMenu(); });
 
         // Close mobile menu when a menu item is clicked
         $(document).on('click', '.main-navigation a', function() {
@@ -68,10 +56,9 @@
             }
         });
 
-        // Ensure overlay element exists (defensive in case of partial markup)
-        if ($('.mobile-menu-overlay').length === 0) {
-            $('<div class="mobile-menu-overlay"/>').appendTo('body');
-        }
+        // Ensure only a single overlay exists; do not duplicate
+        const overlays = $('.mobile-menu-overlay');
+        if (overlays.length > 1) { overlays.not(':first').remove(); }
 
         // Helper function to close menu consistently
         function closeMenu() {
@@ -80,7 +67,6 @@
                 .attr('aria-expanded', 'false')
                 .focus();
             $('.main-navigation ul').removeClass('active');
-            $('.mobile-menu-overlay').fadeOut(200);
             $('body').removeClass('menu-open');
         }
 

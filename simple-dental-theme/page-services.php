@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://images.unsplash.com/photo-1516975698824-571e2c952dbd?w=1200&q=80); background-size: cover; background-position: center;">
+        <header class="page-header section" style="background-image: url('https://images.unsplash.com/photo-1516975698824-571e2c952dbd?w=1200&q=80'); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
                 <div class="container">
                     <h1 class="page-title"><?php echo __t('Our Services'); ?></h1>
@@ -157,8 +157,6 @@ get_header();
     <?php endwhile; ?>
 
 </main>
-
-<style>
 .page-header {
     position: relative;
     text-align: center;
@@ -573,7 +571,6 @@ get_header();
         padding: 1.5rem;
     }
 }
-<!-- Styles moved to style.css (Services page section) -->
 
 <?php
 get_footer();

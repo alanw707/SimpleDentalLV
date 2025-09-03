@@ -136,7 +136,7 @@ a:hover {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
+    z-index: 2000;
     border-bottom: 1px solid var(--border-gray);
 }
 
@@ -1177,16 +1177,21 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
 
 /* Mobile Menu Overlay - Simplified z-index */
 .mobile-menu-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1001; /* Below menu (1002), above content */
-    backdrop-filter: blur(2px); /* Enhanced visual separation */
+    backdrop-filter: blur(2px);
+    z-index: 1500; /* Below header(2000)/menu(2001), above content */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
+
+/* Show overlay when body has menu-open */
+body.menu-open .mobile-menu-overlay { opacity: 1; visibility: visible; }
 
 body.menu-open {
     overflow: hidden;
@@ -1202,7 +1207,7 @@ body.menu-open {
         visibility: visible !important;
         opacity: 1 !important;
         position: relative !important;
-        z-index: 1001 !important; /* Above menu and overlay */
+        z-index: 1003 !important; /* Above menu and overlay */
         background: transparent !important;
         border: none !important;
         border-radius: 0 !important;
@@ -1311,7 +1316,7 @@ body.menu-open {
         width: 44px !important;
         height: 44px !important;
         position: relative !important;
-        z-index: 1001 !important;
+        z-index: 2002 !important;
         box-shadow: none !important;
     }
     
@@ -1327,7 +1332,7 @@ body.menu-open {
         background: var(--white);
         box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         border-radius: 8px;
-        z-index: 1002; /* Above header and overlay */
+        z-index: 2001; /* Above header(2000) and overlay(1500) */
         flex-direction: column;
         padding: 0.5rem 0;
         margin: 0;
@@ -1352,7 +1357,8 @@ body.menu-open {
     }
     
     /* SHOW MOBILE MENU WHEN ACTIVE */
-    .main-navigation ul.active {
+    .main-navigation ul.active,
+    body.menu-open .main-navigation ul {
         opacity: 1 !important;
         visibility: visible !important;
         transform: translateY(0) scale(1) !important;
