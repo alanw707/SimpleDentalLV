@@ -1051,11 +1051,8 @@ button.menu-toggle {
 .hero h1 { font-size: 3.5rem; color: var(--white); margin: 0 0 2rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); letter-spacing: -0.025em; line-height: 1.2; }
 .hero .subtitle { font-size: 1.5rem; color: var(--white); margin: 0 0 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); font-weight: 400; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.4; }
 
-@media (max-width: 768px) {
-    .hero { padding-top: 470px !important; padding-bottom: 100px; margin-top: 0 !important; min-height: 60vh; position: relative !important; }
-    .hero h1 { font-size: 2.3rem; }
-    .hero .subtitle { font-size: 1.2rem; }
-}
+/* Mobile styles for hero are defined in the global Responsive Design section
+   to keep a single source of truth. */
 
 /* ==========================================================================
    Page: Services (migrated from inline in page-services.php)
