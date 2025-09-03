@@ -51,7 +51,7 @@ get_header();
                             </div>
                         </div>
                         
-                        <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn-primary">Learn More About Us</a>
+                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/about/'))); ?>" class="btn btn-primary">Learn More About Us</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ get_header();
                 
                 <div style="text-align: center; margin-top: 40px;">
                     <p><strong>No surprises. No hidden fees.</strong> Patients know upfront what to expect.</p>
-                    <a href="<?php echo esc_url(home_url('/services/')); ?>" class="btn btn-primary">View All Services</a>
+                    <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/services/'))); ?>" class="btn btn-primary">View All Services</a>
                 </div>
             </div>
         </section>
@@ -95,7 +95,7 @@ get_header();
                         <h4><?php echo __t('Schedule Appointment'); ?></h4>
                         <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
                         <p>Call to schedule your visit</p>
-                        <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-primary"><?php echo __t('Contact'); ?></a>
+                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-primary"><?php echo __t('Contact'); ?></a>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ get_header();
                                 if (is_singular()) :
                                     the_title('<h1 class="entry-title">', '</h1>');
                                 else :
-                                    the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
+                                    the_title('<h2 class="entry-title"><a href="' . esc_url(simple_dental_with_lang(get_permalink())) . '" rel="bookmark">', '</a></h2>');
                                 endif;
                                 ?>
                             </header>
@@ -141,7 +141,7 @@ get_header();
 
                             <?php if (!is_singular()) : ?>
                             <footer class="entry-footer">
-                                <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn-secondary">Read More</a>
+                                <a href="<?php echo esc_url(simple_dental_with_lang(get_permalink())); ?>" class="btn btn-secondary">Read More</a>
                             </footer>
                             <?php endif; ?>
                         </article>
@@ -170,7 +170,7 @@ get_header();
                     <div class="no-results">
                         <h1><?php esc_html_e('Nothing Found', 'simple-dental'); ?></h1>
                         <p><?php esc_html_e('It looks like nothing was found at this location.', 'simple-dental'); ?></p>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-primary">Go Home</a>
+                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/'))); ?>" class="btn btn-primary">Go Home</a>
                     </div>
                 </div>
             </div>
