@@ -8,8 +8,8 @@
 
     $(document).ready(function() {
         
-        // Enhanced mobile menu toggle with accessibility and device consistency
-        $('.menu-toggle').on('click', function(e) {
+        // Enhanced mobile menu toggle with delegation for robustness
+        $(document).on('click', '.menu-toggle', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
@@ -43,12 +43,12 @@
         });
 
         // Close mobile menu when overlay is clicked
-        $('.mobile-menu-overlay').on('click', function() {
+        $(document).on('click', '.mobile-menu-overlay', function() {
             closeMenu();
         });
 
         // Close mobile menu when a menu item is clicked
-        $('.main-navigation a').on('click', function() {
+        $(document).on('click', '.main-navigation a', function() {
             if ($(window).width() <= 768) {
                 closeMenu();
             }
@@ -67,6 +67,11 @@
                 closeMenu();
             }
         });
+
+        // Ensure overlay element exists (defensive in case of partial markup)
+        if ($('.mobile-menu-overlay').length === 0) {
+            $('<div class="mobile-menu-overlay"/>').appendTo('body');
+        }
 
         // Helper function to close menu consistently
         function closeMenu() {
