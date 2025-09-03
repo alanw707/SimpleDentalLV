@@ -143,10 +143,6 @@ class SimpleDentalTranslator {
         return $switcher_html;
     }
 
-    public function get_rtl_direction() {
-        $rtl_languages = ['ar', 'he', 'fa', 'ur'];
-        return in_array($this->current_language, $rtl_languages) ? 'rtl' : 'ltr';
-    }
 }
 
 // Initialize global translator instance
@@ -226,8 +222,4 @@ function simple_dental_language_switcher() {
     return $simple_dental_translator->get_language_switcher_html();
 }
 
-// Get current language
-function get_current_language() {
-    global $simple_dental_translator;
-    return $simple_dental_translator->get_current_language();
-}
+// Public helper functions are intentionally minimized to reduce surface area

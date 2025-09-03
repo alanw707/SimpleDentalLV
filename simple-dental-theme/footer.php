@@ -55,8 +55,6 @@
     <span class="scroll-arrow">↑</span>
 </button>
 
-<!-- Mobile Menu Overlay -->
-<div class="mobile-menu-overlay"></div>
 
 <!-- Add some basic CSS for footer layout and mobile menu -->
 <style>
