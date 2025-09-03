@@ -114,6 +114,14 @@ class SimpleDentalTranslator {
     public function get_language_switcher_html() {
         $current_url = home_url($_SERVER['REQUEST_URI']);
         $switcher_html = '<div class="language-switcher">';
+        
+        // Add globe icon
+        $switcher_html .= '<svg class="language-globe-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+        $switcher_html .= '<circle cx="12" cy="12" r="10"/>';
+        $switcher_html .= '<path d="M2 12h20"/>';
+        $switcher_html .= '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>';
+        $switcher_html .= '</svg>';
+        
         $switcher_html .= '<select class="language-dropdown" onchange="window.location.href=this.value" aria-label="Select Language">';
         
         foreach ($this->supported_languages as $code => $name) {
