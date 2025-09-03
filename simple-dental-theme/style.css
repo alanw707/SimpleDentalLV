@@ -1055,6 +1055,16 @@ button.menu-toggle {
    to keep a single source of truth. */
 
 /* ==========================================================================
+   Page: Shared Page Header (used by About/Services/Contact/Default)
+   ========================================================================== */
+
+.page-header { position: relative; text-align: center; padding: 240px 0 160px; min-height: 56vh; background-size: cover; background-position: center; background-repeat: no-repeat; }
+.page-header-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+.page-header-overlay .container { position: relative; z-index: 2; }
+.page-title { font-size: 3rem; color: var(--white); margin: 0 0 1rem 0; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); letter-spacing: -0.025em; }
+.page-subtitle { font-size: 1.25rem; color: var(--white); margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); font-weight: 400; }
+
+/* ==========================================================================
    Page: Services (migrated from inline in page-services.php)
    ========================================================================== */
 
@@ -1087,6 +1097,26 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
 /* Technology Section */
 .technology-section { background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%); padding: 4rem 0; margin: 3rem 0; border-radius: 1rem; }
 .technology-section h2 { text-align: center; color: var(--primary-brown); margin-bottom: 2rem; font-size: 2.5rem; }
+.technology-intro { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
+.technology-intro p { font-size: 1.25rem; line-height: 1.7; color: var(--text-medium); }
+.technology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+.tech-feature { background: var(--white); padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow-light); border: 1px solid var(--border-gray); }
+.tech-feature h3 { color: var(--primary-brown); margin-bottom: 1rem; font-size: 1.5rem; }
+.tech-feature p { color: var(--text-medium); line-height: 1.6; margin-bottom: 1rem; }
+.tech-feature ul { list-style: none; padding: 0; }
+.tech-feature li { color: var(--text-medium); padding: 0.5rem 0; position: relative; padding-left: 1.5rem; }
+.tech-feature li:before { content: '✓'; color: var(--sage-green); font-weight: bold; position: absolute; left: 0; }
+.technology-benefits { margin: 3rem 0; }
+.technology-benefits h3 { text-align: center; color: var(--primary-brown); margin-bottom: 2rem; font-size: 2rem; }
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.benefit-item { background: var(--white); padding: 1.5rem; border-radius: 0.75rem; text-align: center; box-shadow: var(--shadow-light); border: 1px solid var(--border-gray); transition: all 0.2s ease; }
+.benefit-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-medium); border-color: var(--primary-brown); }
+.benefit-icon { font-size: 2rem; display: block; margin-bottom: 1rem; }
+.benefit-item h4 { color: var(--primary-brown); margin-bottom: 0.5rem; font-size: 1.125rem; }
+.benefit-item p { color: var(--text-medium); line-height: 1.5; margin: 0; }
+.technology-cta { background: var(--white); padding: 2rem; border-radius: 1rem; text-align: center; box-shadow: var(--shadow-light); border: 1px solid var(--border-gray); }
+.technology-cta h3 { color: var(--primary-brown); margin-bottom: 1rem; font-size: 1.5rem; }
+.technology-cta p { color: var(--text-medium); line-height: 1.6; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 /* Detailed technology styles (features, grids, CTA) live below in the global CSS */
 
 /* ==========================================================================
@@ -1126,6 +1156,14 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
     .services-cta { padding: 2rem 1.5rem; }
     .cta-content h2 { font-size: 1.75rem; }
     .cta-content p { font-size: 1rem; }
+    /* Technology Section Mobile */
+    .technology-section { padding: 2rem 0; margin: 2rem 0; }
+    .technology-section h2 { font-size: 2rem; }
+    .technology-intro p { font-size: 1.125rem; }
+    .technology-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .tech-feature { padding: 1.5rem; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .technology-cta { padding: 1.5rem; }
 }
 
 .about-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 40px 0; }
@@ -1704,3 +1742,92 @@ body.menu-open {
 }
 
 /* (Header language switcher hidden at ≤480px above; menu instance remains visible) */
+
+/* ==========================================================================
+   Page: About (migrated from inline in page-about.php)
+   ========================================================================== */
+
+.doctor-bio-section { max-width: 1000px; margin: 0 auto; padding: 2rem 0; }
+.doctor-bio-section h2 { color: var(--primary-brown); margin-bottom: 2rem; font-size: 2.25rem; text-align: center; }
+.doctor-bio-content { display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start; }
+.doctor-image img { width: 100%; border-radius: 1rem; box-shadow: var(--shadow-medium); }
+.doctor-bio-text h3 { color: var(--primary-brown); margin-bottom: 1.5rem; font-size: 1.75rem; }
+.doctor-bio-text p { color: var(--text-medium); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1.0625rem; }
+.doctor-bio-text p:last-child { margin-bottom: 0; }
+
+.about-details { margin: 4rem 0; }
+.about-details h2 { text-align: center; color: var(--text-dark); margin-bottom: 3rem; font-size: 2rem; }
+.details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.detail-card { text-align: center; padding: 1.5rem; border: 2px solid var(--border-gray); border-radius: 0.75rem; transition: all 0.2s ease; background: var(--white); }
+.detail-card:hover { border-color: var(--primary-brown); transform: translateY(-2px); box-shadow: var(--shadow-light); }
+.detail-card h4 { color: var(--primary-brown); margin-bottom: 0.75rem; font-size: 1.125rem; }
+.detail-card p { color: var(--text-medium); line-height: 1.6; }
+
+.about-location { background: var(--off-white); padding: 3rem; border-radius: 1rem; margin-top: 4rem; border: 1px solid var(--border-gray); }
+.location-content { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+.location-info h2 { color: var(--text-dark); margin-bottom: 1rem; font-size: 2rem; }
+.location-info h3 { color: var(--primary-brown); margin-bottom: 1rem; font-size: 1.5rem; }
+.location-info p { color: var(--text-medium); margin-bottom: 1rem; line-height: 1.6; }
+.location-highlight { background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%); padding: 1.5rem; border-radius: 0.75rem; margin: 1.5rem 0; border-left: 4px solid var(--accent-teal); }
+.location-highlight p { margin-bottom: 0.75rem; }
+.location-highlight p:last-child { margin-bottom: 0; }
+.address { color: var(--text-dark) !important; font-size: 1.125rem; }
+.feature-list { margin: 1.5rem 0; }
+.feature-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.feature-check { color: var(--sage-green); font-weight: 700; font-size: 1.125rem; }
+.feature-item span:last-child { color: var(--text-medium); line-height: 1.5; }
+
+.location-cta { background: var(--white); padding: 2rem; border-radius: 0.75rem; text-align: center; box-shadow: var(--shadow-light); border: 1px solid var(--border-gray); }
+.location-cta h4 { color: var(--text-dark); margin-bottom: 1rem; font-size: 1.25rem; }
+.location-cta p { color: var(--text-medium); margin-bottom: 1.5rem; line-height: 1.6; }
+
+@media (max-width: 768px) {
+    .page-header { padding-top: 470px !important; padding-bottom: 120px; min-height: 48vh; position: relative !important; }
+    .page-title { font-size: 2.1rem; }
+    .page-subtitle { font-size: 1.2rem; }
+    .details-grid { grid-template-columns: 1fr; }
+    .location-content { grid-template-columns: 1fr; gap: 2rem; }
+    .about-location { padding: 2rem 1.5rem; }
+    .doctor-bio-content { grid-template-columns: 1fr; gap: 2rem; }
+    .doctor-image { max-width: 300px; margin: 0 auto; }
+    .doctor-bio-text h3 { font-size: 1.5rem; }
+}
+
+/* ==========================================================================
+   Page: Contact (migrated from inline in page-contact.php)
+   ========================================================================== */
+
+.contact-section { background-color: var(--off-white); }
+.contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+.contact-card { background: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; }
+.primary-contact { border: 3px solid var(--primary-brown); }
+.contact-card h3 { color: var(--primary-brown); margin-bottom: 20px; }
+.contact-detail { margin-bottom: 20px; }
+.contact-detail h4 { color: var(--primary-brown); margin-bottom: 8px; font-size: 1rem; }
+.contact-detail p { margin: 0; line-height: 1.4; }
+.phone-link { font-size: 1.3rem; font-weight: 600; color: var(--primary-brown); text-decoration: none; }
+.phone-link:hover { color: var(--brown-hover); }
+.contact-form-section { max-width: 600px; margin: 0 auto; text-align: center; }
+.contact-form-section h2 { color: var(--text-dark); margin-bottom: 15px; }
+.contact-form-section p { margin-bottom: 30px; color: var(--text-medium); }
+.map-section { padding: 60px 0; background-color: var(--white); }
+.map-section h2 { text-align: center; color: var(--text-dark); margin-bottom: 30px; }
+.map-container { border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.map-info { text-align: center; }
+.map-info p { font-size: 1.1rem; color: var(--text-medium); }
+.faq-section { background-color: var(--warm-beige); }
+.faq-section h2 { text-align: center; color: var(--text-dark); margin-bottom: 40px; }
+.faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+.faq-item { background: var(--white); padding: 25px; border-radius: 8px; box-shadow: 0 3px 15px rgba(0,0,0,0.08); }
+.faq-item h4 { color: var(--primary-brown); margin-bottom: 10px; font-weight: 600; }
+.faq-item p { margin: 0; line-height: 1.6; color: var(--text-medium); }
+
+@media (max-width: 768px) {
+    .contact-info { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .map-container { height: 300px; }
+}
+@media (max-width: 480px) {
+    .contact-card { padding: 20px; }
+    .phone-link { font-size: 1.1rem; }
+}
