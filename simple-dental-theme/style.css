@@ -1777,6 +1777,9 @@ body.menu-open {
 .feature-check { color: var(--sage-green); font-weight: 700; font-size: 1.125rem; }
 .feature-item span:last-child { color: var(--text-medium); line-height: 1.5; }
 
+/* Opening features wrapper (paragraph + checks) */
+.opening-features { margin: 1.25rem 0 0; }
+
 .location-cta { background: var(--white); padding: 2rem; border-radius: 0.75rem; text-align: center; box-shadow: var(--shadow-light); border: 1px solid var(--border-gray); }
 .location-cta h4 { color: var(--text-dark); margin-bottom: 1rem; font-size: 1.25rem; }
 .location-cta p { color: var(--text-medium); margin-bottom: 1.5rem; line-height: 1.6; }
