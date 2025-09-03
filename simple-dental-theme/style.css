@@ -1591,25 +1591,6 @@ body.menu-open {
         height: 48px !important;
     }
 }
-    
-    .custom-logo-wrapper img {
-        height: 50px;
-        max-width: 180px;
-    }
-    
-    .menu-toggle {
-        width: 40px !important;
-        height: 40px !important;
-        padding: 0.5rem !important;
-    }
-    
-    .main-navigation ul.toggled .language-dropdown,
-    .main-navigation ul.active .language-dropdown {
-        font-size: 0.8rem;
-        min-width: 100px;
-        padding: 0.4rem 0.6rem;
-        padding-right: 2rem;
-    }
 }
 
 /* CSS-only mobile-menu checkbox fallback removed (unused) */
