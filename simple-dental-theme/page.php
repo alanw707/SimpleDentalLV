@@ -167,7 +167,7 @@ get_header();
         padding: 40px 0;
     }
 }
-</style>
+<!-- Styles moved to style.css (Default page section) -->
 
 <?php
 get_footer();

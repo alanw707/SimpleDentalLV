@@ -1092,6 +1092,28 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
 .technology-section h2 { text-align: center; color: var(--primary-brown); margin-bottom: 2rem; font-size: 2.5rem; }
 /* Detailed technology styles (features, grids, CTA) live below in the global CSS */
 
+/* ==========================================================================
+   Page: Default Page (migrated from inline in page.php)
+   ========================================================================== */
+
+.page-content { padding: 60px 0; background: var(--white); }
+.content-wrapper { max-width: 800px; margin: 0 auto; line-height: 1.8; }
+.content-wrapper h2 { color: var(--primary-brown); margin-top: 40px; margin-bottom: 20px; }
+.content-wrapper h3 { color: var(--primary-brown); margin-top: 30px; margin-bottom: 15px; }
+.content-wrapper p { margin-bottom: 20px; color: var(--text-medium); }
+.content-wrapper ul, .content-wrapper ol { margin-bottom: 20px; padding-left: 30px; }
+.content-wrapper li { margin-bottom: 8px; color: var(--text-medium); }
+.page-links { margin-top: 40px; text-align: center; }
+.page-links a { display: inline-block; padding: 8px 16px; margin: 0 4px; background-color: var(--primary-brown); color: var(--white); text-decoration: none; border-radius: 4px; transition: background-color 0.3s ease; }
+.page-links a:hover { background-color: var(--brown-hover); }
+.page-links .current { background-color: var(--brown-hover); color: var(--white); padding: 8px 16px; margin: 0 4px; border-radius: 4px; }
+
+@media (max-width: 768px) {
+    body.page-template-default .page-header { padding-top: 430px !important; padding-bottom: 120px; min-height: 48vh; position: relative !important; }
+    body.page-template-default .page-title { font-size: 2.25rem; }
+    .page-content { padding: 40px 0; }
+}
+
 @media (max-width: 768px) {
     body.page-template-page-services-php .page-header { padding-top: 470px !important; padding-bottom: 120px; min-height: 48vh; position: relative !important; }
     body.page-template-page-services-php .page-title { font-size: 2.1rem; }
