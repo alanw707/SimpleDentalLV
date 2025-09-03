@@ -30,9 +30,9 @@ get_header();
             <!-- Main Story -->
             <div class="about-story">
                 <h2><?php echo __t('What Simple Dental Stands For'); ?></h2>
-                <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
+                <p><?php echo __t("At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need."); ?></p>
                 
-                <p>With digital tools and efficient systems, we make your visit fast, comfortable, and transparent. This isn't about fancy amenities or high-pressure sales — it's about delivering honest, quality dental care that working families can afford.</p>
+                <p><?php echo __t("With digital tools and efficient systems, we make your visit fast, comfortable, and transparent. This isn't about fancy amenities or high-pressure sales — it's about delivering honest, quality dental care that working families can afford."); ?></p>
             </div>
 
             <!-- Practice Philosophy -->
@@ -43,32 +43,32 @@ get_header();
                         <div class="philosophy-item">
                             <div class="philosophy-icon">🩺</div>
                             <h3><?php echo __t('One Doctor, Always'); ?></h3>
-                            <p>You'll see the same experienced dentist every visit. No rotating providers, no bait-and-switch.</p>
+                            <p><?php echo __t("You'll see the same experienced dentist every visit. No rotating providers, no bait-and-switch."); ?></p>
                         </div>
                         
                         <div class="philosophy-item">
                             <div class="philosophy-icon">💰</div>
                             <h3><?php echo __t('Transparent Pricing'); ?></h3>
-                            <p>Know exactly what you'll pay before treatment begins. No surprise bills, no hidden fees.</p>
+                            <p><?php echo __t("Know exactly what you'll pay before treatment begins. No surprise bills, no hidden fees."); ?></p>
                         </div>
                         
                         <div class="philosophy-item">
                             <div class="philosophy-icon">⚡</div>
                             <h3><?php echo __t('Modern Efficiency'); ?></h3>
-                            <p>Same-day crowns, digital technology, and streamlined systems for better outcomes.</p>
+                            <p><?php echo __t('Same-day crowns, digital technology, and streamlined systems for better outcomes.'); ?></p>
                         </div>
                         
                         <div class="philosophy-item">
                             <div class="philosophy-icon">🤝</div>
                             <h3><?php echo __t('No Pressure'); ?></h3>
-                            <p>We recommend only what you truly need. Just honest recommendations based on your dental health.</p>
+                            <p><?php echo __t('We recommend only what you truly need. Just honest recommendations based on your dental health.'); ?></p>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div style="text-align: center; margin-top: 2rem;">
-                <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn-primary">Learn More About Our Practice</a>
+                <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/about/'))); ?>" class="btn btn-primary"><?php echo __t('Learn More About Our Practice'); ?></a>
             </div>
         </div>
     </section>
@@ -77,9 +77,9 @@ get_header();
     <section class="section" style="background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%);">
         <div class="container">
             <div style="text-align: center; margin-bottom: 2rem;">
-                <h2>Start Your Journey to Better Oral Health</h2>
+                <h2><?php echo __t('Start Your Journey to Better Oral Health'); ?></h2>
                 <p style="font-size: 1.125rem; color: var(--text-medium); max-width: 600px; margin: 0 auto;">
-                    New to Simple Dental? We're offering a comprehensive introduction to our practice.
+                    <?php echo __t("New to Simple Dental? We're offering a comprehensive introduction to our practice."); ?>
                 </p>
             </div>
             
@@ -92,14 +92,14 @@ get_header();
         <div class="container">
             <h2 style="text-align: center; margin-bottom: 40px;"><?php echo __t('Our Most Popular Services'); ?></h2>
             <p style="text-align: center; margin-bottom: 2rem; font-size: 1.125rem; color: var(--text-medium);">
-                Transparent pricing on the services our patients need most
+                <?php echo __t('Transparent pricing on the services our patients need most'); ?>
             </p>
             
             <?php echo do_shortcode('[featured_services]'); ?>
             
             <div style="text-align: center; margin-top: 40px;">
-                <p><strong>No surprises. No hidden fees.</strong> Patients know upfront what to expect.</p>
-                <a href="<?php echo esc_url(home_url('/services/')); ?>" class="btn btn-primary">View All Services & Pricing</a>
+                <p><strong><?php echo __t('No surprises. No hidden fees.'); ?></strong> <?php echo __t('Patients know upfront what to expect.'); ?></p>
+                <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/services/'))); ?>" class="btn btn-primary"><?php echo __t('View All Services & Pricing'); ?></a>
             </div>
         </div>
     </section>
@@ -114,21 +114,21 @@ get_header();
                     <h4><?php echo __t('Our Location'); ?></h4>
                     <p><strong>204 S Jones Blvd</strong><br>
                     Las Vegas, NV 89149</p>
-                    <p>Convenient location with easy parking</p>
+                    <p><?php echo __t('Convenient location with easy parking'); ?></p>
                 </div>
                 
                 <div class="contact-card">
                     <h4><?php echo __t('Office Hours'); ?></h4>
-                    <p><strong>Monday - Friday</strong><br>
+                    <p><strong><?php echo __t('Monday - Friday'); ?></strong><br>
                     8:00 AM - 4:00 PM</p>
-                    <p><strong>Weekends:</strong> Closed</p>
+                    <p><strong><?php echo __t('Weekends:'); ?></strong> <?php echo __t('Closed'); ?></p>
                 </div>
                 
                 <div class="contact-card">
                     <h4><?php echo __t('Schedule Appointment'); ?></h4>
                     <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
-                    <p>Call to schedule your visit</p>
-                    <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-primary">Contact Us</a>
+                    <p><?php echo __t('Call to schedule your visit'); ?></p>
+                    <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-primary"><?php echo __t('Contact Us'); ?></a>
                 </div>
             </div>
         </div>
@@ -272,7 +272,7 @@ get_header();
 
 .philosophy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 }
 

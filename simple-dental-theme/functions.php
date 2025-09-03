@@ -216,7 +216,7 @@ add_action('save_post', 'simple_dental_save_service_pricing');
  */
 function simple_dental_add_seo_meta() {
     if (is_front_page()) {
-        echo '<meta name="description" content="Simple Dental - Honest same-day dentistry in Las Vegas. Transparent pricing, no pressure, experienced doctor. Located at 204 S Jones Blvd. Opening September 2025.">' . "\n";
+        echo '<meta name="description" content="Simple Dental - Honest same-day dentistry in Las Vegas. Transparent pricing, no pressure, experienced doctor. Located at 204 S Jones Blvd. Opening October 2025.">' . "\n";
         echo '<meta name="keywords" content="dentist las vegas, dental care, same day crowns, transparent pricing, no pressure dentistry, jones boulevard">' . "\n";
     }
     
@@ -307,7 +307,7 @@ add_action('admin_menu', 'simple_dental_remove_comments_admin_menu');
 function simple_dental_ajax_contact_form() {
     // Verify nonce for security
     if (!wp_verify_nonce($_POST['contact_form_nonce'], 'simple_dental_contact_nonce')) {
-        wp_die(json_encode(array('success' => false, 'message' => 'Security verification failed. Please refresh and try again.')));
+        wp_die(json_encode(array('success' => false, 'message' => __t('Security verification failed. Please refresh and try again.'))));
     }
     
     $errors = array();
@@ -320,19 +320,19 @@ function simple_dental_ajax_contact_form() {
     
     // Validate required fields
     if (empty($name)) {
-        $errors[] = 'Name is required.';
+        $errors[] = __t('Name is required.');
     }
     if (empty($email) || !is_email($email)) {
-        $errors[] = 'Valid email is required.';
+        $errors[] = __t('Valid email is required.');
     }
     if (empty($message)) {
-        $errors[] = 'Message is required.';
+        $errors[] = __t('Message is required.');
     }
     
     // Verify reCAPTCHA if available
     if (function_exists('anr_verify_captcha')) {
         if (!anr_verify_captcha()) {
-            $errors[] = 'Please complete the CAPTCHA verification.';
+            $errors[] = __t('Please complete the CAPTCHA verification.');
         }
     }
     
@@ -347,7 +347,7 @@ function simple_dental_ajax_contact_form() {
     // Check if notifications are enabled
     if (!$email_settings['notifications_enabled']) {
         error_log('Simple Dental Contact Form AJAX - Email notifications disabled');
-        wp_die(json_encode(array('success' => true, 'message' => 'Thank you! Your message has been received. We\'ll get back to you within 24 hours.')));
+        wp_die(json_encode(array('success' => true, 'message' => __t("Thank you! Your message has been received. We'll get back to you within 24 hours."))));
     }
     
     // Prepare email recipients
@@ -358,14 +358,14 @@ function simple_dental_ajax_contact_form() {
     
     // Prepare email subject with custom prefix
     $subject_prefix = $email_settings['subject_prefix'];
-    $subject = $subject_prefix . ' Contact Form Submission';
+    $subject = $subject_prefix . ' ' . __t('Contact Form Submission');
     
     // Prepare email body
-    $body = "New contact form submission from Simple Dental website:\n\n";
-    $body .= "Name: $name\n";
-    $body .= "Email: $email\n";
-    $body .= "Phone: $phone\n\n";
-    $body .= "Message:\n$message\n\n";
+    $body = __t('New contact form submission from Simple Dental website:') . "\n\n";
+    $body .= __t('Name:') . " $name\n";
+    $body .= __t('Email:') . " $email\n";
+    $body .= __t('Phone:') . " $phone\n\n";
+    $body .= __t('Message:') . "\n$message\n\n";
     $body .= "---\n";
     $body .= "Submitted: " . date('Y-m-d H:i:s') . "\n";
     $body .= "IP Address: " . $_SERVER['REMOTE_ADDR'] . "\n";
@@ -389,13 +389,13 @@ function simple_dental_ajax_contact_form() {
     
     if ($mail_sent) {
         error_log('Simple Dental Contact Form AJAX - Email sent successfully');
-        wp_die(json_encode(array('success' => true, 'message' => 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.')));
+        wp_die(json_encode(array('success' => true, 'message' => __t("Thank you! Your message has been sent successfully. We'll get back to you within 24 hours."))));
     } else {
         error_log('Simple Dental Contact Form AJAX - Email failed to send to: ' . $to);
         // Provide helpful error message with contact alternatives
-        $error_message = 'Sorry, there was an error sending your message. Please try one of these alternatives:';
-        $error_message .= '\n• Call us directly at (702) 302-4787';
-        $error_message .= '\n• Email us at ' . $to;
+        $error_message = __t('Sorry, there was an error sending your message. Please try one of these alternatives:');
+        $error_message .= '\n• ' . __t('Call us directly at (702) 302-4787');
+        $error_message .= '\n• ' . __t('Email us at') . ' ' . $to;
         if (!empty($cc_emails)) {
             $error_message .= ' or ' . implode(', ', $cc_emails);
         }
@@ -417,16 +417,16 @@ function simple_dental_contact_form() {
         <?php wp_nonce_field('simple_dental_contact_nonce', 'contact_form_nonce'); ?>
         
         <div class="form-row">
-            <input type="text" name="contact_name" id="contact_name" placeholder="Your Name*" required>
-            <input type="email" name="contact_email" id="contact_email" placeholder="Your Email*" required>
+            <input type="text" name="contact_name" id="contact_name" placeholder="<?php echo __t('Your Name*'); ?>" required>
+            <input type="email" name="contact_email" id="contact_email" placeholder="<?php echo __t('Your Email*'); ?>" required>
         </div>
         
         <div class="form-row">
-            <input type="tel" name="contact_phone" id="contact_phone" placeholder="Your Phone Number">
+            <input type="tel" name="contact_phone" id="contact_phone" placeholder="<?php echo __t('Your Phone Number'); ?>">
         </div>
         
         <div class="form-row">
-            <textarea name="contact_message" id="contact_message" placeholder="Your Message*" rows="5" required></textarea>
+            <textarea name="contact_message" id="contact_message" placeholder="<?php echo __t('Your Message*'); ?>" rows="5" required></textarea>
         </div>
         
         <?php if (function_exists('anr_captcha_form_field')) : ?>
@@ -437,13 +437,13 @@ function simple_dental_contact_form() {
         
         <div class="form-row">
             <button type="submit" id="contact-submit-btn" class="btn btn-primary">
-                <span class="btn-text">Send Message</span>
-                <span class="btn-loading" style="display: none;">Sending...</span>
+                <span class="btn-text"><?php echo __t('Send Message'); ?></span>
+                <span class="btn-loading" style="display: none;"><?php echo __t('Sending...'); ?></span>
             </button>
         </div>
         
         <div class="form-row form-note">
-            <small><strong>*</strong> Required fields | We respect your privacy and will never share your information.</small>
+            <small><strong>*</strong> <?php echo __t('Required fields'); ?> | <?php echo __t('We respect your privacy and will never share your information.'); ?></small>
         </div>
     </form>
     
@@ -490,7 +490,7 @@ function simple_dental_contact_form() {
                 success: function(response) {
                     if (response.success) {
                         // Show success message
-                        messagesDiv.html('<div class="contact-success">✅ <strong>Thank you!</strong> ' + response.message + '</div>');
+                        messagesDiv.html('<div class="contact-success">✅ <strong><?php echo __t('Thank you!'); ?></strong> ' + response.message + '</div>');
                         // Reset form
                         $('#simple-contact-form')[0].reset();
                         // Reset reCAPTCHA if available
@@ -505,13 +505,13 @@ function simple_dental_contact_form() {
                         // Show error message(s)
                         var errorHtml = '<div class="contact-error">';
                         if (response.errors && response.errors.length > 0) {
-                            errorHtml += '<strong>Please correct the following:</strong><ul>';
+                            errorHtml += '<strong><?php echo __t('Please correct the following:'); ?></strong><ul>';
                             response.errors.forEach(function(error) {
                                 errorHtml += '<li>' + error + '</li>';
                             });
                             errorHtml += '</ul>';
                         } else {
-                            errorHtml += response.message || 'An error occurred. Please try again.';
+                            errorHtml += response.message || '<?php echo __t('An error occurred. Please try again.'); ?>';
                         }
                         errorHtml += '</div>';
                         messagesDiv.html(errorHtml);
@@ -523,7 +523,7 @@ function simple_dental_contact_form() {
                     }
                 },
                 error: function() {
-                    messagesDiv.html('<div class="contact-error">Connection error. Please try again or call us directly at (702) 302-4787.</div>');
+                    messagesDiv.html('<div class="contact-error"><?php echo __t('Connection error. Please try again or call us directly at (702) 302-4787.'); ?></div>');
                 },
                 complete: function() {
                     // Reset button state
@@ -613,9 +613,9 @@ function featured_services_display($atts) {
     echo '<div class="services-grid">';
     foreach ($featured as $service) {
         echo '<div class="service-card">';
-        echo '<h3 class="service-title">' . esc_html($service['name']) . '</h3>';
+        echo '<h3 class="service-title">' . esc_html(__t($service['name'])) . '</h3>';
         echo '<div class="service-price">' . esc_html($service['price']) . '</div>';
-        echo '<p class="service-description">' . esc_html($service['description']) . '</p>';
+        echo '<p class="service-description">' . esc_html(__t($service['description'])) . '</p>';
         echo '</div>';
     }
     echo '</div>';
@@ -630,16 +630,16 @@ function new_patient_special_display($atts) {
     ob_start();
     ?>
     <div class="new-patient-special">
-        <div class="special-badge">New Patient Special</div>
-        <h3>Complete Checkup & Cleaning</h3>
+        <div class="special-badge"><?php echo __t('New Patient Special'); ?></div>
+        <h3><?php echo __t('Complete Checkup & Cleaning'); ?></h3>
         <div class="special-price">$199</div>
-        <p>Comprehensive exam, professional cleaning, and peace of mind for new patients</p>
+        <p><?php echo __t('Comprehensive exam, professional cleaning, and peace of mind for new patients'); ?></p>
         <div class="special-features">
-            <span class="feature">✓ Full Examination</span>
-            <span class="feature">✓ Professional Cleaning</span>
-            <span class="feature">✓ X-rays if needed</span>
+            <span class="feature">✓ <?php echo __t('Full Examination'); ?></span>
+            <span class="feature">✓ <?php echo __t('Professional Cleaning'); ?></span>
+            <span class="feature">✓ <?php echo __t('X-rays if needed'); ?></span>
         </div>
-        <a href="tel:7023024787" class="btn btn-coral">Book Your Visit</a>
+        <a href="tel:7023024787" class="btn btn-coral"><?php echo __t('Book Your Visit'); ?></a>
     </div>
     <?php
     return ob_get_clean();
@@ -657,14 +657,14 @@ function services_by_category_display($atts) {
     
     foreach ($services_data as $category_key => $category) {
         echo '<div class="service-category" data-category="' . esc_attr($category_key) . '">';
-        echo '<h3 class="category-title">' . esc_html($category['title']) . '</h3>';
+        echo '<h3 class="category-title">' . esc_html(__t($category['title'])) . '</h3>';
         echo '<div class="services-grid category-grid">';
         
         foreach ($category['services'] as $service) {
             echo '<div class="service-card category-card">';
-            echo '<h4 class="service-title">' . esc_html($service['name']) . '</h4>';
+            echo '<h4 class="service-title">' . esc_html(__t($service['name'])) . '</h4>';
             echo '<div class="service-price">' . esc_html($service['price']) . '</div>';
-            echo '<p class="service-description">' . esc_html($service['description']) . '</p>';
+            echo '<p class="service-description">' . esc_html(__t($service['description'])) . '</p>';
             echo '</div>';
         }
         

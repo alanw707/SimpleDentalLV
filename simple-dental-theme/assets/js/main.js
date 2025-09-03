@@ -7,6 +7,66 @@
     'use strict';
 
     $(document).ready(function() {
+        // --- Lightweight language persistence on client ---
+        // Goal: avoid relying on server cookies (bypassed by caches)
+        // Strategy: store selected lang in localStorage and ensure URLs carry it
+        (function() {
+            try {
+                var allowed = ['en', 'es', 'zh-TW', 'zh-CN'];
+                var params = new URLSearchParams(window.location.search);
+                var urlLang = params.get('lang');
+
+                function isAllowed(code) {
+                    return allowed.indexOf(code) !== -1;
+                }
+
+                function addLangToUrl(href, code) {
+                    try {
+                        var u = new URL(href, window.location.origin);
+                        u.searchParams.set('lang', code);
+                        return u.toString();
+                    } catch (e) {
+                        return href; // Leave unchanged on parse errors
+                    }
+                }
+
+                // If current URL carries lang, persist to localStorage
+                if (urlLang && isAllowed(urlLang)) {
+                    window.localStorage.setItem('simple_dental_lang', urlLang);
+                }
+
+                var stored = window.localStorage.getItem('simple_dental_lang');
+
+                // If no lang in URL but we have a stored non-default, redirect once
+                if (!urlLang && stored && stored !== 'en') {
+                    var redirectedKey = 'simple_dental_lang_redirected_' + window.location.pathname;
+                    if (!sessionStorage.getItem(redirectedKey)) {
+                        sessionStorage.setItem(redirectedKey, '1');
+                        window.location.replace(addLangToUrl(window.location.href, stored));
+                        return; // stop further execution on this page
+                    }
+                }
+
+                // Safety net: rewrite internal links missing lang
+                if (stored && stored !== 'en') {
+                    var anchors = document.querySelectorAll('a[href]');
+                    var origin = window.location.origin;
+                    anchors.forEach(function(a) {
+                        var href = a.getAttribute('href');
+                        if (!href) return;
+                        // Ignore external, mailto, tel, fragments
+                        if (href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('#') === 0) return;
+                        var isAbsolute = /^https?:\/\//i.test(href);
+                        if (isAbsolute && href.indexOf(origin) !== 0) return; // external
+                        // Skip if lang already present
+                        if (/([?&])lang=/.test(href)) return;
+                        a.setAttribute('href', addLangToUrl(href, stored));
+                    });
+                }
+            } catch (e) {
+                // Fail silently; language fallback is English
+            }
+        })();
         
         // Mobile menu logic is handled in navigation.js - avoiding duplicate handlers
         

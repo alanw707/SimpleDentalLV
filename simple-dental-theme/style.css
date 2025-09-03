@@ -1115,6 +1115,12 @@ body.menu-open {
     .language-switcher-wrapper:hover {
         opacity: 1;
     }
+
+    /* Hide the header language switcher when hamburger menu is present.
+       The mobile menu contains its own language switcher entry. */
+    .site-header .header-content > .language-switcher-wrapper {
+        display: none !important;
+    }
     
     /* HIDE HEADER CTA ON MOBILE - Hero section has prominent call button */
     .header-cta {
@@ -1299,11 +1305,6 @@ body.menu-open {
         grid-template-areas: "logo hamburger";
         gap: 0.75rem;
         padding: 0.625rem 0;
-    }
-    
-    /* Hide only the header language switcher; keep the one in the menu */
-    .site-header .header-content > .language-switcher-wrapper {
-        display: none;
     }
     
     .menu-toggle {

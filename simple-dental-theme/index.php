@@ -32,9 +32,9 @@ get_header();
                 <div class="about-preview">
                     <div class="about-content">
                         <h2><?php echo __t('Welcome to Simple Dental'); ?></h2>
-                        <p>At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need.</p>
+                        <p><?php echo __t("At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need."); ?></p>
                         
-                        <p>With digital tools like same-day crowns and efficient systems, we make your visit fast, comfortable, and transparent. No hidden fees, no pressure, just honest care for everyday working families.</p>
+                        <p><?php echo __t('With digital tools like same-day crowns and efficient systems, we make your visit fast, comfortable, and transparent. No hidden fees, no pressure, just honest care for everyday working families.'); ?></p>
                         
                         <div class="about-features">
                             <div class="feature">
@@ -51,7 +51,7 @@ get_header();
                             </div>
                         </div>
                         
-                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/about/'))); ?>" class="btn btn-primary">Learn More About Us</a>
+                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/about/'))); ?>" class="btn btn-primary"><?php echo __t('Learn More About Us'); ?></a>
                     </div>
                 </div>
             </div>
@@ -65,8 +65,8 @@ get_header();
                 <?php echo do_shortcode('[simple_dental_services]'); ?>
                 
                 <div style="text-align: center; margin-top: 40px;">
-                    <p><strong>No surprises. No hidden fees.</strong> Patients know upfront what to expect.</p>
-                    <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/services/'))); ?>" class="btn btn-primary">View All Services</a>
+                    <p><strong><?php echo __t('No surprises. No hidden fees.'); ?></strong> <?php echo __t('Patients know upfront what to expect.'); ?></p>
+                    <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/services/'))); ?>" class="btn btn-primary"><?php echo __t('View All Services'); ?></a>
                 </div>
             </div>
         </section>
@@ -78,23 +78,23 @@ get_header();
                 
                 <div class="contact-info">
                     <div class="contact-card">
-                        <h4>Our Location</h4>
+                        <h4><?php echo __t('Our Location'); ?></h4>
                         <p><strong>204 S Jones Blvd</strong><br>
                         Las Vegas, NV 89149</p>
-                        <p>Convenient location with easy parking</p>
+                        <p><?php echo __t('Convenient location with easy parking'); ?></p>
                     </div>
                     
                     <div class="contact-card">
-                        <h4>Office Hours</h4>
-                        <p><strong>Monday - Friday</strong><br>
+                        <h4><?php echo __t('Office Hours'); ?></h4>
+                        <p><strong><?php echo __t('Monday - Friday'); ?></strong><br>
                         8:00 AM - 4:00 PM</p>
-                        <p><strong>Weekends:</strong> Closed</p>
+                        <p><strong><?php echo __t('Weekends:'); ?></strong> <?php echo __t('Closed'); ?></p>
                     </div>
                     
                     <div class="contact-card">
                         <h4><?php echo __t('Schedule Appointment'); ?></h4>
                         <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
-                        <p>Call to schedule your visit</p>
+                        <p><?php echo __t('Call to schedule your visit'); ?></p>
                         <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-primary"><?php echo __t('Contact'); ?></a>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ get_header();
 
                             <?php if (!is_singular()) : ?>
                             <footer class="entry-footer">
-                                <a href="<?php echo esc_url(simple_dental_with_lang(get_permalink())); ?>" class="btn btn-secondary">Read More</a>
+                                <a href="<?php echo esc_url(simple_dental_with_lang(get_permalink())); ?>" class="btn btn-secondary"><?php echo __t('Read More'); ?></a>
                             </footer>
                             <?php endif; ?>
                         </article>
@@ -168,9 +168,9 @@ get_header();
             <div class="container">
                 <div class="content-area section">
                     <div class="no-results">
-                        <h1><?php esc_html_e('Nothing Found', 'simple-dental'); ?></h1>
-                        <p><?php esc_html_e('It looks like nothing was found at this location.', 'simple-dental'); ?></p>
-                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/'))); ?>" class="btn btn-primary">Go Home</a>
+                        <h1><?php echo __t('Nothing Found'); ?></h1>
+                        <p><?php echo __t('It looks like nothing was found at this location.'); ?></p>
+                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/'))); ?>" class="btn btn-primary"><?php echo __t('Go Home'); ?></a>
                     </div>
                 </div>
             </div>
