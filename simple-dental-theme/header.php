@@ -87,15 +87,12 @@
  */
 function simple_dental_fallback_menu() {
     echo '<ul id="primary-menu" class="primary-menu">';
-    // Language switcher for mobile menu
-    echo '<div class="language-switcher-wrapper">';
-    echo '<svg class="menu-icon language-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
-    echo '<circle cx="12" cy="12" r="10"/>';
-    echo '<path d="M2 12h20"/>';
-    echo '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>';
-    echo '</svg>';
-    echo simple_dental_language_switcher();
-    echo '</div>';
+    // Language switcher for mobile menu (as first menu item)
+    echo '<li class="language-switcher-item">';
+    echo '  <div class="language-switcher-wrapper">';
+    echo        simple_dental_language_switcher();
+    echo '  </div>';
+    echo '</li>';
     echo '<li><a href="' . esc_url(home_url('/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span class="menu-text">' . __t('Home') . '</span></a></li>';
     echo '<li><a href="' . esc_url(home_url('/about/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="menu-text">' . __t('About') . '</span></a></li>';
     echo '<li><a href="' . esc_url(home_url('/services/')) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="M1 12h6m6 0h6"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span class="menu-text">' . __t('Services') . '</span></a></li>';
