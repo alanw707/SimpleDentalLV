@@ -123,5 +123,8 @@ get_header();
 
     <?php endwhile; ?>
 
-</main>
+ </main>
 
+<?php
+get_footer();
+?>
