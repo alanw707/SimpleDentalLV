@@ -1169,20 +1169,6 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
     visibility: visible !important;
 }
 
-/* Clean X Icon */
-.close-icon {
-    font-size: 18px !important;
-    font-weight: bold !important;
-    color: var(--primary-brown) !important;
-    line-height: 1 !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(0) !important;
-    z-index: 10 !important;
-    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1) !important;
-    opacity: 0;
-}
 
 /* Hamburger to X animation */
 .menu-toggle.active .hamburger {
@@ -1191,10 +1177,6 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
     transition: all 0.25s ease !important;
 }
 
-.menu-toggle.active .close-icon {
-    transform: translate(-50%, -50%) scale(1) !important;
-    opacity: 1 !important;
-}
 
 /* Mobile Menu Overlay - Simplified z-index */
 .mobile-menu-overlay {
