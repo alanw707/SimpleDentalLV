@@ -216,6 +216,27 @@ function simple_dental_nav_menu_link_attributes($atts, $item, $args, $depth) {
 }
 add_filter('nav_menu_link_attributes', 'simple_dental_nav_menu_link_attributes', 10, 4);
 
+/**
+ * Ensure the custom logo link points to the language-preserving URL.
+ */
+function simple_dental_custom_logo_with_lang($html) {
+    if (empty($html)) {
+        return $html;
+    }
+    // Replace the href in the rendered custom logo anchor with a lang-aware URL
+    $updated = preg_replace_callback(
+        '/href="([^"]+)"/i',
+        function ($m) {
+            $url = isset($m[1]) ? $m[1] : '';
+            $new = simple_dental_with_lang($url);
+            return 'href="' . esc_url($new) . '"';
+        },
+        $html
+    );
+    return $updated ?: $html;
+}
+add_filter('get_custom_logo', 'simple_dental_custom_logo_with_lang');
+
 // Language switcher function
 function simple_dental_language_switcher() {
     global $simple_dental_translator;

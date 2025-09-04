@@ -42,7 +42,7 @@
                         ?>
                         <div class="site-title-wrapper">
                             <h1 class="site-title">
-                                <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                                <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/'))); ?>" rel="home">
                                     Simple Dental LV
                                 </a>
                             </h1>
