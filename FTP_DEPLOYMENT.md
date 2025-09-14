@@ -1,43 +1,36 @@
 # Automated FTP Deployment Guide
 
-## Quick Setup
+## Secure Setup (recommended)
 
-### Option 1: Simple Deployment (credentials in script)
-1. Edit `deploy.py` and update the FTP_CONFIG section:
+- Credentials live only in `deployconfig.py` (git-ignored).
+- Do not place passwords inside docs or scripts committed to git.
+
+1) Create your local config from the example:
+```bash
+cp deployconfig.example.py deployconfig.py
+```
+
+2) Edit `deployconfig.py` with your real credentials:
 ```python
 FTP_CONFIG = {
-    'host': 'ftp://simpledentallv.com',           # Your Hostinger FTP hostname
-    'username': 'u659513315.simpledentallv.com',         # Your FTP username
-    'password': 'Ilovebibi920#1',         # Your FTP password
-    'remote_path': '/public_html/wp-content/themes/'  # Path to WordPress themes directory
-}
-```
-
-2. Run deployment:
-```bash
-python3 deploy.py
-```
-
-### Option 2: Secure Deployment (separate config file)
-1. Copy the example config:
-```bash
-cp deploy-config.example.py ftp_config.py
-```
-
-2. Edit `ftp_config.py` with your credentials:
-```python
-FTP_CONFIG = {
-    'host': 'ftp.yourdomain.com',
-    'username': 'your-ftp-username',
-    'password': 'your-ftp-password',
+    'host': 'ftp.yourdomain.com',          # FTP hostname
+    'username': 'your-ftp-username',       # FTP username
+    'password': 'your-ftp-password',       # FTP password
     'remote_path': '/public_html/wp-content/themes/'
 }
 ```
 
-3. Run secure deployment:
+3) Deploy the entire theme:
 ```bash
-python3 deploy-secure.py
+python3 deploy-robust.py
 ```
+
+4) Deploy a single file (path is relative to `simple-dental-theme/`):
+```bash
+python3 deploy-robust.py assets/js/navigation.js
+```
+
+`deployconfig.py` is already listed in `.gitignore` to prevent accidental commits.
 
 ## Finding Your FTP Details
 
@@ -100,9 +93,27 @@ You can verify the upload worked by:
 
 ## Security Note
 
-- Option 2 (secure deployment) keeps credentials separate
-- Add `ftp_config.py` to `.gitignore` if using version control
-- Never commit FTP passwords to repositories
+- Credentials belong only in `deployconfig.py` (git-ignored).
+- Never commit FTP passwords to repositories or documentation.
+- If a password was ever committed, rotate it immediately, then scrub it from git history (see below).
+
+### Scrubbing Secrets from Git History (if needed)
+If a credential was committed in the past, remove it from history and force-push:
+
+Option A – git-filter-repo (recommended):
+```bash
+pipx install git-filter-repo  # or: pip install git-filter-repo
+git filter-repo --path FTP_DEPLOYMENT.md --invert-paths
+git push --force
+```
+
+Option B – BFG Repo-Cleaner:
+```bash
+java -jar bfg.jar --replace-text replacements.txt  # see BFG docs
+git push --force
+```
+
+After rewriting history, rotate any exposed passwords with your hosting provider.
 
 ## Alternative: SFTP/SSH
 If your host supports SFTP, you can modify the script to use `paramiko` library for secure file transfer.

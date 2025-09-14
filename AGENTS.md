@@ -34,5 +34,5 @@
 - PRs must include: summary, linked issue, before/after screenshots for UI, test steps (including mobile), and deployment notes (risk/rollback).
 
 ## Security & Configuration
-- Never commit credentials. `deployconfig.py` is git-ignored; copy from `deploy-config.example.py` and edit locally.
+- Never commit credentials. `deployconfig.py` is git-ignored; copy from `deployconfig.example.py` and edit locally.
 - Review diff for accidental secrets; rotate keys immediately if exposed.
