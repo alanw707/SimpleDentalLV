@@ -1415,7 +1415,8 @@ body.menu-open {
         border-radius: 8px;
         z-index: 2001; /* Above header(2000) and overlay(1500) */
         flex-direction: column;
-        padding: 0.5rem 0;
+        gap: 0;
+        padding: 0.35rem 0;
         margin: 0;
         list-style: none;
         border: 1px solid var(--border-gray);
@@ -1459,7 +1460,7 @@ body.menu-open {
         display: flex;
         align-items: center;
         gap: 1rem !important; /* Increased from 0.75rem for more breathing room */
-        padding: 0.75rem 1rem; /* Increased vertical padding for 44px+ touch targets */
+        padding: 0.5rem 0.75rem; /* Tighter mobile spacing */
         text-align: left;
         color: var(--text-dark);
         text-decoration: none;
@@ -1468,7 +1469,7 @@ body.menu-open {
         transition: all 0.2s ease;
         white-space: nowrap;
         overflow: hidden;
-        min-height: 44px; /* Ensure minimum touch target size */
+        min-height: 40px; /* Slightly tighter mobile spacing */
     }
     
     .main-navigation a:hover {
@@ -1504,9 +1505,9 @@ body.menu-open {
         display: flex;
         align-items: center;
         gap: 1rem !important; /* Increased to match menu item spacing */
-        padding: 0.75rem 1rem; /* Increased to match menu item padding */
+        padding: 0.5rem 0.75rem; /* Tighter mobile spacing */
         justify-content: center;
-        min-height: 44px; /* Consistent touch target size */
+        min-height: 40px; /* Slightly tighter mobile spacing */
     }
     
     .main-navigation .language-icon {
@@ -1793,8 +1794,8 @@ body.menu-open {
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
     .main-navigation a {
-        min-height: 48px !important; /* Larger touch targets */
-        padding: 0.875rem 1rem !important;
+        min-height: 40px !important; /* Tighter touch spacing */
+        padding: 0.6rem 0.75rem !important;
     }
     
     .menu-toggle {
