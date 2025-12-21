@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://images.pexels.com/photos/287237/pexels-photo-287237.jpeg'); background-size: cover; background-position: center;">
+        <header class="page-header section" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/page-feature-sterilization.jpg'); ?>'); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
             <div class="container">
             <h1 class="page-title"><?php echo __t('About Simple Dental'); ?></h1>
@@ -31,7 +31,7 @@ get_header();
                     <h2><?php echo __t('Meet Dr. Charles Chang'); ?></h2>
                     <div class="doctor-bio-content">
                         <div class="doctor-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Charles-Portrait-1.jpg" alt="Dr. Charles Chang, DDS, MS, AFAAID" />
+                            <?php echo simple_dental_media_image('Charles-Portrait-1.jpg', __t('Dr. Charles Chang portrait')); ?>
                         </div>
                         <div class="doctor-bio-text">
                             <h3>🦷 Dr. Charles Chang, DDS, MS, AFAAID</h3>
@@ -42,6 +42,24 @@ get_header();
                             <p><?php echo __t("Outside of the office, Dr. Chang enjoys spending time with his wife and daughter, exploring local parks and restaurants, and caring for their two dogs. As a dedicated father and family man, he understands the importance of balance and brings that same thoughtful, caring approach to each patient he treats."); ?></p>
 
                             <p><?php echo __t('Dr. Chang looks forward to welcoming you to Simple Dental, where you can expect straightforward, compassionate care in a warm and welcoming environment.'); ?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Office Gallery -->
+                <div class="about-gallery">
+                    <div class="media-split about-gallery-split">
+                        <div class="media-split-content">
+                            <h2><?php echo __t('Designed for Comfort'); ?></h2>
+                            <p class="about-gallery-copy"><?php echo __t('Warm light, clean lines, and a layout that keeps visits calm and efficient.'); ?></p>
+                        </div>
+                        <div class="media-split-image about-gallery-grid">
+                            <figure class="about-gallery-item">
+                                <?php echo simple_dental_media_image('about-gallery-dentist-wall.jpg', __t('Simple Dental front desk and dentist wall')); ?>
+                            </figure>
+                            <figure class="about-gallery-item">
+                                <?php echo simple_dental_media_image('about-gallery-front-desk.jpg', __t('Simple Dental front desk detail')); ?>
+                            </figure>
                         </div>
                     </div>
                 </div>
@@ -78,7 +96,7 @@ get_header();
                         <div class="location-info">
                             <h2><?php echo __t('Coming to Las Vegas'); ?></h2>
                             <h3><?php echo __t('🎉 Opening October 2025!'); ?></h3>
-                            <p class="address"><strong>204 S Jones Blvd, Las Vegas, NV 89149</strong></p>
+                            <p class="address"><strong>204 S Jones Blvd, Las Vegas, NV 89107</strong></p>
                             
                             <div class="location-highlight">
                                 <p><strong><?php echo __t("🚗 We're seconds away from Highway 95!"); ?></strong></p>
