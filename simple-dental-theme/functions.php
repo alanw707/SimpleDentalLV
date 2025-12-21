@@ -115,7 +115,7 @@ function simple_dental_add_seo_meta() {
                 "streetAddress" => "204 S Jones Blvd",
                 "addressLocality" => "Las Vegas",
                 "addressRegion" => "NV",
-                "postalCode" => "89149",
+                "postalCode" => "89107",
                 "addressCountry" => "US"
             ),
             "telephone" => "(702) 302-4787",
@@ -647,6 +647,81 @@ function simple_dental_customizer_settings($wp_customize) {
     ));
 }
 add_action('customize_register', 'simple_dental_customizer_settings');
+
+/**
+ * Find attachment ID by filename with a slug fallback.
+ */
+function simple_dental_find_attachment_id_by_filename($filename) {
+    $attachment_id = 0;
+
+    $query = new WP_Query(array(
+        'post_type'      => 'attachment',
+        'post_status'    => 'inherit',
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+        'meta_query'     => array(
+            array(
+                'key'     => '_wp_attached_file',
+                'value'   => '/' . $filename,
+                'compare' => 'LIKE',
+            ),
+        ),
+    ));
+
+    if (!empty($query->posts)) {
+        $attachment_id = (int) $query->posts[0];
+    }
+    wp_reset_postdata();
+
+    if (!$attachment_id) {
+        $basename = pathinfo($filename, PATHINFO_FILENAME);
+        if (!empty($basename)) {
+            $attachment = get_page_by_path(sanitize_title($basename), OBJECT, 'attachment');
+            if ($attachment) {
+                $attachment_id = (int) $attachment->ID;
+            }
+        }
+    }
+
+    return $attachment_id;
+}
+
+/**
+ * Render media library image by filename with theme asset fallback.
+ */
+function simple_dental_media_image($filename, $alt, $class = '') {
+    $attachment_id = simple_dental_find_attachment_id_by_filename($filename);
+
+    if ($attachment_id) {
+        $attrs = array(
+            'loading'  => 'lazy',
+            'decoding' => 'async',
+        );
+        if (!empty($class)) {
+            $attrs['class'] = $class;
+        }
+        return wp_get_attachment_image($attachment_id, 'full', false, $attrs);
+    }
+
+    $src = get_template_directory_uri() . '/assets/images/' . $filename;
+    $class_attr = !empty($class) ? ' class="' . esc_attr($class) . '"' : '';
+    return '<img src="' . esc_url($src) . '" alt="' . esc_attr($alt) . '"' . $class_attr . ' loading="lazy" decoding="async" />';
+}
+
+/**
+ * Return media URL by filename with theme asset fallback.
+ */
+function simple_dental_media_url($filename, $size = 'full') {
+    $attachment_id = simple_dental_find_attachment_id_by_filename($filename);
+    if ($attachment_id) {
+        $url = wp_get_attachment_image_url($attachment_id, $size);
+        if (!empty($url)) {
+            return $url;
+        }
+    }
+
+    return get_template_directory_uri() . '/assets/images/' . $filename;
+}
 
 /**
  * Load translation system

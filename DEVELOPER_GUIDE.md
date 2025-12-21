@@ -406,12 +406,23 @@ function add_google_analytics() {
 ## Testing Customizations
 
 ### Local Testing Setup
-1. **WordPress Local Development**:
+1. **Docker Compose (local staging)**:
+   - Copy `.env.example` to `.env` and set passwords
+   - Add hosts entry: `127.0.0.1 simpledental.local`
+   - Start stack: `docker compose up -d`
+   - Install WordPress:
+     `docker compose run --rm wpcli wp core install --url=http://simpledental.local:8090 --title="Simple Dental Dev" --admin_user=admin --admin_password=admin123 --admin_email=admin@example.com`
+   - Activate theme:
+     `docker compose run --rm wpcli wp theme activate simple-dental-theme`
+   - Theme files are mounted from `simple-dental-theme/`
+   - Optional helper: `./tools/wp-init.sh` (set `WP_URL`, `WP_TITLE`, `WP_ADMIN_USER`, `WP_ADMIN_PASSWORD`, `WP_ADMIN_EMAIL` if needed)
+
+2. **WordPress Local Development**:
    - Use Local by Flywheel or XAMPP
    - Copy theme files to local installation
    - Test customizations before deployment
 
-2. **Staging Environment**:
+3. **Staging Environment**:
    - Create staging subdomain
    - Deploy customizations first to staging
    - Test all functionality before production

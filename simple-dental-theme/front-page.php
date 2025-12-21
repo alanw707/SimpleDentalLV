@@ -11,7 +11,7 @@ get_header();
 <main id="primary" class="site-main">
 
     <!-- Hero Section -->
-    <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&q=80'); background-size: cover; background-position: center;">
+    <section class="hero" style="background-image: url('<?php echo esc_url(simple_dental_media_url('hero-home-reception-wide.jpg', 'large')); ?>'); background-size: cover; background-position: center;">
         <div class="hero-overlay">
             <div class="container">
                 <h1><?php echo __t('Straightforward Dentistry from one Experienced Doctor.'); ?></h1>
@@ -30,7 +30,7 @@ get_header();
             <!-- Main Story -->
             <div class="about-story">
                 <h2><?php echo __t('What Simple Dental Stands For'); ?></h2>
-                <p><?php echo __t("At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need."); ?></p>
+                <p><?php echo __t("At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist, and we'll only recommend what you truly need."); ?></p>
                 
                 <p><?php echo __t("With digital tools and efficient systems, we make your visit fast, comfortable, and transparent. This isn't about fancy amenities or high-pressure sales — it's about delivering honest, quality dental care that working families can afford."); ?></p>
             </div>
@@ -69,6 +69,26 @@ get_header();
             
             <div style="text-align: center; margin-top: 2rem;">
                 <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/about/'))); ?>" class="btn btn-primary"><?php echo __t('Learn More About Our Practice'); ?></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Preview Strip -->
+    <section class="section office-preview">
+        <div class="container">
+            <div class="media-split office-preview-split">
+                <div class="media-split-content">
+                    <h2 class="office-preview-title"><?php echo __t('Inside Our New Office'); ?></h2>
+                    <p class="office-preview-copy"><?php echo __t('Take a quick look at the calm, modern space designed for efficient, comfortable visits.'); ?></p>
+                </div>
+                <div class="media-split-image office-preview-grid office-preview-collage">
+                    <figure class="office-preview-item">
+                        <?php echo simple_dental_media_image('front-preview-lobby-seating.jpg', __t('Simple Dental lobby seating area')); ?>
+                    </figure>
+                    <figure class="office-preview-item">
+                        <?php echo simple_dental_media_image('front-preview-dentist-wall.jpg', __t('Simple Dental reception and dentist wall')); ?>
+                    </figure>
+                </div>
             </div>
         </div>
     </section>
@@ -113,7 +133,7 @@ get_header();
                 <div class="contact-card">
                     <h4><?php echo __t('Our Location'); ?></h4>
                     <p><strong>204 S Jones Blvd</strong><br>
-                    Las Vegas, NV 89149</p>
+                    Las Vegas, NV 89107</p>
                     <p><?php echo __t('Convenient location with easy parking'); ?></p>
                 </div>
                 

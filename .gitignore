@@ -6,6 +6,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.venv/
 
 # IDE Files
 .vscode/
@@ -28,3 +29,14 @@ wp-content/uploads/
 # Backup Files
 *.bak
 *.backup
+
+# Local tooling output
+_bmad/
+_bmad-output/
+archive/
+
+# Local env files
+.env
+
+# Windows metadata
+*:Zone.Identifier

@@ -20,15 +20,6 @@
 <div id="page" class="site">
     <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'simple-dental'); ?></a>
 
-    <?php if (is_front_page()): ?>
-    <!-- Coming Soon Banner -->
-    <div class="coming-soon-banner">
-        <div class="container">
-            <span class="banner-text"><?php echo __t('🎉 Coming October 2025! | Modern Dental Care in Las Vegas'); ?></span>
-        </div>
-    </div>
-    <?php endif; ?>
-
     <header id="masthead" class="site-header">
         <div class="container">
             <div class="header-content">

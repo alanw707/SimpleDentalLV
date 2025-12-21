@@ -5,7 +5,6 @@
 This project includes comprehensive documentation for all stakeholders. Choose the appropriate guide for your needs:
 
 ### 🎯 Quick Start
-- **[CLAUDE.md](CLAUDE.md)** - Complete project overview and developer workflow instructions
 - **[README.md](simple-dental-theme/README.md)** - Basic theme installation and setup
 
 ### 👤 For End Users
@@ -63,13 +62,7 @@ This project includes comprehensive documentation for all stakeholders. Choose t
 - Hook reference
 
 ### Project Manager/Client
-**Start Here**: [CLAUDE.md](CLAUDE.md)
-- Project overview
-- Feature status
-- Requirements
-- Timeline
-
-**Status**: [PROJECT_STATUS.md](PROJECT_STATUS.md)
+**Start Here**: [PROJECT_STATUS.md](PROJECT_STATUS.md)
 - Current progress
 - Completed features
 - Outstanding tasks
@@ -107,16 +100,14 @@ When making changes to the theme:
 ## 💡 Getting Started Guide
 
 ### For New Users
-1. Read [CLAUDE.md](CLAUDE.md) for project context
-2. Follow [README.md](simple-dental-theme/README.md) for installation
-3. Use [USER_GUIDE.md](USER_GUIDE.md) for daily management
-4. Bookmark [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for issues
+1. Follow [README.md](simple-dental-theme/README.md) for installation
+2. Use [USER_GUIDE.md](USER_GUIDE.md) for daily management
+3. Bookmark [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for issues
 
 ### For New Developers
-1. Read [CLAUDE.md](CLAUDE.md) for project architecture
-2. Review [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) for APIs
-3. Follow [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) for customizations
-4. Use [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for debugging
+1. Review [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) for APIs
+2. Follow [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) for customizations
+3. Use [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for debugging
 
 ### For Support Staff
 1. Understand project scope with [PROJECT_STATUS.md](PROJECT_STATUS.md)

@@ -15,13 +15,21 @@ get_header();
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
             
             <!-- Page Header -->
-            <header class="page-header section" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&q=80'); background-size: cover; background-position: center;">
+            <header class="page-header section" style="background-image: url('<?php echo esc_url(simple_dental_media_url('hero-default-front-desk.jpg', 'large')); ?>'); background-size: cover; background-position: center;">
                 <div class="page-header-overlay">
                     <div class="container">
                         <h1 class="page-title"><?php the_title(); ?></h1>
                     </div>
                 </div>
             </header>
+
+            <section class="page-image-strip">
+                <div class="container">
+                    <figure class="page-image-strip-item">
+                        <?php echo simple_dental_media_image('page-feature-sterilization.jpg', __t('Sterilization and prep area at Simple Dental')); ?>
+                    </figure>
+                </div>
+            </section>
 
             <!-- Page Content -->
             <div class="page-content section">

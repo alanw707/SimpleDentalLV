@@ -157,7 +157,6 @@ The Simple Dental website is a custom WordPress theme for a new dental practice 
 ## 📞 Support & Maintenance
 
 ### Documentation Available
-- **CLAUDE.md**: Comprehensive project documentation
 - **INSTALLATION_GUIDE.md**: Setup and configuration instructions
 - **FTP_DEPLOYMENT.md**: Deployment process documentation
 - **TECHNICAL_REFERENCE.md**: Detailed technical documentation

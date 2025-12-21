@@ -1,0 +1,16 @@
+simple-dental-theme/assets/images/Charles-Portrait-1.jpg
+simple-dental-theme/assets/images/about-gallery-dentist-wall.jpg
+simple-dental-theme/assets/images/about-gallery-front-desk.jpg
+simple-dental-theme/assets/images/about-page-bio.png
+simple-dental-theme/assets/images/contact-office-hallway.jpg
+simple-dental-theme/assets/images/contact-operatory-side.jpg
+simple-dental-theme/assets/images/front-preview-dentist-wall.jpg
+simple-dental-theme/assets/images/front-preview-lobby-seating.jpg
+simple-dental-theme/assets/images/hero-about-lobby-dentist-wall.jpg
+simple-dental-theme/assets/images/hero-contact-waiting-area.jpg
+simple-dental-theme/assets/images/hero-default-front-desk.jpg
+simple-dental-theme/assets/images/hero-home-reception-wide.jpg
+simple-dental-theme/assets/images/hero-services-operatory.jpg
+simple-dental-theme/assets/images/page-feature-sterilization.jpg
+simple-dental-theme/assets/images/services-tech-lab-milling.jpg
+simple-dental-theme/assets/images/services-tech-operatory.jpg

@@ -209,7 +209,6 @@ To change colors, edit the `:root` section in Appearance > Theme Editor > style.
 ## Support Resources
 
 ### Documentation Files
-- **CLAUDE.md**: Comprehensive project documentation
 - **PROJECT_STATUS.md**: Current project status and completion
 - **TECHNICAL_REFERENCE.md**: Detailed technical documentation
 - **FTP_DEPLOYMENT.md**: Deployment instructions

@@ -16,12 +16,14 @@ get_header();
         
         <!-- Hero Section -->
         <section class="hero">
-            <div class="container">
-                <h1><?php echo __t('Welcome to Simple Dental'); ?></h1>
-                <p class="subtitle"><?php echo __t('Quality dental care for the whole family'); ?></p>
-                <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary"><?php echo __t('Our Services'); ?></a>
-                    <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call Us'); ?> (702) 302-4787</a>
+            <div class="hero-overlay">
+                <div class="container">
+                    <h1><?php echo __t('Welcome to Simple Dental'); ?></h1>
+                    <p class="subtitle"><?php echo __t('Quality dental care for the whole family'); ?></p>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn btn-primary"><?php echo __t('Our Services'); ?></a>
+                        <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call Us'); ?> (702) 302-4787</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -32,7 +34,7 @@ get_header();
                 <div class="about-preview">
                     <div class="about-content">
                         <h2><?php echo __t('Welcome to Simple Dental'); ?></h2>
-                        <p><?php echo __t("At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist — me — and we'll only recommend what you truly need."); ?></p>
+                        <p><?php echo __t("At Simple Dental, we believe dentistry shouldn't be confusing or pushy. You'll always see the same dentist, and we'll only recommend what you truly need."); ?></p>
                         
                         <p><?php echo __t('With digital tools like same-day crowns and efficient systems, we make your visit fast, comfortable, and transparent. No hidden fees, no pressure, just honest care for everyday working families.'); ?></p>
                         
@@ -80,7 +82,7 @@ get_header();
                     <div class="contact-card">
                         <h4><?php echo __t('Our Location'); ?></h4>
                         <p><strong>204 S Jones Blvd</strong><br>
-                        Las Vegas, NV 89149</p>
+                        Las Vegas, NV 89107</p>
                         <p><?php echo __t('Convenient location with easy parking'); ?></p>
                     </div>
                     

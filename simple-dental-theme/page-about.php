@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/page-feature-sterilization.jpg'); ?>'); background-size: cover; background-position: center;">
+        <header class="page-header section" style="background-image: url('<?php echo esc_url(simple_dental_media_url('page-feature-sterilization.jpg', 'large')); ?>'); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
             <div class="container">
             <h1 class="page-title"><?php echo __t('About Simple Dental'); ?></h1>

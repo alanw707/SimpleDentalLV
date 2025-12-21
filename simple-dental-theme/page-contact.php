@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?w=1200&q=80'); background-size: cover; background-position: center;">
+        <header class="page-header section" style="background-image: url('<?php echo esc_url(simple_dental_media_url('hero-contact-waiting-area.jpg', 'large')); ?>'); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
                 <div class="container">
                     <h1 class="page-title"><?php echo __t('Contact Simple Dental'); ?></h1>
@@ -26,47 +26,47 @@ get_header();
         <section class="contact-section section">
             <div class="container">
                 
-                <!-- Contact Info Cards -->
-                <div class="contact-info">
-                    <div class="contact-card primary-contact">
-                        <h3><?php echo __t('Schedule an Appointment'); ?></h3>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('Phone'); ?></h4>
-                            <p><a href="tel:7023024787" class="phone-link">(702) 302-4787</a></p>
+                <!-- Contact Rows -->
+                <div class="contact-rows">
+                    <div class="contact-row media-split">
+                        <div class="media-split-content">
+                            <h2><?php echo __t('Schedule Your Visit'); ?></h2>
+                            <p><?php echo __t('Call or text and we will help you pick a time that works.'); ?></p>
+                            <div class="contact-row-details">
+                                <div class="detail-item">
+                                    <h4><?php echo __t('Phone'); ?></h4>
+                                    <p><a href="tel:7023024787" class="phone-link">(702) 302-4787</a></p>
+                                </div>
+                                <div class="detail-item">
+                                    <h4><?php echo __t('Hours'); ?></h4>
+                                    <p><?php echo __t('Monday - Friday: 8:00 AM - 4:00 PM'); ?></p>
+                                </div>
+                            </div>
+                            <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call Now'); ?></a>
                         </div>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('Best Times to Call'); ?></h4>
-                            <p><?php echo __t('Monday - Friday: 8:00 AM - 4:00 PM'); ?></p>
-                        </div>
-                        <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call Now'); ?></a>
+                        <figure class="media-split-image">
+                            <?php echo simple_dental_media_image('contact-operatory-side.jpg', __t('Operatory chair and equipment at Simple Dental')); ?>
+                        </figure>
                     </div>
-                    
-                    <div class="contact-card">
-                        <h3><?php echo __t('Our Location'); ?></h3>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('Address'); ?></h4>
-                            <p>204 S Jones Blvd<br>Las Vegas, NV 89149</p>
+
+                    <div class="contact-row media-split reverse">
+                        <div class="media-split-content">
+                            <h2><?php echo __t('Find Us Fast'); ?></h2>
+                            <p><?php echo __t('Just off Highway 95 at the Jones exit - quick to reach from Summerlin, Centennial Hills, and central Las Vegas.'); ?></p>
+                            <div class="contact-row-details">
+                                <div class="detail-item">
+                                    <h4><?php echo __t('Address'); ?></h4>
+                                    <p>204 S Jones Blvd<br>Las Vegas, NV 89107</p>
+                                </div>
+                                <div class="detail-item">
+                                    <h4><?php echo __t('Opening'); ?></h4>
+                                    <p><?php echo __t('October 2025'); ?></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('🚗 Easy Access from Highway 95'); ?></h4>
-                            <p><?php echo __t("Just off Highway 95 at the Jones exit — you'll be at our door in seconds! Convenient for Summerlin, Centennial Hills, and central Las Vegas."); ?></p>
-                        </div>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('Opening'); ?></h4>
-                            <p><?php echo __t('October 2025'); ?></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <h3><?php echo __t('Office Hours'); ?></h3>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('Monday - Friday'); ?></h4>
-                            <p>8:00 AM - 4:00 PM</p>
-                        </div>
-                        <div class="contact-detail">
-                            <h4><?php echo __t('Weekends'); ?></h4>
-                            <p><?php echo __t('Closed'); ?></p>
-                        </div>
+                        <figure class="media-split-image">
+                            <?php echo simple_dental_media_image('contact-office-hallway.jpg', __t('Simple Dental office hallway')); ?>
+                        </figure>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@ get_header();
                 <h2><?php echo __t('Find Us in Las Vegas'); ?></h2>
                 <div class="map-container">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.2747982!2d-115.2089!3d36.1699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c0b9f7c4b123%3A0x1234567890abcdef!2s204%20S%20Jones%20Blvd%2C%20Las%20Vegas%2C%20NV%2089149!5e0!3m2!1sen!2sus!4v1234567890123"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.2747982!2d-115.2089!3d36.1699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c0b9f7c4b123%3A0x1234567890abcdef!2s204%20S%20Jones%20Blvd%2C%20Las%20Vegas%2C%20NV%2089107!5e0!3m2!1sen!2sus!4v1234567890123"
                         width="100%" 
                         height="400" 
                         style="border:0;" 

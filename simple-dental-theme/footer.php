@@ -11,7 +11,7 @@
                     <h4><?php echo __t('Contact'); ?></h4>
                     <p><strong><?php echo __t('Address:'); ?></strong><br>
                     204 S Jones Blvd<br>
-                    Las Vegas, NV 89149</p>
+                    Las Vegas, NV 89107</p>
                     <p><strong><?php echo __t('Phone:'); ?></strong> <a href="tel:7023024787">(702) 302-4787</a></p>
                 </div>
 

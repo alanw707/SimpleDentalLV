@@ -71,6 +71,12 @@
         }
 
         // Smooth scroll for anchor links
+        function getHeaderOffset() {
+            var headerHeight = $('.site-header').outerHeight() || 0;
+            var adminBarHeight = $('#wpadminbar').length ? ($('#wpadminbar').outerHeight() || 0) : 0;
+            return headerHeight + adminBarHeight;
+        }
+
         $('a[href*="#"]:not([href="#"])').click(function() {
             if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && 
                 location.hostname === this.hostname) {
@@ -78,7 +84,7 @@
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
                     $('html, body').animate({
-                        scrollTop: target.offset().top - 80
+                        scrollTop: target.offset().top - getHeaderOffset()
                     }, 1000);
                     return false;
                 }

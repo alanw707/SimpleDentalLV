@@ -13,7 +13,7 @@ get_header();
     <?php while (have_posts()) : the_post(); ?>
         
         <!-- Page Header -->
-        <header class="page-header section" style="background-image: url('https://images.unsplash.com/photo-1516975698824-571e2c952dbd?w=1200&q=80'); background-size: cover; background-position: center;">
+        <header class="page-header section" style="background-image: url('<?php echo esc_url(simple_dental_media_url('hero-services-operatory.jpg', 'large')); ?>'); background-size: cover; background-position: center;">
             <div class="page-header-overlay">
                 <div class="container">
                     <h1 class="page-title"><?php echo __t('Our Services'); ?></h1>
@@ -40,25 +40,35 @@ get_header();
                         </div>
                         
                         <div class="technology-grid">
-                            <div class="tech-feature">
-                                <h3><?php echo __t('Advanced Intraoral Scanner'); ?></h3>
-                                <p><?php echo __t('Our state-of-the-art intraoral scanner captures precise 3D digital impressions in minutes. No more uncomfortable goopy impressions that make you gag — just a small wand that creates a perfect digital model of your tooth.'); ?></p>
-                                <ul>
-                                    <li><?php echo __t('Comfortable, non-invasive scanning process'); ?></li>
-                                    <li><?php echo __t('Precise measurements for perfect crown fit'); ?></li>
-                                    <li><?php echo __t('Real-time 3D visualization of your tooth'); ?></li>
-                                </ul>
+                            <div class="tech-feature media-split">
+                                <div class="media-split-content">
+                                    <h3><?php echo __t('Advanced Intraoral Scanner'); ?></h3>
+                                    <p><?php echo __t('Our state-of-the-art intraoral scanner captures precise 3D digital impressions in minutes. No more uncomfortable goopy impressions that make you gag — just a small wand that creates a perfect digital model of your tooth.'); ?></p>
+                                    <ul>
+                                        <li><?php echo __t('Comfortable, non-invasive scanning process'); ?></li>
+                                        <li><?php echo __t('Precise measurements for perfect crown fit'); ?></li>
+                                        <li><?php echo __t('Real-time 3D visualization of your tooth'); ?></li>
+                                    </ul>
+                                </div>
+                                <figure class="media-split-image">
+                                    <?php echo simple_dental_media_image('services-tech-operatory.jpg', __t('Operatory treatment chair at Simple Dental')); ?>
+                                </figure>
                             </div>
                             
-                            <div class="tech-feature">
-                                <h3><?php echo __t('Glidewell Fastmill.io System'); ?></h3>
-                                <p><?php echo __t('Using Glidewell\'s Fastmill.io technology, we design and mill your custom crown right here in our office. This cutting-edge system ensures precision craftsmanship and perfect color matching for natural-looking results.'); ?></p>
-                                <ul>
-                                    <li><?php echo __t('Crown designed and created in our office'); ?></li>
-                                    <li><?php echo __t('Perfect color and shape matching'); ?></li>
-                                    <li><?php echo __t('High-strength ceramic materials'); ?></li>
-                                    <li><?php echo __t('Same-day placement and completion'); ?></li>
-                                </ul>
+                            <div class="tech-feature media-split reverse">
+                                <div class="media-split-content">
+                                    <h3><?php echo __t('Glidewell Fastmill.io System'); ?></h3>
+                                    <p><?php echo __t('Using Glidewell\'s Fastmill.io technology, we design and mill your custom crown right here in our office. This cutting-edge system ensures precision craftsmanship and perfect color matching for natural-looking results.'); ?></p>
+                                    <ul>
+                                        <li><?php echo __t('Crown designed and created in our office'); ?></li>
+                                        <li><?php echo __t('Perfect color and shape matching'); ?></li>
+                                        <li><?php echo __t('High-strength ceramic materials'); ?></li>
+                                        <li><?php echo __t('Same-day placement and completion'); ?></li>
+                                    </ul>
+                                </div>
+                                <figure class="media-split-image">
+                                    <?php echo simple_dental_media_image('services-tech-lab-milling.jpg', __t('Same-day crown lab milling equipment')); ?>
+                                </figure>
                             </div>
                         </div>
                         
@@ -161,4 +171,3 @@ get_header();
 <?php
 get_footer();
 ?>
-
