@@ -60,7 +60,7 @@ get_header();
                                 </div>
                                 <div class="detail-item">
                                     <h4><?php echo __t('Opening'); ?></h4>
-                                    <p><?php echo __t('October 2025'); ?></p>
+                                    <p><?php echo __t('January 2026'); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +97,8 @@ get_header();
                     </iframe>
                 </div>
                 <div class="map-info">
-                    <p><strong><?php echo __t('🎉 Coming October 2025!'); ?></strong></p>
-                    <p><?php echo __t("We're excited to announce that Simple Dental will be opening in October. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."); ?></p>
+                    <p><strong><?php echo __t('🎉 Coming January 2026!'); ?></strong></p>
+                    <p><?php echo __t("We're excited to announce that Simple Dental will be opening in January. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."); ?></p>
                     <p><strong><?php echo __t("Stay tuned for updates — we can't wait to welcome you soon!"); ?></strong></p>
                 </div>
             </div>
@@ -112,7 +112,7 @@ get_header();
                 <div class="faq-grid">
                     <div class="faq-item">
                         <h4><?php echo __t('When do you open?'); ?></h4>
-                        <p><?php echo __t("We're opening in October 2025 at our new location on S Jones Blvd."); ?></p>
+                        <p><?php echo __t("We're opening in January 2026 at our new location on S Jones Blvd."); ?></p>
                     </div>
                     
                     <div class="faq-item">
@@ -132,7 +132,7 @@ get_header();
                     
                     <div class="faq-item">
                         <h4><?php echo __t('How do I schedule an appointment?'); ?></h4>
-                        <p><?php echo __t("Call us at (702) 302-4787. We'll be taking appointments starting in October 2025."); ?></p>
+                        <p><?php echo __t("Call us at (702) 302-4787. We'll be taking appointments starting in January 2026."); ?></p>
                     </div>
                     
                     <div class="faq-item">

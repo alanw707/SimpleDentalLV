@@ -98,7 +98,7 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  */
 function simple_dental_add_seo_meta() {
     if (is_front_page()) {
-        echo '<meta name="description" content="Simple Dental - Honest same-day dentistry in Las Vegas. Transparent pricing, no pressure, experienced doctor. Located at 204 S Jones Blvd. Opening October 2025.">' . "\n";
+        echo '<meta name="description" content="Simple Dental - Honest same-day dentistry in Las Vegas. Transparent pricing, no pressure, experienced doctor. Located at 204 S Jones Blvd. Opening January 2026.">' . "\n";
         echo '<meta name="keywords" content="dentist las vegas, dental care, same day crowns, transparent pricing, no pressure dentistry, jones boulevard">' . "\n";
     }
     

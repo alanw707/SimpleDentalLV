@@ -95,7 +95,7 @@ get_header();
                     <div class="location-content">
                         <div class="location-info">
                             <h2><?php echo __t('Coming to Las Vegas'); ?></h2>
-                            <h3><?php echo __t('🎉 Opening October 2025!'); ?></h3>
+                            <h3><?php echo __t('🎉 Opening January 2026!'); ?></h3>
                             <p class="address"><strong>204 S Jones Blvd, Las Vegas, NV 89107</strong></p>
                             
                             <div class="location-highlight">
@@ -104,7 +104,7 @@ get_header();
                                 <p><?php echo __t("Look for us right off Jones Blvd, and enjoy stress-free parking and easy access — because your visit should start simple before you even step inside."); ?></p>
                             </div>
                             
-                            <p><?php echo __t("We're excited to announce that Simple Dental will be opening in October. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."); ?></p>
+                            <p><?php echo __t("We're excited to announce that Simple Dental will be opening in January. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."); ?></p>
                             
                             <div class="opening-features">
                                 <div class="feature-list">
@@ -130,7 +130,7 @@ get_header();
                         
                         <div class="location-cta">
                             <h4><?php echo __t('Ready to Experience Simple Dental?'); ?></h4>
-                            <p><?php echo __t('Call us to learn more about our approach or to get on our list for October 2025.'); ?></p>
+                            <p><?php echo __t('Call us to learn more about our approach or to get on our list for January 2026.'); ?></p>
                             <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call (702) 302-4787'); ?></a>
                         </div>
                     </div>
