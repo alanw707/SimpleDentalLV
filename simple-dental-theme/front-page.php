@@ -16,6 +16,18 @@ get_header();
             <div class="container">
                 <h1><?php echo __t('Straightforward Dentistry from one Experienced Doctor.'); ?></h1>
                 <p class="subtitle"><?php echo __t('No pressure. No upsell. Just honest, transparent dental care with modern technology and fair pricing.'); ?></p>
+
+                <!-- Countdown Timer -->
+                <div class="countdown-wrapper">
+                    <p class="countdown-label"><?php echo __t('Opening Soon'); ?></p>
+                    <div class="countdown-timer" data-grace-message="<?php echo esc_attr(__t('Opening Very Soon!')); ?>">
+                        <div class="countdown-unit"><span class="countdown-days">--</span><span class="countdown-unit-label"><?php echo __t('Days'); ?></span></div>
+                        <div class="countdown-unit"><span class="countdown-hours">--</span><span class="countdown-unit-label"><?php echo __t('Hours'); ?></span></div>
+                        <div class="countdown-unit"><span class="countdown-mins">--</span><span class="countdown-unit-label"><?php echo __t('Mins'); ?></span></div>
+                        <div class="countdown-unit"><span class="countdown-secs">--</span><span class="countdown-unit-label"><?php echo __t('Secs'); ?></span></div>
+                    </div>
+                </div>
+
                 <div class="hero-buttons">
                     <a href="#services" class="btn btn-primary"><?php echo __t('View Our Services'); ?></a>
                     <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call (702) 302-4787'); ?></a>

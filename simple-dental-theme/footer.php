@@ -42,7 +42,7 @@
                         <p>&copy; <?php echo date('Y'); ?> Simple Dental. <?php echo __t('All rights reserved.'); ?></p>
                     </div>
                     <div class="footer-bottom-right">
-                        <p><?php echo __t('Opening January 2026 | Las Vegas, Nevada'); ?></p>
+                        <p><?php echo sprintf(__t('Opening %s | Las Vegas, Nevada'), simple_dental_get_opening_date_display()); ?></p>
                     </div>
                 </div>
             </div>

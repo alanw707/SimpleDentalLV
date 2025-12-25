@@ -1209,6 +1209,87 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
 .feature h4 { color: var(--accent-teal); margin-bottom: 10px; }
 .hero-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
 
+/* Countdown Timer Styles */
+.countdown-wrapper {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.countdown-label {
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.countdown-unit {
+    background: var(--white);
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    min-width: 70px;
+    text-align: center;
+}
+
+.countdown-unit span {
+    display: block;
+}
+
+.countdown-days,
+.countdown-hours,
+.countdown-mins,
+.countdown-secs {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-brown);
+    line-height: 1;
+}
+
+.countdown-unit-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-medium);
+    margin-top: 0.25rem;
+    letter-spacing: 0.5px;
+}
+
+.countdown-grace-message {
+    font-size: 1.5rem;
+    color: var(--white);
+    font-weight: 600;
+    padding: 1rem;
+}
+
+/* Countdown Mobile: 2x2 grid */
+@media (max-width: 480px) {
+    .countdown-timer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .countdown-unit {
+        padding: 0.75rem;
+        min-width: unset;
+    }
+
+    .countdown-days,
+    .countdown-hours,
+    .countdown-mins,
+    .countdown-secs {
+        font-size: 2rem;
+    }
+}
+
 .about-story { max-width: 700px; margin: 0 auto; text-align: center; padding: 2rem 0; }
 .about-story h2 { color: var(--primary-brown); margin-bottom: 1.5rem; font-size: 2.25rem; }
 .about-story p { font-size: 1.125rem; line-height: 1.7; margin-bottom: 1.5rem; color: var(--text-medium); }

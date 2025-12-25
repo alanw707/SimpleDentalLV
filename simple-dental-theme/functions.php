@@ -80,6 +80,24 @@ function simple_dental_scripts() {
     
     // CRITICAL FIX: Re-enable navigation script for mobile menu functionality
     wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array('jquery'), '1.1.0', true);
+
+    // Countdown timer script (only on front page)
+    if (is_front_page()) {
+        wp_enqueue_script('simple-dental-countdown', get_template_directory_uri() . '/assets/js/countdown.js', array('jquery'), '1.0.0', true);
+
+        // Pass countdown data to JavaScript
+        wp_localize_script('simple-dental-countdown', 'countdownData', array(
+            'targetTimestamp' => simple_dental_get_opening_date() * 1000, // Convert to milliseconds for JS
+            'isGracePeriod' => simple_dental_is_in_grace_period(),
+            'labels' => array(
+                'days' => __t('Days'),
+                'hours' => __t('Hours'),
+                'mins' => __t('Mins'),
+                'secs' => __t('Secs')
+            ),
+            'gracePeriodMessage' => __t('Opening Very Soon!')
+        ));
+    }
 }
 add_action('wp_enqueue_scripts', 'simple_dental_scripts');
 
@@ -98,7 +116,8 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  */
 function simple_dental_add_seo_meta() {
     if (is_front_page()) {
-        echo '<meta name="description" content="Simple Dental - Honest same-day dentistry in Las Vegas. Transparent pricing, no pressure, experienced doctor. Located at 204 S Jones Blvd. Opening January 2026.">' . "\n";
+        $opening_date = simple_dental_get_opening_date_display();
+        echo '<meta name="description" content="Simple Dental - Honest same-day dentistry in Las Vegas. Transparent pricing, no pressure, experienced doctor. Located at 204 S Jones Blvd. Opening ' . esc_attr($opening_date) . '.">' . "\n";
         echo '<meta name="keywords" content="dentist las vegas, dental care, same day crowns, transparent pricing, no pressure dentistry, jones boulevard">' . "\n";
     }
     
@@ -727,6 +746,84 @@ function simple_dental_media_url($filename, $size = 'full') {
  * Load translation system
  */
 require_once get_template_directory() . '/includes/translator.php';
+
+/**
+ * Opening Date Configuration and Auto-Extend Logic
+ *
+ * Single source of truth for the practice opening date.
+ * Auto-extends by 1 month if date passes (with 3-day grace period).
+ */
+define('SIMPLE_DENTAL_BASE_OPENING_DATE', '2026-01-15');
+
+/**
+ * Get the opening date timestamp with auto-extend logic
+ *
+ * If the base date + 3 days grace period has passed, extend by 1 month.
+ * This repeats until we have a future date.
+ *
+ * @return int Unix timestamp of the (possibly extended) opening date
+ */
+function simple_dental_get_opening_date() {
+    $base_date = strtotime(SIMPLE_DENTAL_BASE_OPENING_DATE);
+    $current_time = current_time('timestamp');
+    $grace_period = 3 * DAY_IN_SECONDS;
+
+    // Keep extending by 1 month until we have a future date (past grace period)
+    while ($current_time > ($base_date + $grace_period)) {
+        $base_date = strtotime('+1 month', $base_date);
+    }
+
+    return $base_date;
+}
+
+/**
+ * Check if we're currently in the grace period
+ *
+ * Grace period = opening date has passed but within 3 days
+ * During this time, show "Opening Very Soon!" instead of countdown
+ *
+ * @return bool True if in grace period
+ */
+function simple_dental_is_in_grace_period() {
+    $opening_date = simple_dental_get_opening_date();
+    $current_time = current_time('timestamp');
+    $grace_period = 3 * DAY_IN_SECONDS;
+
+    // In grace period if: current time > opening date AND current time <= opening date + 3 days
+    return ($current_time > $opening_date && $current_time <= ($opening_date + $grace_period));
+}
+
+/**
+ * Get formatted opening date string for display
+ *
+ * Returns localized month and year (e.g., "January 2026", "Enero de 2026")
+ *
+ * @return string Formatted date string
+ */
+function simple_dental_get_opening_date_display() {
+    $opening_date = simple_dental_get_opening_date();
+
+    // Get month name based on current locale
+    $month_names = array(
+        1 => __t('January'),
+        2 => __t('February'),
+        3 => __t('March'),
+        4 => __t('April'),
+        5 => __t('May'),
+        6 => __t('June'),
+        7 => __t('July'),
+        8 => __t('August'),
+        9 => __t('September'),
+        10 => __t('October'),
+        11 => __t('November'),
+        12 => __t('December')
+    );
+
+    $month = (int) date('n', $opening_date);
+    $year = date('Y', $opening_date);
+
+    return $month_names[$month] . ' ' . $year;
+}
 
 /**
  * Sanitize email list (comma-separated emails)

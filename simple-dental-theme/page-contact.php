@@ -60,7 +60,7 @@ get_header();
                                 </div>
                                 <div class="detail-item">
                                     <h4><?php echo __t('Opening'); ?></h4>
-                                    <p><?php echo __t('January 2026'); ?></p>
+                                    <p><?php echo simple_dental_get_opening_date_display(); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +97,8 @@ get_header();
                     </iframe>
                 </div>
                 <div class="map-info">
-                    <p><strong><?php echo __t('🎉 Coming January 2026!'); ?></strong></p>
-                    <p><?php echo __t("We're excited to announce that Simple Dental will be opening in January. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."); ?></p>
+                    <p><strong><?php echo sprintf(__t('🎉 Coming %s!'), simple_dental_get_opening_date_display()); ?></strong></p>
+                    <p><?php echo sprintf(__t("We're excited to announce that Simple Dental will be opening in %s. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."), simple_dental_get_opening_date_display()); ?></p>
                     <p><strong><?php echo __t("Stay tuned for updates — we can't wait to welcome you soon!"); ?></strong></p>
                 </div>
             </div>
@@ -112,7 +112,7 @@ get_header();
                 <div class="faq-grid">
                     <div class="faq-item">
                         <h4><?php echo __t('When do you open?'); ?></h4>
-                        <p><?php echo __t("We're opening in January 2026 at our new location on S Jones Blvd."); ?></p>
+                        <p><?php echo sprintf(__t("We're opening in %s at our new location on S Jones Blvd."), simple_dental_get_opening_date_display()); ?></p>
                     </div>
                     
                     <div class="faq-item">
@@ -132,7 +132,7 @@ get_header();
                     
                     <div class="faq-item">
                         <h4><?php echo __t('How do I schedule an appointment?'); ?></h4>
-                        <p><?php echo __t("Call us at (702) 302-4787. We'll be taking appointments starting in January 2026."); ?></p>
+                        <p><?php echo sprintf(__t("Call us at (702) 302-4787. We'll be taking appointments starting in %s."), simple_dental_get_opening_date_display()); ?></p>
                     </div>
                     
                     <div class="faq-item">
