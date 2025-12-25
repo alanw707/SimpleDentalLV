@@ -31,8 +31,6 @@ wp-content/uploads/
 *.backup
 
 # Local tooling output
-_bmad/
-_bmad-output/
 archive/
 
 # Local env files

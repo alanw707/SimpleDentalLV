@@ -751,9 +751,10 @@ require_once get_template_directory() . '/includes/translator.php';
  * Opening Date Configuration and Auto-Extend Logic
  *
  * Single source of truth for the practice opening date.
+ * Base date set to 60 days from 2025-12-25.
  * Auto-extends by 1 month if date passes (with 3-day grace period).
  */
-define('SIMPLE_DENTAL_BASE_OPENING_DATE', '2026-01-15');
+define('SIMPLE_DENTAL_BASE_OPENING_DATE', '2026-02-23');
 
 /**
  * Get the opening date timestamp with auto-extend logic
