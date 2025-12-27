@@ -748,6 +748,50 @@ function simple_dental_media_url($filename, $size = 'full') {
 require_once get_template_directory() . '/includes/translator.php';
 
 /**
+ * Ensure FAQ link appears in primary wp_nav_menu output.
+ */
+function simple_dental_append_faq_menu_item($items, $args) {
+    if (empty($args->theme_location) || $args->theme_location !== 'primary') {
+        return $items;
+    }
+
+    if (strpos($items, '/faq/') !== false) {
+        return $items;
+    }
+
+    $faq_url = esc_url(simple_dental_with_lang(home_url('/faq/')));
+    $items .= '<li class="menu-item menu-item-faq"><a href="' . $faq_url . '">' . esc_html(__t('FAQ')) . '</a></li>';
+    return $items;
+}
+add_filter('wp_nav_menu_items', 'simple_dental_append_faq_menu_item', 10, 2);
+
+/**
+ * Force internal menu links to open in the same tab.
+ */
+function simple_dental_force_menu_self_target($atts, $item, $args, $depth) {
+    if (empty($atts['href'])) {
+        return $atts;
+    }
+
+    $scheme = wp_parse_url($atts['href'], PHP_URL_SCHEME);
+    if ($scheme && !in_array($scheme, array('http', 'https'), true)) {
+        return $atts;
+    }
+
+    $home_host = wp_parse_url(home_url('/'), PHP_URL_HOST);
+    $url_host = wp_parse_url($atts['href'], PHP_URL_HOST);
+    $is_relative = (!$url_host && strpos($atts['href'], '/') === 0);
+    $is_same_host = ($url_host && $home_host && strtolower($url_host) === strtolower($home_host));
+
+    if ($is_relative || $is_same_host) {
+        $atts['target'] = '_self';
+    }
+
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'simple_dental_force_menu_self_target', 20, 4);
+
+/**
  * Opening Date Configuration and Auto-Extend Logic
  *
  * Single source of truth for the practice opening date.

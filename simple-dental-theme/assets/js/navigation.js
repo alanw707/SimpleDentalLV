@@ -70,6 +70,11 @@
             $('body').removeClass('menu-open');
         }
 
+        // Clear any stale mobile menu state on desktop loads.
+        if ($(window).width() > 768) {
+            closeMenu();
+        }
+
         // Smooth scroll for anchor links
         function getHeaderOffset() {
             var headerHeight = $('.site-header').outerHeight() || 0;
@@ -78,16 +83,44 @@
         }
 
         $('a[href*="#"]:not([href="#"])').click(function() {
+            var isFaqJump = $(this).closest('.faq-panel-nav').length;
             if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && 
                 location.hostname === this.hostname) {
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
+                    var duration = isFaqJump ? 200 : 1000;
                     $('html, body').animate({
                         scrollTop: target.offset().top - getHeaderOffset()
-                    }, 1000);
+                    }, duration);
+                    if (this.hash && window.history && window.history.pushState) {
+                        window.history.pushState(null, '', this.hash);
+                    }
                     return false;
                 }
+            }
+        });
+
+        // Force internal menu links to open in the same tab
+        function isInternalLink(href) {
+            if (!href) {
+                return false;
+            }
+            if (href.indexOf('#') === 0) {
+                return true;
+            }
+            var link = document.createElement('a');
+            link.href = href;
+            if (link.protocol && link.protocol !== 'http:' && link.protocol !== 'https:') {
+                return false;
+            }
+            return !link.hostname || link.hostname === window.location.hostname;
+        }
+
+        $('.main-navigation a, .faq-panel-nav a').each(function() {
+            var href = $(this).attr('href');
+            if (isInternalLink(href)) {
+                $(this).attr('target', '_self');
             }
         });
 

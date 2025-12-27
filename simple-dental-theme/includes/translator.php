@@ -68,6 +68,14 @@ class SimpleDentalTranslator {
             return $text;
         }
 
+        if ($context && strpos($context, 'key:') === 0) {
+            $key = substr($context, 4);
+            if (isset($this->translations[$key])) {
+                return $this->translations[$key];
+            }
+            return $text;
+        }
+
         $key = $context ? $context . '|' . $text : $text;
         
         // Try with context first
