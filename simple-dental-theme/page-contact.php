@@ -6,6 +6,8 @@
  */
 
 get_header();
+
+$booking_url = simple_dental_get_booking_url();
 ?>
 
 <main id="primary" class="site-main">
@@ -17,7 +19,7 @@ get_header();
             <div class="page-header-overlay">
                 <div class="container">
                     <h1 class="page-title"><?php echo __t('Contact Simple Dental'); ?></h1>
-                    <p class="page-subtitle"><?php echo __t('Get in touch to schedule your appointment'); ?></p>
+                    <p class="page-subtitle"><?php echo __t('Book online or contact us with questions.'); ?></p>
                 </div>
             </div>
         </header>
@@ -30,9 +32,13 @@ get_header();
                 <div class="contact-rows">
                     <div class="contact-row media-split">
                         <div class="media-split-content">
-                            <h2><?php echo __t('Schedule Your Visit'); ?></h2>
-                            <p><?php echo __t('Call or text and we will help you pick a time that works.'); ?></p>
+                            <h2><?php echo __t('Book Your Visit Online'); ?></h2>
+                            <p><?php echo __t('Use our online scheduler to choose a time that works. Prefer to talk first? Call or text us and we will help.'); ?></p>
                             <div class="contact-row-details">
+                                <div class="detail-item">
+                                    <h4><?php echo __t('Book Online'); ?></h4>
+                                    <p><a href="<?php echo esc_url($booking_url); ?>" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a></p>
+                                </div>
                                 <div class="detail-item">
                                     <h4><?php echo __t('Phone'); ?></h4>
                                     <p><a href="tel:7023024787" class="phone-link">(702) 302-4787</a></p>
@@ -42,7 +48,10 @@ get_header();
                                     <p><?php echo __t('Monday - Friday: 8:00 AM - 4:00 PM'); ?></p>
                                 </div>
                             </div>
-                            <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call Now'); ?></a>
+                            <div class="cta-buttons">
+                                <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
+                                <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                            </div>
                         </div>
                         <figure class="media-split-image">
                             <?php echo simple_dental_media_image('contact-operatory-side.jpg', __t('Operatory chair and equipment at Simple Dental')); ?>
@@ -97,8 +106,8 @@ get_header();
                     </iframe>
                 </div>
                 <div class="map-info">
-                    <p><strong><?php echo sprintf(__t('🎉 Coming %s!'), simple_dental_get_opening_date_display()); ?></strong></p>
-                    <p><?php echo sprintf(__t("We're excited to announce that Simple Dental will be opening in %s. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."), simple_dental_get_opening_date_display()); ?></p>
+                    <p><strong><?php echo sprintf(__t('Opening Date: %s'), simple_dental_get_opening_date_display()); ?></strong></p>
+                    <p><?php echo sprintf(__t("Simple Dental's opening date is %s. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."), simple_dental_get_opening_date_display()); ?></p>
                     <p><strong><?php echo __t("Stay tuned for updates — we can't wait to welcome you soon!"); ?></strong></p>
                 </div>
             </div>
@@ -112,7 +121,7 @@ get_header();
                 <div class="faq-grid">
                     <div class="faq-item">
                         <h4><?php echo __t('When do you open?'); ?></h4>
-                        <p><?php echo sprintf(__t("We're opening in %s at our new location on S Jones Blvd."), simple_dental_get_opening_date_display()); ?></p>
+                        <p><?php echo sprintf(__t('Our opening date is %s at our new location on S Jones Blvd.'), simple_dental_get_opening_date_display()); ?></p>
                     </div>
                     
                     <div class="faq-item">
@@ -132,7 +141,7 @@ get_header();
                     
                     <div class="faq-item">
                         <h4><?php echo __t('How do I schedule an appointment?'); ?></h4>
-                        <p><?php echo sprintf(__t("Call us at (702) 302-4787. We'll be taking appointments starting in %s."), simple_dental_get_opening_date_display()); ?></p>
+                        <p><?php echo wp_kses_post(sprintf(__t('Book online at %s, or call us at %s and our team will help you choose a time that works.'), '<a href="' . esc_url($booking_url) . '" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a>', '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
                     </div>
                     
                     <div class="faq-item">

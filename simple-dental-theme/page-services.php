@@ -6,6 +6,8 @@
  */
 
 get_header();
+
+$booking_url = simple_dental_get_booking_url();
 ?>
 
 <main id="primary" class="site-main">
@@ -101,7 +103,7 @@ get_header();
                         <div class="technology-cta">
                             <h3><?php echo __t('Experience Modern Dental Care'); ?></h3>
                             <p><?php echo __t('Ready to see how advanced technology makes dental care more comfortable and efficient? Our same-day crown process typically takes 2-3 hours from start to finish.'); ?></p>
-                            <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Schedule Your Same-Day Crown Consultation'); ?></a>
+                            <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Schedule Your Same-Day Crown Consultation'); ?></a>
                         </div>
                     </div>
                 </div>
@@ -152,10 +154,11 @@ get_header();
                 <!-- Call to Action -->
                 <div class="services-cta">
                     <div class="cta-content">
-                        <h2><?php echo __t('Ready to Schedule Your Visit?'); ?></h2>
-                        <p><?php echo __t('Call us today to discuss your dental needs and schedule an appointment. We\'re here to provide honest, affordable care.'); ?></p>
+                        <h2><?php echo __t('Ready to Book Your Visit?'); ?></h2>
+                        <p><?php echo __t('Book online to choose a convenient time, or call us if you would like help before scheduling.'); ?></p>
                         <div class="cta-buttons">
-                            <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                            <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
+                            <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call (702) 302-4787'); ?></a>
                             <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-secondary"><?php echo __t('Get More Information'); ?></a>
                         </div>
                     </div>

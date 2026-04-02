@@ -1,3 +1,12 @@
+<?php
+$hipaa_policy_page = get_page_by_path('hipaa-policy');
+$hipaa_policy_url = ($hipaa_policy_page instanceof WP_Post && 'publish' === $hipaa_policy_page->post_status)
+    ? simple_dental_with_lang(get_permalink($hipaa_policy_page))
+    : '';
+$footer_status_label = simple_dental_is_open()
+    ? __t('Now Open | Las Vegas, Nevada')
+    : sprintf(__t('Opening %s | Las Vegas, Nevada'), simple_dental_get_opening_date_display());
+?>
     <footer id="colophon" class="site-footer">
         <div class="container">
             <div class="footer-content">
@@ -40,9 +49,12 @@
                 <div class="footer-bottom-content">
                     <div class="footer-bottom-left">
                         <p>&copy; <?php echo date('Y'); ?> Simple Dental. <?php echo __t('All rights reserved.'); ?></p>
+                        <?php if ($hipaa_policy_url) : ?>
+                            <p class="footer-legal-links"><a href="<?php echo esc_url($hipaa_policy_url); ?>"><?php echo __t('HIPAA Policy'); ?></a></p>
+                        <?php endif; ?>
                     </div>
                     <div class="footer-bottom-right">
-                        <p><?php echo sprintf(__t('Opening %s | Las Vegas, Nevada'), simple_dental_get_opening_date_display()); ?></p>
+                        <p><?php echo esc_html($footer_status_label); ?></p>
                     </div>
                 </div>
             </div>

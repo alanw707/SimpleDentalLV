@@ -6,6 +6,8 @@
  */
 
 get_header();
+
+$booking_url = simple_dental_get_booking_url();
 ?>
 
 <main id="primary" class="site-main">
@@ -110,7 +112,7 @@ get_header();
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('How do I book an appointment?', 'key:faq.location.q.appointment')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(sprintf(__t('Call us at %s to book an appointment. Our team will find a time that works for you and answer any questions.', 'key:faq.location.a.appointment'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('Book online at %s, or call us at %s and our team will help you choose a time that works.', 'key:faq.location.a.appointment'), '<a href="' . esc_url($booking_url) . '" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a>', '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
                                     </div>
                                 </div>
                             </div>

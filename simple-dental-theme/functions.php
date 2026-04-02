@@ -81,23 +81,6 @@ function simple_dental_scripts() {
     // CRITICAL FIX: Re-enable navigation script for mobile menu functionality
     wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array('jquery'), '1.1.0', true);
 
-    // Countdown timer script (only on front page)
-    if (is_front_page()) {
-        wp_enqueue_script('simple-dental-countdown', get_template_directory_uri() . '/assets/js/countdown.js', array('jquery'), '1.0.0', true);
-
-        // Pass countdown data to JavaScript
-        wp_localize_script('simple-dental-countdown', 'countdownData', array(
-            'targetTimestamp' => simple_dental_get_opening_date() * 1000, // Convert to milliseconds for JS
-            'isGracePeriod' => simple_dental_is_in_grace_period(),
-            'labels' => array(
-                'days' => __t('Days'),
-                'hours' => __t('Hours'),
-                'mins' => __t('Mins'),
-                'secs' => __t('Secs')
-            ),
-            'gracePeriodMessage' => __t('Opening Very Soon!')
-        ));
-    }
 }
 add_action('wp_enqueue_scripts', 'simple_dental_scripts');
 
@@ -528,6 +511,7 @@ add_shortcode('featured_services', 'featured_services_display');
  * New Patient Special callout
  */
 function new_patient_special_display($atts) {
+    $booking_url = simple_dental_get_booking_url();
     ob_start();
     ?>
     <div class="new-patient-special">
@@ -540,7 +524,7 @@ function new_patient_special_display($atts) {
             <span class="feature">✓ <?php echo __t('Professional Cleaning'); ?></span>
             <span class="feature">✓ <?php echo __t('X-rays if needed'); ?></span>
         </div>
-        <a href="tel:7023024787" class="btn btn-coral"><?php echo __t('Book Your Visit'); ?></a>
+        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-coral" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Your Visit'); ?></a>
     </div>
     <?php
     return ob_get_clean();
@@ -792,63 +776,65 @@ function simple_dental_force_menu_self_target($atts, $item, $args, $depth) {
 add_filter('nav_menu_link_attributes', 'simple_dental_force_menu_self_target', 20, 4);
 
 /**
- * Opening Date Configuration and Auto-Extend Logic
- *
- * Single source of truth for the practice opening date.
- * Base date set to 60 days from 2025-12-25.
- * Auto-extends by 1 month if date passes (with 3-day grace period).
+ * Opening date and booking configuration.
  */
-define('SIMPLE_DENTAL_BASE_OPENING_DATE', '2026-02-23');
+define('SIMPLE_DENTAL_OPENING_DATE', '2026-04-06');
+define('SIMPLE_DENTAL_BOOKING_URL', 'https://dental4.me/simpledental');
 
 /**
- * Get the opening date timestamp with auto-extend logic
+ * Get the fixed opening date timestamp.
  *
- * If the base date + 3 days grace period has passed, extend by 1 month.
- * This repeats until we have a future date.
- *
- * @return int Unix timestamp of the (possibly extended) opening date
+ * @return int Unix timestamp of the opening date
  */
 function simple_dental_get_opening_date() {
-    $base_date = strtotime(SIMPLE_DENTAL_BASE_OPENING_DATE);
-    $current_time = current_time('timestamp');
-    $grace_period = 3 * DAY_IN_SECONDS;
-
-    // Keep extending by 1 month until we have a future date (past grace period)
-    while ($current_time > ($base_date + $grace_period)) {
-        $base_date = strtotime('+1 month', $base_date);
-    }
-
-    return $base_date;
+    return strtotime(SIMPLE_DENTAL_OPENING_DATE);
 }
 
 /**
- * Check if we're currently in the grace period
+ * Get the online booking URL.
  *
- * Grace period = opening date has passed but within 3 days
- * During this time, show "Opening Very Soon!" instead of countdown
- *
- * @return bool True if in grace period
+ * @return string
  */
-function simple_dental_is_in_grace_period() {
-    $opening_date = simple_dental_get_opening_date();
-    $current_time = current_time('timestamp');
-    $grace_period = 3 * DAY_IN_SECONDS;
-
-    // In grace period if: current time > opening date AND current time <= opening date + 3 days
-    return ($current_time > $opening_date && $current_time <= ($opening_date + $grace_period));
+function simple_dental_get_booking_url() {
+    return SIMPLE_DENTAL_BOOKING_URL;
 }
+
+/**
+ * Check whether the practice is open.
+ *
+ * @return bool
+ */
+function simple_dental_is_open() {
+    return current_time('timestamp') >= simple_dental_get_opening_date();
+}
+
+/**
+ * Get the current language code from the custom translator.
+ *
+ * @return string
+ */
+function simple_dental_get_current_language_code() {
+    global $simple_dental_translator;
+
+    if ($simple_dental_translator && method_exists($simple_dental_translator, 'get_current_language')) {
+        return $simple_dental_translator->get_current_language();
+    }
+
+    return 'en';
+}
+
 
 /**
  * Get formatted opening date string for display
  *
- * Returns localized month and year (e.g., "January 2026", "Enero de 2026")
+ * Returns a full localized date string.
  *
  * @return string Formatted date string
  */
 function simple_dental_get_opening_date_display() {
     $opening_date = simple_dental_get_opening_date();
+    $language = simple_dental_get_current_language_code();
 
-    // Get month name based on current locale
     $month_names = array(
         1 => __t('January'),
         2 => __t('February'),
@@ -865,9 +851,18 @@ function simple_dental_get_opening_date_display() {
     );
 
     $month = (int) date('n', $opening_date);
+    $day = (int) date('j', $opening_date);
     $year = date('Y', $opening_date);
 
-    return $month_names[$month] . ' ' . $year;
+    if ($language === 'es') {
+        return $day . ' de ' . $month_names[$month] . ' de ' . $year;
+    }
+
+    if ($language === 'zh-TW' || $language === 'zh-CN') {
+        return $year . '年' . $month_names[$month] . $day . '日';
+    }
+
+    return $month_names[$month] . ' ' . $day . ', ' . $year;
 }
 
 /**

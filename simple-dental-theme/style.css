@@ -695,7 +695,7 @@ a:hover {
     border-top: 1px solid var(--medium-gray);
     padding-top: 20px;
     text-align: center;
-    color: var(--text-light);
+    color: var(--light-gray);
 }
 
 /* ==========================================================================
@@ -997,9 +997,36 @@ button.menu-toggle::before {
 .footer-bottom-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 1rem 2.5rem;
+}
+
+.footer-bottom-content p {
+    margin: 0;
+    color: var(--light-gray);
+    font-size: 0.975rem;
+    line-height: 1.55;
+}
+
+.footer-bottom-left {
+    display: grid;
+    gap: 0.5rem;
+    flex: 1 1 18rem;
+    text-align: left;
+}
+
+.footer-bottom-right {
+    flex: 1 1 18rem;
+    text-align: right;
+}
+
+.footer-bottom-right p {
+    color: var(--warm-beige);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    max-width: 28rem;
+    margin-left: auto;
 }
 
 .footer-section ul {
@@ -1020,6 +1047,19 @@ button.menu-toggle::before {
     color: var(--light-gray);
 }
 .footer-faq-item strong { color: var(--white); font-weight: 600; }
+.footer-legal-links {
+    margin-top: 0.5rem;
+}
+.footer-legal-links a {
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.16em;
+}
+.footer-legal-links a:hover {
+    color: var(--warm-beige);
+}
 
 /* Scroll to Top Button */
 .scroll-to-top {
@@ -1058,6 +1098,15 @@ button.menu-toggle::before {
 
 @media (max-width: 768px) {
     .footer-bottom-content { flex-direction: column; text-align: center; }
+    .footer-bottom-left,
+    .footer-bottom-right {
+        width: 100%;
+        text-align: center;
+    }
+    .footer-bottom-right p {
+        margin-right: auto;
+        margin-left: auto;
+    }
     .scroll-to-top { bottom: 15px; right: 15px; width: 45px; height: 45px; }
     .scroll-arrow { font-size: 16px; }
 }
@@ -1377,85 +1426,43 @@ body.page-template-page-services-php .page-header-overlay { background: rgba(0, 
 .feature h4 { color: var(--accent-teal); margin-bottom: 10px; }
 .hero-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
 
-/* Countdown Timer Styles */
-.countdown-wrapper {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.countdown-label {
-    font-size: 1.25rem;
-    color: var(--white);
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
-
-.countdown-timer {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.countdown-unit {
-    background: var(--white);
-    padding: 1rem 1.25rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow-light);
-    min-width: 70px;
-    text-align: center;
-}
-
-.countdown-unit span {
-    display: block;
-}
-
-.countdown-days,
-.countdown-hours,
-.countdown-mins,
-.countdown-secs {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary-brown);
-    line-height: 1;
-}
-
-.countdown-unit-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--text-medium);
-    margin-top: 0.25rem;
-    letter-spacing: 0.5px;
-}
-
-.countdown-grace-message {
-    font-size: 1.5rem;
-    color: var(--white);
+/* Opening Soon Badge */
+.opening-soon-label {
+    display: inline-block;
+    font-size: 0.85rem;
     font-weight: 600;
-    padding: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 2rem;
+    padding: 0.45rem 1.4rem;
+    margin: 2rem 0;
+    background: rgba(139, 115, 85, 0.25);
 }
 
-/* Countdown Mobile: 2x2 grid */
-@media (max-width: 480px) {
-    .countdown-timer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-        max-width: 200px;
-        margin: 0 auto;
-    }
+.hero-booking-note,
+.contact-card-note,
+.location-cta-note {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
 
-    .countdown-unit {
-        padding: 0.75rem;
-        min-width: unset;
-    }
+.hero-booking-note {
+    color: var(--white);
+}
 
-    .countdown-days,
-    .countdown-hours,
-    .countdown-mins,
-    .countdown-secs {
-        font-size: 2rem;
-    }
+.contact-card-note,
+.location-cta-note {
+    color: var(--text-medium);
+}
+
+.hero-booking-note a,
+.contact-card-note a,
+.location-cta-note a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
 }
 
 .about-story { max-width: 700px; margin: 0 auto; text-align: center; padding: 2rem 0; }
@@ -2165,6 +2172,7 @@ body.menu-open {
 .contact-row-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
 .contact-row-details .detail-item { background: var(--off-white); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--border-gray); }
 .contact-row-details .detail-item h4 { color: var(--primary-brown); margin-bottom: 0.5rem; font-size: 1rem; }
+.contact-row .cta-buttons { justify-content: flex-start; }
 .contact-row .media-split-image {
     display: block;
     margin: 0;
@@ -2218,6 +2226,37 @@ body.menu-open {
 .media-split-image { display: grid; gap: 1rem; margin: 0; }
 .media-split-image figure { margin: 0; }
 .media-split-image img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+.narrow-content {
+    max-width: 860px;
+}
+
+.policy-page {
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid var(--border-gray);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-light);
+}
+
+.policy-page h2,
+.policy-page h3,
+.policy-page h4 {
+    color: var(--primary-brown);
+}
+
+.policy-page ul,
+.policy-page ol {
+    margin: 0 0 1rem 1.5rem;
+}
+
+.policy-admin-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    background: var(--warm-beige);
+    border: 1px solid var(--soft-taupe);
+}
 
 .office-preview { background: var(--off-white); }
 .office-preview .container { max-width: 1280px; }

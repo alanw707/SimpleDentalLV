@@ -6,6 +6,8 @@
  */
 
 get_header();
+
+$booking_url = simple_dental_get_booking_url();
 ?>
 
 <main id="primary" class="site-main">
@@ -104,7 +106,7 @@ get_header();
                                 <p><?php echo __t("Look for us right off Jones Blvd, and enjoy stress-free parking and easy access — because your visit should start simple before you even step inside."); ?></p>
                             </div>
                             
-                            <p><?php echo sprintf(__t("We're excited to announce that Simple Dental will be opening in %s. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."), simple_dental_get_opening_date_display()); ?></p>
+                            <p><?php echo sprintf(__t("Simple Dental's opening date is %s. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."), simple_dental_get_opening_date_display()); ?></p>
                             
                             <div class="opening-features">
                                 <div class="feature-list">
@@ -130,8 +132,9 @@ get_header();
                         
                         <div class="location-cta">
                             <h4><?php echo __t('Ready to Experience Simple Dental?'); ?></h4>
-                            <p><?php echo sprintf(__t('Call us to learn more about our approach or to get on our list for %s.'), simple_dental_get_opening_date_display()); ?></p>
-                            <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                            <p><?php echo __t('Book online anytime, or call us if you have questions.'); ?></p>
+                            <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
+                            <p class="location-cta-note"><?php echo wp_kses_post(sprintf(__t('Prefer to call? %s'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
                         </div>
                     </div>
                 </div>

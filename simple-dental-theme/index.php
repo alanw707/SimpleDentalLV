@@ -8,6 +8,8 @@
  */
 
 get_header();
+
+$booking_url = simple_dental_get_booking_url();
 ?>
 
 <main id="primary" class="site-main">
@@ -94,10 +96,10 @@ get_header();
                     </div>
                     
                     <div class="contact-card">
-                        <h4><?php echo __t('Schedule Appointment'); ?></h4>
-                        <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
-                        <p><?php echo __t('Call to schedule your visit'); ?></p>
-                        <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-primary"><?php echo __t('Contact'); ?></a>
+                        <h4><?php echo __t('Book Online'); ?></h4>
+                        <p><strong><a href="<?php echo esc_url($booking_url); ?>" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a></strong></p>
+                        <p><?php echo __t('Choose a convenient appointment time online.'); ?></p>
+                        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,11 @@
  */
 
 get_header();
+
+$booking_url = simple_dental_get_booking_url();
+$hero_opening_label = simple_dental_is_open()
+    ? __t('Now Open')
+    : sprintf(__t('Opening %s'), simple_dental_get_opening_date_display());
 ?>
 
 <main id="primary" class="site-main">
@@ -17,21 +22,13 @@ get_header();
                 <h1><?php echo __t('Straightforward Dentistry from one Experienced Doctor.'); ?></h1>
                 <p class="subtitle"><?php echo __t('No pressure. No upsell. Just honest, transparent dental care with modern technology and fair pricing.'); ?></p>
 
-                <!-- Countdown Timer -->
-                <div class="countdown-wrapper">
-                    <p class="countdown-label"><?php echo __t('Opening Soon'); ?></p>
-                    <div class="countdown-timer" data-grace-message="<?php echo esc_attr(__t('Opening Very Soon!')); ?>">
-                        <div class="countdown-unit"><span class="countdown-days">--</span><span class="countdown-unit-label"><?php echo __t('Days'); ?></span></div>
-                        <div class="countdown-unit"><span class="countdown-hours">--</span><span class="countdown-unit-label"><?php echo __t('Hours'); ?></span></div>
-                        <div class="countdown-unit"><span class="countdown-mins">--</span><span class="countdown-unit-label"><?php echo __t('Mins'); ?></span></div>
-                        <div class="countdown-unit"><span class="countdown-secs">--</span><span class="countdown-unit-label"><?php echo __t('Secs'); ?></span></div>
-                    </div>
-                </div>
+                <p class="opening-soon-label"><?php echo esc_html($hero_opening_label); ?></p>
 
                 <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary"><?php echo __t('View Our Services'); ?></a>
-                    <a href="tel:7023024787" class="btn btn-secondary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                    <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
+                    <a href="#services" class="btn btn-secondary"><?php echo __t('View Our Services'); ?></a>
                 </div>
+                <p class="hero-booking-note"><?php echo wp_kses_post(sprintf(__t('Prefer to call? %s'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
             </div>
         </div>
     </section>
@@ -157,10 +154,11 @@ get_header();
                 </div>
                 
                 <div class="contact-card">
-                    <h4><?php echo __t('Schedule Appointment'); ?></h4>
-                    <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
-                    <p><?php echo __t('Call to schedule your visit'); ?></p>
-                    <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-primary"><?php echo __t('Contact Us'); ?></a>
+                    <h4><?php echo __t('Book Online'); ?></h4>
+                    <p><strong><a href="<?php echo esc_url($booking_url); ?>" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a></strong></p>
+                    <p><?php echo __t('Choose a convenient appointment time online.'); ?></p>
+                    <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
+                    <p class="contact-card-note"><?php echo wp_kses_post(sprintf(__t('Prefer to call? %s'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
                 </div>
             </div>
         </div>
