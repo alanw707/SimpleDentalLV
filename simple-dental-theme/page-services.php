@@ -28,9 +28,20 @@ $booking_url = simple_dental_get_booking_url();
         <section class="services-section section">
             <div class="container">
                 
-                <!-- New Patient Special Highlight -->
-                <div style="text-align: center; margin-bottom: 3rem;">
-                    <?php echo do_shortcode('[new_patient_special]'); ?>
+                <!-- Opening Promotion -->
+                <div class="opening-promotion-section">
+                    <h2 class="opening-promotion-title"><?php echo esc_html(__t('Opening Promotion')); ?></h2>
+                    <div class="opening-promotion-grid">
+                        <div class="promo-card">
+                            <div class="promo-name"><?php echo esc_html(__t('New Patient Exam and X-rays')); ?></div>
+                            <div class="promo-price">$59</div>
+                        </div>
+                        <div class="promo-card">
+                            <div class="promo-name"><?php echo esc_html(__t('New Patient Special')); ?></div>
+                            <div class="promo-price">$199</div>
+                        </div>
+                    </div>
+                    <p class="opening-promotion-note"><?php echo esc_html(__t('Limited-time opening offers for new patients. Call or book online to schedule.')); ?></p>
                 </div>
 
                 <!-- Same-Day Crown Technology Section -->
