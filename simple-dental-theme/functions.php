@@ -515,26 +515,28 @@ function new_patient_special_display($atts) {
     ob_start();
     ?>
     <div class="new-patient-special">
-        <div class="special-badge"><?php echo __t('New Patient Special'); ?></div>
-        <h3><?php echo __t('Opening Promotions'); ?></h3>
+        <h3><?php echo __t('Opening Promotion'); ?></h3>
         <div class="special-offers">
-            <article class="special-offer-card">
-                <h4><?php echo __t('New Patient Exam and X-rays'); ?></h4>
+            <article class="special-offer-card special-offer-card--starter">
+                <h4><?php echo __t('New Patient Exam + X-rays'); ?></h4>
                 <div class="special-price">$59</div>
-                <p><?php echo __t('Comprehensive exam and digital X-rays for new patients.'); ?></p>
+                <p><?php echo __t('A simple first-visit exam with digital X-rays for new patients.'); ?></p>
             </article>
-            <article class="special-offer-card">
+            <article class="special-offer-card special-offer-card--featured">
                 <h4><?php echo __t('New Patient Special'); ?></h4>
                 <div class="special-price">$199</div>
-                <p><?php echo __t('Comprehensive exam, X-rays, regular cleaning, and complimentary digital 3D scan.'); ?></p>
+                <ul class="special-offer-list">
+                    <li><?php echo __t('Comprehensive exam'); ?></li>
+                    <li><?php echo __t('Digital X-rays'); ?></li>
+                    <li><?php echo __t('Regular cleaning'); ?></li>
+                    <li><?php echo __t('Complimentary digital 3D scan'); ?></li>
+                </ul>
             </article>
         </div>
         <div class="special-features">
-            <span class="feature">✓ <?php echo __t('New patient exam and X-rays available now'); ?></span>
-            <span class="feature">✓ <?php echo __t('New Patient Special includes 3D scan complement'); ?></span>
-            <span class="feature">✓ <?php echo __t('Book online or call for availability'); ?></span>
+            <span class="feature">✓ <?php echo __t('Call or book online to schedule'); ?></span>
         </div>
-        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-coral" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Your Visit'); ?></a>
+        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-coral" target="_blank" rel="noopener noreferrer"><?php echo __t('Book New Patient Visit'); ?></a>
     </div>
     <?php
     return ob_get_clean();
