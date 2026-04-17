@@ -40,14 +40,49 @@ class SimpleDentalTranslator {
 
         // Check browser language (first visit only - set cookie to remember)
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $browser_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-            if (array_key_exists($browser_lang, $this->supported_languages)) {
+            $browser_lang = $this->match_browser_language($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            if ($browser_lang) {
                 $this->set_language($browser_lang);
                 return $browser_lang;
             }
         }
 
         return $this->default_language;
+    }
+
+    private function match_browser_language($accept_language) {
+        $languages = array_map('trim', explode(',', strtolower($accept_language)));
+
+        foreach ($languages as $language) {
+            $language = trim(explode(';', $language)[0]);
+            if ($language === '') {
+                continue;
+            }
+
+            if ($language === 'es' || strpos($language, 'es-') === 0) {
+                return 'es';
+            }
+
+            if (
+                $language === 'zh-tw' ||
+                $language === 'zh-hk' ||
+                $language === 'zh-mo' ||
+                strpos($language, 'zh-hant') === 0
+            ) {
+                return 'zh-TW';
+            }
+
+            if (
+                $language === 'zh-cn' ||
+                $language === 'zh-sg' ||
+                strpos($language, 'zh-hans') === 0 ||
+                $language === 'zh'
+            ) {
+                return 'zh-CN';
+            }
+        }
+
+        return '';
     }
 
     private function load_translations() {
@@ -73,6 +108,11 @@ class SimpleDentalTranslator {
             if (isset($this->translations[$key])) {
                 return $this->translations[$key];
             }
+
+            if (isset($this->translations[$text])) {
+                return $this->translations[$text];
+            }
+
             return $text;
         }
 
