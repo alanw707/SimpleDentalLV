@@ -444,11 +444,80 @@ a:hover {
     margin-right: auto;
 }
 
+.special-intro {
+    max-width: 700px !important;
+    margin: 0.5rem auto 1.5rem !important;
+}
+
+.special-offers {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 1rem;
+    margin: 1.25rem 0;
+    align-items: stretch;
+}
+
+.special-offer-card {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 0.85rem;
+    padding: 1.1rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.special-offer-card--featured {
+    background: rgba(255, 255, 255, 0.24);
+    border: 2px solid rgba(255, 255, 255, 0.42);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.special-offer-card h4 {
+    margin: 0 0 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.special-offer-card p {
+    max-width: none;
+    margin: 0.75rem 0 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.94);
+}
+
+.special-offer-list {
+    list-style: none;
+    margin: 0.35rem 0 0;
+    padding: 0;
+}
+
+.special-offer-list li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin: 0.45rem 0;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+.special-offer-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+}
+
 .special-features {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    margin: 1.5rem 0 2rem 0;
+    gap: 1rem;
+    margin: 1.2rem 0 1.75rem 0;
     flex-wrap: wrap;
 }
 
@@ -1932,6 +2001,25 @@ body.menu-open {
         flex-direction: column;
         gap: 0.75rem;
         text-align: center;
+    }
+
+    .special-offers {
+        grid-template-columns: 1fr;
+    }
+
+    .special-offer-card,
+    .special-offer-card--featured {
+        text-align: center;
+        transform: none;
+    }
+
+    .special-offer-list li {
+        padding-left: 0;
+    }
+
+    .special-offer-list li::before {
+        position: static;
+        margin-right: 0.35rem;
     }
     
     .new-patient-special h3 {

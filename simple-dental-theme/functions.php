@@ -432,8 +432,8 @@ function get_dental_services_data() {
         'preventive' => array(
             'title' => 'Preventive & Diagnostic',
             'services' => array(
-                array('name' => 'New Patient Exam + X-rays', 'price' => '$149', 'description' => 'Comprehensive initial examination with digital X-rays'),
-                array('name' => 'Routine Exam + 4 X-rays', 'price' => '$149', 'description' => 'Regular checkup with limited X-ray series'),
+                array('name' => 'New Patient Exam and X-rays', 'price' => '$59', 'description' => 'Comprehensive initial examination with digital X-rays'),
+                
                 array('name' => 'Adult Cleaning', 'price' => '$150', 'description' => 'Professional teeth cleaning and polishing'),
                 array('name' => 'Deep Cleaning (per quadrant)', 'price' => '$225', 'description' => 'Deep scaling and root planing treatment'),
                 array('name' => 'Fluoride Treatment', 'price' => '$39', 'description' => 'Professional fluoride application for cavity prevention'),
@@ -485,7 +485,7 @@ function get_dental_services_data() {
  */
 function featured_services_display($atts) {
     $featured = array(
-        array('name' => 'New Patient Exam + X-rays', 'price' => '$149', 'description' => 'Comprehensive initial examination with digital X-rays'),
+        array('name' => 'Patient Exam and X-rays', 'price' => '$99', 'description' => 'Comprehensive examination with digital X-rays'),
         array('name' => 'Adult Cleaning', 'price' => '$150', 'description' => 'Professional teeth cleaning and polishing'),
         array('name' => 'Tooth-Colored Filling', 'price' => '$180-250', 'description' => 'Composite fillings depending on surfaces treated'),
         array('name' => 'Same-Day Crown (Ceramic)', 'price' => '$899', 'description' => 'Complete crown restoration in one visit'),
@@ -515,16 +515,28 @@ function new_patient_special_display($atts) {
     ob_start();
     ?>
     <div class="new-patient-special">
-        <div class="special-badge"><?php echo __t('New Patient Special'); ?></div>
-        <h3><?php echo __t('Complete Checkup & Cleaning'); ?></h3>
-        <div class="special-price">$199</div>
-        <p><?php echo __t('Comprehensive exam, professional cleaning, and peace of mind for new patients'); ?></p>
-        <div class="special-features">
-            <span class="feature">✓ <?php echo __t('Full Examination'); ?></span>
-            <span class="feature">✓ <?php echo __t('Professional Cleaning'); ?></span>
-            <span class="feature">✓ <?php echo __t('X-rays if needed'); ?></span>
+        <h3><?php echo __t('Opening Promotion'); ?></h3>
+        <div class="special-offers">
+            <article class="special-offer-card special-offer-card--starter">
+                <h4><?php echo __t('New Patient Exam + X-rays'); ?></h4>
+                <div class="special-price">$59</div>
+                <p><?php echo __t('A simple first-visit exam with digital X-rays for new patients.'); ?></p>
+            </article>
+            <article class="special-offer-card special-offer-card--featured">
+                <h4><?php echo __t('New Patient Special'); ?></h4>
+                <div class="special-price">$199</div>
+                <ul class="special-offer-list">
+                    <li><?php echo __t('Comprehensive exam'); ?></li>
+                    <li><?php echo __t('Digital X-rays'); ?></li>
+                    <li><?php echo __t('Regular cleaning'); ?></li>
+                    <li><?php echo __t('Complimentary digital 3D scan'); ?></li>
+                </ul>
+            </article>
         </div>
-        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-coral" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Your Visit'); ?></a>
+        <div class="special-features">
+            <span class="feature">✓ <?php echo __t('Call or book online to schedule'); ?></span>
+        </div>
+        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-coral" target="_blank" rel="noopener noreferrer"><?php echo __t('Book New Patient Visit'); ?></a>
     </div>
     <?php
     return ob_get_clean();

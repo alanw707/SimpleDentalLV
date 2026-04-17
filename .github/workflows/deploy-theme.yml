@@ -1,0 +1,69 @@
+name: Deploy WordPress theme
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'simple-dental-theme/**'
+      - 'deploy-robust.py'
+      - '.github/workflows/deploy-theme.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: production-theme-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Lint and deploy theme
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate required deploy secrets
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_PATH: ${{ secrets.FTP_REMOTE_PATH }}
+        run: |
+          missing=0
+          for var in FTP_HOST FTP_USERNAME FTP_PASSWORD FTP_REMOTE_PATH; do
+            if [ -z "${!var}" ]; then
+              echo "::error title=Missing secret::$var is not set"
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Lint PHP files
+        run: find simple-dental-theme -name "*.php" -print0 | xargs -0 -n1 -r php -l
+
+      - name: Deploy theme to production
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_PATH: ${{ secrets.FTP_REMOTE_PATH }}
+        run: python3 deploy-robust.py
