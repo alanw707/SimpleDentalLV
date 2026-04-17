@@ -485,7 +485,7 @@ function get_dental_services_data() {
  */
 function featured_services_display($atts) {
     $featured = array(
-        array('name' => 'New Patient Exam and X-rays', 'price' => '$59', 'description' => 'Comprehensive initial examination with digital X-rays'),
+        array('name' => 'Patient Exam and X-rays', 'price' => '$99', 'description' => 'Comprehensive examination with digital X-rays'),
         array('name' => 'Adult Cleaning', 'price' => '$150', 'description' => 'Professional teeth cleaning and polishing'),
         array('name' => 'Tooth-Colored Filling', 'price' => '$180-250', 'description' => 'Composite fillings depending on surfaces treated'),
         array('name' => 'Same-Day Crown (Ceramic)', 'price' => '$899', 'description' => 'Complete crown restoration in one visit'),
