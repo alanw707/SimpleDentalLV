@@ -53,7 +53,7 @@ $booking_url = simple_dental_get_booking_url();
                                     </ul>
                                 </div>
                                 <figure class="media-split-image">
-                                    <?php echo simple_dental_media_image('services-tech-operatory.jpg', __t('Operatory treatment chair at Simple Dental')); ?>
+                                    <?php echo simple_dental_media_image('services-tech-operatory.jpg', __t('Operatory treatment chair at Simple Dental', 'key:media.services.operatory.alt')); ?>
                                 </figure>
                             </div>
                             
@@ -69,7 +69,7 @@ $booking_url = simple_dental_get_booking_url();
                                     </ul>
                                 </div>
                                 <figure class="media-split-image">
-                                    <?php echo simple_dental_media_image('services-tech-lab-milling.jpg', __t('Same-day crown lab milling equipment')); ?>
+                                    <?php echo simple_dental_media_image('services-tech-lab-milling.jpg', __t('Same-day crown lab milling equipment', 'key:media.services.fastmill.alt')); ?>
                                 </figure>
                             </div>
                         </div>
