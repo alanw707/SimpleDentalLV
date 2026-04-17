@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Robust FTP deployment with reconnection handling
+Robust FTP deployment with reconnection handling.
+
+Supports local `deployconfig.py` usage and `FTP_*` environment variables for CI.
 """
 
 import ftplib
@@ -9,19 +11,53 @@ import sys
 import time
 from pathlib import Path
 
-# Import FTP configuration from external file
-try:
-    from deployconfig import FTP_CONFIG
-except ImportError:
-    print("❌ Error: deployconfig.py not found!")
-    print("Create deployconfig.py with your FTP credentials:")
-    print("FTP_CONFIG = {")
-    print("    'host': 'your-host.com',")
-    print("    'username': 'your-username',")
-    print("    'password': 'your-password',")
-    print("    'remote_path': '/public_html/wp-content/themes/'")
-    print("}")
-    sys.exit(1)
+REQUIRED_FTP_KEYS = ('host', 'username', 'password', 'remote_path')
+
+
+def load_ftp_config():
+    """Load FTP config from environment variables or local deployconfig.py."""
+    env_config = {
+        'host': os.getenv('FTP_HOST'),
+        'username': os.getenv('FTP_USERNAME') or os.getenv('FTP_USER'),
+        'password': os.getenv('FTP_PASSWORD'),
+        'remote_path': os.getenv('FTP_REMOTE_PATH'),
+    }
+
+    file_config = {}
+    try:
+        from deployconfig import FTP_CONFIG as file_ftp_config
+        if isinstance(file_ftp_config, dict):
+            file_config = file_ftp_config.copy()
+    except ImportError:
+        pass
+
+    ftp_config = file_config.copy()
+    for key, value in env_config.items():
+        if value:
+            ftp_config[key] = value
+
+    missing_keys = [key for key in REQUIRED_FTP_KEYS if not ftp_config.get(key)]
+    if missing_keys:
+        print('❌ Error: FTP deployment configuration is incomplete!')
+        print('Set these environment variables or create deployconfig.py:')
+        print('  FTP_HOST')
+        print('  FTP_USERNAME')
+        print('  FTP_PASSWORD')
+        print('  FTP_REMOTE_PATH')
+        print(f"Missing: {', '.join(missing_keys)}")
+        print('\nExample deployconfig.py:')
+        print('FTP_CONFIG = {')
+        print("    'host': 'your-host.com',")
+        print("    'username': 'your-username',")
+        print("    'password': 'your-password',")
+        print("    'remote_path': '/public_html/wp-content/themes/'")
+        print('}')
+        sys.exit(1)
+
+    return ftp_config
+
+
+FTP_CONFIG = load_ftp_config()
 
 def connect_ftp():
     """Create FTP connection with retry"""
