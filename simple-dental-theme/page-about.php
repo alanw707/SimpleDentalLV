@@ -132,9 +132,9 @@ $booking_url = simple_dental_get_booking_url();
                         
                         <div class="location-cta">
                             <h4><?php echo __t('Ready to Experience Simple Dental?'); ?></h4>
-                            <p><?php echo __t('Book online anytime, or call us if you have questions.'); ?></p>
-                            <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
-                            <p class="location-cta-note"><?php echo wp_kses_post(sprintf(__t('Prefer to call? %s'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                            <p><?php echo __t('Call us if you have questions, or book online anytime.'); ?></p>
+                            <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                            <p class="location-cta-note"><?php echo wp_kses_post(sprintf(__t('Prefer online booking? %s'), '<a href="' . esc_url($booking_url) . '">' . esc_html(__t('Book online')) . '</a>')); ?></p>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,9 @@ The Simple Dental website is a custom WordPress theme for a new dental practice 
 - [x] **20+ Dental Services**: Organized into 6 professional categories
 - [x] **Content Consolidation**: Eliminated 40+ instances of duplicate content
 - [x] **SEO Optimization**: Structured content hierarchy and meta optimization
+- [x] **Local SEO Trust Signals**: Verified Google Maps embed, NAP consistency, and Dentist schema map/geo data
 - [x] **Same-Day Crown Technology**: Comprehensive technology showcase
+- [x] **Same-Day Crowns SEO Page**: Multilingual high-intent landing page at `/same-day-crowns-las-vegas/`
 
 ### 📧 Advanced Contact System
 - [x] **AJAX Contact Form**: No page refresh submission
@@ -83,7 +85,7 @@ The Simple Dental website is a custom WordPress theme for a new dental practice 
 ### Pre-Launch Requirements
 - [ ] **Doctor Biography**: Waiting for client-provided content for About page
 - [ ] **Final Email Configuration**: Set up actual business email addresses
-- [ ] **Google Maps**: Update embed with verified practice location
+- [x] **Google Maps**: Updated embed with verified Simple Dental Google Business Profile location
 - [ ] **reCAPTCHA Keys**: Configure with client's Google account
 - [ ] **Final Content Review**: Client approval of all content
 
@@ -96,7 +98,7 @@ The Simple Dental website is a custom WordPress theme for a new dental practice 
 ## 🐛 Known Issues
 
 ### Current Limitations
-- **Google Maps**: Currently using placeholder embed URL
+- **Google Maps**: Verified Google Business Profile embed is live on Contact page
 - **About Page**: Doctor biography section shows placeholder content
 - **Email Testing**: Contact form tested with Brevo but needs final business email setup
 
@@ -129,30 +131,34 @@ The Simple Dental website is a custom WordPress theme for a new dental practice 
 - **JavaScript**: Minimal, optimized code for essential functionality
 
 ### SEO Status
-- **Local Business Schema**: Implemented
-- **Meta Tags**: Optimized for dental practice keywords
+- **Rank Math Cleanup**: Complete — one title, description, canonical, robots tag, OG/Twitter set, and JSON-LD script per verified production page
+- **Local Business Schema**: Consolidated through Rank Math JSON-LD filters
+- **Meta Tags**: Optimized for Las Vegas dentist, services, contact, about, and FAQ pages
+- **FAQ Page**: Existing `/faq/` page retained as canonical global FAQ hub, with internal service/contact links, phone-first CTA, and matching FAQ schema
+- **Locale Routing**: Direct locale routes implemented (`/es/`, `/zh-cn/`, `/zh-tw/`); legacy `?lang=` URLs 301 redirect to direct routes
+- **Locale Sitemap**: `locale-sitemap.xml` deployed, added to Rank Math sitemap index and robots.txt, with 15 direct locale URLs
 - **Content Structure**: Proper heading hierarchy
 - **Mobile-Friendly**: Google Mobile-Friendly test compliant
 
 ## 🔄 Next Steps
 
 ### Immediate Actions (This Week)
-1. **Content Review**: Final review of all website content with client
-2. **Email Setup**: Configure actual business email addresses in Customizer
-3. **reCAPTCHA Setup**: Set up client's Google reCAPTCHA account
-4. **Maps Integration**: Update Google Maps embed with verified location
+1. **Maps Integration**: Update Google Maps embed with verified location
+2. **Direct Locale Monitoring**: Watch for crawl/indexing issues from legacy `?lang=` redirects and hreflang processing
+3. **Search Console Monitoring**: Check sitemap processing, indexed locale URLs, and hreflang status after recrawl
+4. **Next Service SEO Page**: Build Teeth Cleaning Las Vegas page
 
 ### Short-Term (Next Month)
-1. **Doctor Biography**: Add client-provided biography content
-2. **Testing**: Comprehensive testing of all functionality
-3. **Training**: Provide client training on WordPress admin usage
-4. **Go-Live**: Final launch preparation and announcement
+1. **Same-Day Crowns SEO Page**: Build first priority service page with FAQ/schema/phone-first CTA
+2. **Teeth Cleaning SEO Page**: Build second priority service page
+3. **Root Canal SEO Page**: Build third priority service page
+4. **Analytics**: Track phone clicks, online booking clicks, and contact form submissions
 
 ### Long-Term (3-6 Months)
-1. **Content Expansion**: Blog posts, patient testimonials
-2. **Feature Enhancement**: Online booking, patient portal
-3. **Marketing Integration**: SEO optimization, local listings
-4. **Analytics**: Set up Google Analytics and conversion tracking
+1. **Google Business Profile Optimization**: Categories, services, photos, appointment URL, and UTM tracking
+2. **Content Expansion**: Patient testimonials and focused service/support content
+3. **Marketing Integration**: Local listings and citation consistency
+4. **SEO Monitoring**: Search Console query tracking, indexing checks, and crawl audits
 
 ## 📞 Support & Maintenance
 

@@ -97,9 +97,9 @@ $booking_url = simple_dental_get_booking_url();
                     
                     <div class="contact-card">
                         <h4><?php echo __t('Book Online'); ?></h4>
-                        <p><strong><a href="<?php echo esc_url($booking_url); ?>" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a></strong></p>
+                        <p><strong><a href="<?php echo esc_url($booking_url); ?>"><?php echo esc_html(home_url(SIMPLE_DENTAL_BOOKING_PATH)); ?></a></strong></p>
                         <p><?php echo __t('Choose a convenient appointment time online.'); ?></p>
-                        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
+                        <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary"><?php echo __t('Book Online'); ?></a>
                     </div>
                 </div>
             </div>
