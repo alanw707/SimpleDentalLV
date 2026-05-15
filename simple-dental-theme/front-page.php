@@ -25,10 +25,10 @@ $hero_opening_label = simple_dental_is_open()
                 <p class="opening-soon-label"><?php echo esc_html($hero_opening_label); ?></p>
 
                 <div class="hero-buttons">
-                    <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
-                    <a href="#services" class="btn btn-secondary"><?php echo __t('View Our Services'); ?></a>
+                    <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                    <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-secondary"><?php echo __t('Book Online'); ?></a>
                 </div>
-                <p class="hero-booking-note"><?php echo wp_kses_post(sprintf(__t('Prefer to call? %s'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                <p class="hero-booking-note"><a href="#services"><?php echo __t('View Our Services'); ?></a></p>
             </div>
         </div>
     </section>
@@ -129,6 +129,7 @@ $hero_opening_label = simple_dental_is_open()
             <div style="text-align: center; margin-top: 40px;">
                 <p><strong><?php echo __t('No surprises. No hidden fees.'); ?></strong> <?php echo __t('Patients know upfront what to expect.'); ?></p>
                 <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/services/'))); ?>" class="btn btn-primary"><?php echo __t('View All Services & Pricing'); ?></a>
+                <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/same-day-crowns-las-vegas/'))); ?>" class="btn btn-secondary"><?php echo __t('Learn About Same-Day Crowns', 'key:crowns.link.learn'); ?></a>
             </div>
         </div>
     </section>
@@ -154,11 +155,11 @@ $hero_opening_label = simple_dental_is_open()
                 </div>
                 
                 <div class="contact-card">
-                    <h4><?php echo __t('Book Online'); ?></h4>
-                    <p><strong><a href="<?php echo esc_url($booking_url); ?>" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a></strong></p>
-                    <p><?php echo __t('Choose a convenient appointment time online.'); ?></p>
-                    <a href="<?php echo esc_url($booking_url); ?>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?php echo __t('Book Online'); ?></a>
-                    <p class="contact-card-note"><?php echo wp_kses_post(sprintf(__t('Prefer to call? %s'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                    <h4><?php echo __t('Call or Book Online'); ?></h4>
+                    <p><strong><a href="tel:7023024787">(702) 302-4787</a></strong></p>
+                    <p><?php echo __t('Call us for help choosing the right appointment time.'); ?></p>
+                    <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call (702) 302-4787'); ?></a>
+                    <p class="contact-card-note"><?php echo wp_kses_post(sprintf(__t('Prefer online booking? %s'), '<a href="' . esc_url($booking_url) . '">' . esc_html(__t('Book online')) . '</a>')); ?></p>
                 </div>
             </div>
         </div>

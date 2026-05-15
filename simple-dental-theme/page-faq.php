@@ -46,13 +46,13 @@ $booking_url = simple_dental_get_booking_url();
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('Why is Simple Dental different from other Las Vegas dentists?', 'key:faq.philosophy.q.different')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('Most dental offices today are owned by large corporations where you see a different doctor every time and feel pressured to buy services you don\'t need. Simple Dental is different. You will see the same experienced dentist every time. We offer a "No Pressure, No Upsell" guarantee. We only recommend what you truly need for a healthy smile.', 'key:faq.philosophy.a.different')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('Most dental offices today are owned by large corporations where you see a different doctor every time and feel pressured to buy services you don\'t need. Simple Dental is different. You will see the same experienced dentist every time. We offer a "No Pressure, No Upsell" guarantee. We only recommend what you truly need for a healthy smile. See our %s for the treatments and prices patients ask about most.', 'key:faq.philosophy.a.different'), '<a href="' . esc_url(simple_dental_with_lang(home_url('/services/'))) . '">' . esc_html(__t('services and pricing')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('Do I have to worry about hidden fees or "bait and switch" pricing?', 'key:faq.philosophy.q.hidden_fees')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('No. Our name is Simple Dental because we keep pricing simple. We provide upfront, flat-rate pricing for our most common services, like our $199 New Patient Special and our $899 Same-Day Crowns. You will know exactly what you are paying before we ever start treatment.', 'key:faq.philosophy.a.hidden_fees')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('No. Our name is Simple Dental because we keep pricing simple. We provide upfront, flat-rate pricing for our most common services, like our $199 New Patient Special and our $899 Same-Day Crowns. You will know exactly what you are paying before we ever start treatment. Review our current %s before your visit.', 'key:faq.philosophy.a.hidden_fees'), '<a href="' . esc_url(simple_dental_with_lang(home_url('/services/'))) . '">' . esc_html(__t('service menu')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -62,19 +62,19 @@ $booking_url = simple_dental_get_booking_url();
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('How can Simple Dental offer a permanent crown in just one visit?', 'key:faq.crowns.q.same_day')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('We use advanced digital technology to design and mill your ceramic crown right here in our Las Vegas office. This means you don\'t have to wear a temporary crown for two weeks or come back for a second appointment. You walk in with a problem and walk out with a permanent, high-quality crown in about two hours.', 'key:faq.crowns.a.same_day')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('We use advanced digital technology to design and mill your ceramic crown right here in our Las Vegas office. This means you don\'t have to wear a temporary crown for two weeks or come back for a second appointment. You walk in with a problem and walk out with a permanent, high-quality crown in about two hours. Learn more on our %s.', 'key:faq.crowns.a.same_day'), '<a href="' . esc_url(simple_dental_with_lang(home_url('/same-day-crowns-las-vegas/'))) . '">' . esc_html(__t('same-day crowns page', 'key:crowns.link.same_day_page')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('How much does a dental crown cost at Simple Dental?', 'key:faq.crowns.q.cost')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('We offer high-quality, permanent ceramic crowns for $899. This is an all-inclusive, fair price designed for patients who want quality work without the "strip mall" markup.', 'key:faq.crowns.a.cost')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('We offer high-quality, permanent ceramic crowns for $899. This is an all-inclusive, fair price designed for patients who want quality work without the "strip mall" markup. See the full %s for related fees if a buildup or other treatment is needed.', 'key:faq.crowns.a.cost'), '<a href="' . esc_url(simple_dental_with_lang(home_url('/services/'))) . '">' . esc_html(__t('transparent pricing list')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('What if I need a crown but I am worried about the cost?', 'key:faq.crowns.q.cost_concern')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('We specialize in helping patients get the care they need without breaking the bank. Because we are an efficient, doctor-owned practice, we keep our overhead low and pass those savings to you. We also offer flexible financing through CareCredit to make your treatment affordable.', 'key:faq.crowns.a.cost_concern')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('We specialize in helping patients get the care they need without breaking the bank. Because we are an efficient, doctor-owned practice, we keep our overhead low and pass those savings to you. We also offer flexible financing through CareCredit to make your treatment affordable. If cost is holding you back, %s and we can talk through options.', 'key:faq.crowns.a.cost_concern'), '<a href="tel:7023024787">' . esc_html(__t('call us at (702) 302-4787')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +84,13 @@ $booking_url = simple_dental_get_booking_url();
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('Do you accept patients without dental insurance?', 'key:faq.insurance.q.no_insurance')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('Yes! A huge portion of our patients are "cash patients" or self-pay. We have designed our pricing to be affordable for the everyday person who doesn\'t have a big corporate insurance plan. Our $199 New Patient Special is a great way to get started.', 'key:faq.insurance.a.no_insurance')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('Yes! A huge portion of our patients are "cash patients" or self-pay. We have designed our pricing to be affordable for the everyday person who doesn\'t have a big corporate insurance plan. Our $199 New Patient Special is a great way to get started. You can compare common costs on our %s.', 'key:faq.insurance.a.no_insurance'), '<a href="' . esc_url(simple_dental_with_lang(home_url('/services/'))) . '">' . esc_html(__t('services and pricing page')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('Which insurance plans does Simple Dental accept?', 'key:faq.insurance.q.plans')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(sprintf(__t('We work with most major PPO dental insurance plans. We are happy to verify your benefits for you before your appointment so there are no surprises. Please call us at %s with your insurance information, and we\'ll do the legwork for you.', 'key:faq.insurance.a.plans'), '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('We work with most major PPO dental insurance plans. We are happy to verify your benefits for you before your appointment so there are no surprises. Please call us at %s with your insurance information, and we\'ll do the legwork for you. You can also %s if you prefer to send a message.', 'key:faq.insurance.a.plans'), '<a href="tel:7023024787">(702) 302-4787</a>', '<a href="' . esc_url(simple_dental_with_lang(home_url('/contact/'))) . '">' . esc_html(__t('contact us online')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ $booking_url = simple_dental_get_booking_url();
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('Where is your office located and is there parking?', 'key:faq.location.q.address')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(__t('Simple Dental is located at 204 S Jones Blvd, Las Vegas, NV 89107. We chose this location because it is easy to access with plenty of free parking right in back of the office. You won\'t have to deal with parking garages or long walks.', 'key:faq.location.a.address')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('Simple Dental is located at 204 S Jones Blvd, Las Vegas, NV 89107. We chose this location because it is easy to access with plenty of free parking right in back of the office. You won\'t have to deal with parking garages or long walks. Get details on the %s.', 'key:faq.location.a.address'), '<a href="' . esc_url(simple_dental_with_lang(home_url('/contact/'))) . '">' . esc_html(__t('contact page')) . '</a>')); ?></p>
                                     </div>
                                 </div>
                                 <div class="faq-item">
@@ -112,10 +112,21 @@ $booking_url = simple_dental_get_booking_url();
                                 <div class="faq-item">
                                     <h3 class="faq-question"><?php echo esc_html(__t('How do I book an appointment?', 'key:faq.location.q.appointment')); ?></h3>
                                     <div class="faq-answer">
-                                        <p><?php echo wp_kses_post(sprintf(__t('Book online at %s, or call us at %s and our team will help you choose a time that works.', 'key:faq.location.a.appointment'), '<a href="' . esc_url($booking_url) . '" target="_blank" rel="noopener noreferrer">dental4.me/simpledental</a>', '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                                        <p><?php echo wp_kses_post(sprintf(__t('Call us at %s and our team will help you choose a time that works. If you prefer, you can also book online at %s.', 'key:faq.location.a.appointment'), '<a href="tel:7023024787">(702) 302-4787</a>', '<a href="' . esc_url($booking_url) . '">' . esc_html(home_url(SIMPLE_DENTAL_BOOKING_PATH)) . '</a>')); ?></p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-cta faq-final-cta">
+                    <div class="cta-content">
+                        <h2><?php echo esc_html(__t('Still Have Questions?')); ?></h2>
+                        <p><?php echo esc_html(__t('Call Simple Dental and we will help you understand services, pricing, insurance, and appointment options before you schedule.')); ?></p>
+                        <div class="cta-buttons">
+                            <a href="tel:7023024787" class="btn btn-primary"><?php echo esc_html(__t('Call (702) 302-4787')); ?></a>
+                            <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>" class="btn btn-secondary"><?php echo esc_html(__t('Contact Us Online')); ?></a>
                         </div>
                     </div>
                 </div>
