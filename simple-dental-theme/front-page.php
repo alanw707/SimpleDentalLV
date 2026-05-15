@@ -134,6 +134,8 @@ $hero_opening_label = simple_dental_is_open()
         </div>
     </section>
 
+    <?php echo simple_dental_render_google_reviews_home_section(); ?>
+
     <!-- Contact Preview Section -->
     <section class="section">
         <div class="container">

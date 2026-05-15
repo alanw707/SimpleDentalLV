@@ -49,6 +49,7 @@ $footer_status_label = simple_dental_is_open()
                 <div class="footer-bottom-content">
                     <div class="footer-bottom-left">
                         <p>&copy; <?php echo date('Y'); ?> Simple Dental. <?php echo __t('All rights reserved.'); ?></p>
+                        <p class="footer-legal-links"><a href="<?php echo esc_url(simple_dental_with_lang(home_url('/testimonials/'))); ?>"><?php echo __t('Patient Reviews'); ?></a></p>
                         <?php if ($hipaa_policy_url) : ?>
                             <p class="footer-legal-links"><a href="<?php echo esc_url($hipaa_policy_url); ?>"><?php echo __t('HIPAA Policy'); ?></a></p>
                         <?php endif; ?>
