@@ -314,6 +314,10 @@ function simple_dental_get_base_canonical_url() {
         return home_url(simple_dental_get_same_day_crowns_path());
     }
 
+    if (simple_dental_is_testimonials_request()) {
+        return home_url(simple_dental_get_testimonials_path());
+    }
+
     if (is_singular()) {
         return remove_query_arg('lang', get_permalink());
     }
