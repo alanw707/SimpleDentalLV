@@ -92,10 +92,10 @@ $hero_opening_label = simple_dental_is_open()
                 </div>
                 <div class="media-split-image office-preview-grid office-preview-collage">
                     <figure class="office-preview-item">
-                        <?php echo simple_dental_media_image('front-preview-lobby-seating.jpg', __t('Simple Dental lobby seating area')); ?>
+                        <?php echo simple_dental_media_image('front-preview-lobby-seating.jpg', __t('Simple Dental lobby seating area', 'key:media.front_page.lobby_seating.alt')); ?>
                     </figure>
                     <figure class="office-preview-item">
-                        <?php echo simple_dental_media_image('front-preview-dentist-wall.jpg', __t('Simple Dental reception and dentist wall')); ?>
+                        <?php echo simple_dental_media_image('front-preview-dentist-wall.jpg', __t('Simple Dental reception and dentist wall', 'key:media.front_page.reception_wall.alt')); ?>
                     </figure>
                 </div>
             </div>

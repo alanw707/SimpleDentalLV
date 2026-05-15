@@ -462,11 +462,27 @@ function debug_custom_functions() {
 # Track custom modifications
 git add custom-functions.php
 git commit -m "Add custom testimonials functionality"
-git push origin main
+git push origin feat/my-change
+```
 
-# Deploy with existing script
+Open a pull request into `main`. Merging into `main` triggers the deployment workflow.
+
+### Deployment Options
+**Local deployment**
+```bash
 python3 deploy-robust.py
 ```
+
+**GitHub Actions deployment**
+- `.github/workflows/deploy-theme.yml` runs on pushes to `main` (including merged pull requests).
+- The workflow runs PHP lint before deploying.
+- Store FTP credentials in GitHub Secrets or production environment secrets:
+  - `FTP_HOST`
+  - `FTP_USERNAME`
+  - `FTP_PASSWORD`
+  - `FTP_REMOTE_PATH`
+- `FTP_REMOTE_PATH` should point to the parent themes directory, for example `/public_html/wp-content/themes/`.
+- `deploy-robust.py` reads those environment variables automatically in CI, so `deployconfig.py` stays local-only.
 
 ## Support and Maintenance
 

@@ -2,8 +2,10 @@
 """
 Example FTP deployment configuration.
 
-- Copy this file to `deployconfig.py` and fill in real values.
-- `deployconfig.py` is in .gitignore and must never be committed.
+- Copy this file to `deployconfig.py` and fill in real values for local deployments.
+- `deployconfig.py` is in `.gitignore` and must never be committed.
+- In GitHub Actions, use `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`, and
+  `FTP_REMOTE_PATH` secrets instead of committing credentials.
 """
 
 FTP_CONFIG = {
