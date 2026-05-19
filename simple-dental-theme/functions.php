@@ -104,7 +104,7 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  * One-time cache purge after theme content updates.
  */
 function simple_dental_purge_cache_after_reviews_update() {
-    $version = 'reviews-2026-05-14-3';
+    $version = 'sitemap-smile-preview-2026-05-19-1';
     if (get_option('simple_dental_cache_purge_version') === $version) {
         return;
     }
@@ -112,7 +112,9 @@ function simple_dental_purge_cache_after_reviews_update() {
     do_action('litespeed_purge_all');
     do_action('litespeed_purge_url', home_url('/'));
     do_action('litespeed_purge_url', home_url('/locale-sitemap.xml'));
+    do_action('litespeed_purge_url', home_url('/sitemap_index.xml'));
     do_action('litespeed_purge_url', home_url(simple_dental_get_testimonials_path()));
+    do_action('litespeed_purge_url', home_url(simple_dental_get_smile_preview_path()));
 
     update_option('simple_dental_cache_purge_version', $version, false);
 }
