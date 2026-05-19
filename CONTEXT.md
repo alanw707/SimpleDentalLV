@@ -36,6 +36,14 @@ _Avoid_: every service at once, thin service page
 A page focused on one dental service or service category that answers patient search intent for that service.
 _Avoid_: landing page, content page
 
+**Smile Preview Flow**:
+The cosmetic preview interaction where a prospective patient uploads a teeth-visible selfie, selects cosmetic goals, gives consent, and receives a non-clinical visual concept.
+_Avoid_: treatment planning, diagnosis, guaranteed result
+
+**Smile Concept Preview**:
+The non-clinical generated visual output from the **Smile Preview Flow**; it can support conversation before a consultation but does not represent dental advice or a promised outcome.
+_Avoid_: treatment plan, final result, diagnosis
+
 ## Relationships
 
 - **Local Dental Search Visibility** is the primary SEO outcome for the website.
@@ -46,6 +54,7 @@ _Avoid_: landing page, content page
 - **Mentioned Topic SEO** applies to visible page content, including doctor training and service mentions.
 - **Priority Service Pages** are Same-Day Crowns, Teeth Cleaning, and Root Canal; Dental Implants are unresolved pending service confirmation.
 - **Service-Specific Pages** support **Local Dental Search Visibility** by matching specific patient searches.
+- **Smile Preview Flow** can support **Patient Conversion**, but its **Smile Concept Preview** must remain clearly non-clinical.
 
 ## Example dialogue
 
