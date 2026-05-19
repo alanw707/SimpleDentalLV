@@ -18,12 +18,12 @@
 <?php wp_body_open(); ?>
 
 <div id="page" class="site">
-    <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'simple-dental'); ?></a>
+    <a class="skip-link screen-reader-text" href="#primary"><?php echo esc_html(__t('Skip to content')); ?></a>
 
     <header id="masthead" class="site-header">
         <div class="container">
-            <div class="header-content">
-                <div class="site-branding">
+            <div class="header-content header-layout">
+                <div class="site-branding header-brand-region">
                     <?php
                     if (has_custom_logo()) {
                         echo '<div class="custom-logo-wrapper">';
@@ -43,26 +43,26 @@
                     ?>
                 </div><!-- .site-branding -->
 
-                <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Main navigation">
-                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle mobile menu">
+                <nav id="site-navigation" class="main-navigation header-nav-region" role="navigation" aria-label="<?php echo esc_attr(__t('Main navigation')); ?>">
+                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php echo esc_attr(__t('Toggle mobile menu')); ?>">
                         <span class="hamburger" aria-hidden="true"></span>
                         <span class="hamburger" aria-hidden="true"></span>
                         <span class="hamburger" aria-hidden="true"></span>
-                        <span class="screen-reader-text"><?php esc_html_e('Menu', 'simple-dental'); ?></span>
+                        <span class="screen-reader-text"><?php echo esc_html(__t('Menu')); ?></span>
                     </button>
                     
                     <?php
                     // Force translated fallback menu for multilingual support
-                    simple_dental_fallback_menu();
+                    simple_dental_render_header_navigation();
                     ?>
                 </nav><!-- #site-navigation -->
 
                 <!-- Language switcher for multilingual support -->
-                <div class="language-switcher-wrapper">
+                <div class="language-switcher-wrapper header-utility-region">
                     <?php echo simple_dental_language_switcher(); ?>
                 </div>
 
-                <div class="header-cta">
+                <div class="header-cta header-action-region">
                     <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call Us'); ?>: (702) 302-4787</a>
                 </div>
             </div>
@@ -72,24 +72,4 @@
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay"></div>
 
-<?php
-/**
- * Fallback menu if no menu is set
- */
-function simple_dental_fallback_menu() {
-    echo '<ul id="primary-menu" class="primary-menu">';
-    // Language switcher for mobile menu (as first menu item)
-    echo '<li class="language-switcher-item">';
-    echo '  <div class="language-switcher-wrapper">';
-    echo        simple_dental_language_switcher();
-    echo '  </div>';
-    echo '</li>';
-    echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url('/'))) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span class="menu-text">' . __t('Home') . '</span></a></li>';
-    echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url('/about/'))) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="menu-text">' . __t('About') . '</span></a></li>';
-    echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url('/services/'))) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="M1 12h6m6 0h6"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span class="menu-text">' . __t('Services') . '</span></a></li>';
-    echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url('/faq/'))) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1"/></svg><span class="menu-text">' . __t('FAQ') . '</span></a></li>';
-    echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url('/testimonials/'))) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 8h8"/><path d="M8 12h6"/></svg><span class="menu-text">' . __t('Reviews') . '</span></a></li>';
-    echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url('/contact/'))) . '"><svg class="menu-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="menu-text">' . __t('Contact') . '</span></a></li>';
-    echo '</ul>';
-}
-?>
+
