@@ -489,6 +489,7 @@ function simple_dental_get_locale_sitemap_page_paths() {
         '/faq/',
         '/same-day-crowns-las-vegas/',
         '/testimonials/',
+        '/smile-preview/',
     );
 }
 
@@ -497,7 +498,7 @@ function simple_dental_get_locale_sitemap_languages() {
 }
 
 function simple_dental_get_sitemap_languages_for_path($path) {
-    if ($path === simple_dental_get_same_day_crowns_path() || $path === simple_dental_get_testimonials_path()) {
+    if ($path === simple_dental_get_same_day_crowns_path() || $path === simple_dental_get_testimonials_path() || $path === simple_dental_get_smile_preview_path()) {
         return array('en', 'es', 'zh-CN', 'zh-TW');
     }
 
@@ -516,6 +517,7 @@ function simple_dental_get_page_lastmod_for_path($path) {
     $virtual_templates = array(
         simple_dental_get_same_day_crowns_path() => 'page-same-day-crowns.php',
         simple_dental_get_testimonials_path() => 'page-testimonials.php',
+        simple_dental_get_smile_preview_path() => 'page-smile-preview.php',
     );
 
     if (isset($virtual_templates[$path])) {
@@ -544,7 +546,7 @@ function simple_dental_add_locale_sitemap_rewrite_rule() {
 add_action('init', 'simple_dental_add_locale_sitemap_rewrite_rule');
 
 function simple_dental_flush_locale_sitemap_rewrite_rule() {
-    $version = '2026-05-14-1';
+    $version = '2026-05-19-1';
     if (get_option('simple_dental_locale_sitemap_version') === $version) {
         return;
     }
