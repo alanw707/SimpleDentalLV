@@ -35,9 +35,9 @@ get_header();
             <div class="smile-hero__card" aria-label="<?php echo esc_attr($t('How the smile preview works')); ?>">
                 <p class="smile-hero__card-title"><?php echo esc_html($t('How it works')); ?></p>
                 <ol>
+                    <li><strong><?php echo esc_html($t('Share')); ?></strong><span><?php echo esc_html($t('Tell us who you are and what you want to improve.')); ?></span></li>
                     <li><strong><?php echo esc_html($t('Upload')); ?></strong><span><?php echo esc_html($t('Use a front-facing smile selfie with visible teeth and good lighting.')); ?></span></li>
-                    <li><strong><?php echo esc_html($t('Choose')); ?></strong><span><?php echo esc_html($t('Select whitening, veneers, alignment, repair, or a natural cosmetic refresh.')); ?></span></li>
-                    <li><strong><?php echo esc_html($t('Preview')); ?></strong><span><?php echo esc_html($t('Review your concept and request a cosmetic dentistry consultation in Las Vegas.')); ?></span></li>
+                    <li><strong><?php echo esc_html($t('Preview')); ?></strong><span><?php echo esc_html($t('Review your concept and book a cosmetic dentistry consultation in Las Vegas.')); ?></span></li>
                 </ol>
             </div>
         </div>
@@ -53,7 +53,27 @@ get_header();
 
             <form class="smile-tool" id="smile-preview-form" novalidate>
                 <div class="smile-step">
-                    <h3><?php echo esc_html($t('1. Upload a teeth-visible smile selfie')); ?></h3>
+                    <h3><?php echo esc_html($t('1. Tell us where to send follow-up')); ?></h3>
+                    <p><?php echo esc_html($t('Simple Dental LV may contact you about your smile preview and consultation request.')); ?></p>
+                    <div class="smile-lead-fields smile-intake-fields">
+                        <label>
+                            <span><?php echo esc_html($t('Name')); ?> <em><?php echo esc_html($t('required')); ?></em></span>
+                            <input id="smile-name" name="name" type="text" autocomplete="name" required>
+                        </label>
+                        <label>
+                            <span><?php echo esc_html($t('Email')); ?> <em><?php echo esc_html($t('required')); ?></em></span>
+                            <input id="smile-email" name="email" type="email" autocomplete="email" required>
+                        </label>
+                        <label>
+                            <span><?php echo esc_html($t('Phone')); ?> <em><?php echo esc_html($t('optional')); ?></em></span>
+                            <input id="smile-phone" name="phone" type="tel" autocomplete="tel" placeholder="<?php echo esc_attr($t('Best number for consultation follow-up')); ?>">
+                        </label>
+                    </div>
+                    <p class="smile-error" id="smile-contact-error" role="alert"></p>
+                </div>
+
+                <div class="smile-step">
+                    <h3><?php echo esc_html($t('2. Upload a teeth-visible smile selfie')); ?></h3>
                     <p><?php echo esc_html($t('Required for best results: face camera directly, teeth visible, no sunglasses, good lighting. Closed-mouth photos may not produce a useful preview.')); ?></p>
                     <label class="smile-upload" for="smile-photo">
                         <span class="smile-upload__icon" aria-hidden="true">📷</span>
@@ -66,12 +86,16 @@ get_header();
                 </div>
 
                 <div class="smile-step">
-                    <h3><?php echo esc_html($t('2. Choose your smile goal')); ?></h3>
-                    <div class="smile-goals" role="group" aria-label="<?php echo esc_attr($t('Smile goals')); ?>">
+                    <h3><?php echo esc_html($t('3. Choose what you want to improve')); ?></h3>
+                    <div class="smile-goals" role="group" aria-label="<?php echo esc_attr($t('Smile improvement goals')); ?>">
                         <?php foreach ($smile_preview_goals as $goal) : ?>
                             <label><input type="checkbox" name="<?php echo esc_attr($smile_preview_contract['goalInputName']); ?>" value="<?php echo esc_attr($goal['id']); ?>"> <?php echo esc_html($goal['label']); ?></label>
                         <?php endforeach; ?>
                     </div>
+                    <label class="smile-notes" for="smile-improvement-notes">
+                        <span><?php echo esc_html($t('Anything else you want to improve?')); ?> <em><?php echo esc_html($t('optional')); ?></em></span>
+                        <textarea id="smile-improvement-notes" name="improvement_notes" rows="3" placeholder="<?php echo esc_attr($t('Tell us in your own words.')); ?>"></textarea>
+                    </label>
                     <p class="smile-error" id="smile-goal-error" role="alert"></p>
                 </div>
 
@@ -82,6 +106,14 @@ get_header();
                     </label>
                     <p class="smile-error" id="smile-consent-error" role="alert"></p>
                 </div>
+
+                <input type="hidden" name="smile_check" value="7">
+                <input class="smile-honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <input id="smile-utm-source" name="utm_source" type="hidden">
+                <input id="smile-utm-medium" name="utm_medium" type="hidden">
+                <input id="smile-utm-campaign" name="utm_campaign" type="hidden">
+                <input id="smile-utm-content" name="utm_content" type="hidden">
+                <input id="smile-utm-term" name="utm_term" type="hidden">
 
                 <?php if (function_exists('simple_dental_has_captcha_field') && simple_dental_has_captcha_field()) : ?>
                 <div class="smile-step captcha-row">
@@ -123,8 +155,8 @@ get_header();
                     <h3><?php echo esc_html($t('Like the direction? Let’s see what’s actually possible.')); ?></h3>
                     <p><?php echo esc_html($t('No obligation. Call Simple Dental LV or request an appointment when you are ready to review what is actually possible.')); ?></p>
                     <div class="smile-hero__actions smile-lead-actions">
-                        <a class="btn btn-primary" href="tel:7023024787"><?php echo esc_html($t('Call / Text (702) 302-4787')); ?></a>
-                        <a class="btn btn-secondary" href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>"><?php echo esc_html($t('Request Appointment')); ?></a>
+                        <a class="btn btn-primary" href="<?php echo esc_url(simple_dental_with_lang(home_url('/contact/'))); ?>"><?php echo esc_html($t('Book Consultation')); ?></a>
+                        <a class="btn btn-secondary" href="tel:7023024787"><?php echo esc_html($t('Or call Simple Dental at (702) 302-4787')); ?></a>
                     </div>
                     <p class="form-note"><small><?php echo esc_html($t('We respect your privacy. Uploaded images are processed temporarily for AI generation and are not retained by this site.')); ?></small></p>
                 </div>

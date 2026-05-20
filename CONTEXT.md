@@ -44,6 +44,10 @@ _Avoid_: treatment planning, diagnosis, guaranteed result
 The non-clinical generated visual output from the **Smile Preview Flow**; it can support conversation before a consultation but does not represent dental advice or a promised outcome.
 _Avoid_: treatment plan, final result, diagnosis
 
+**Smile Improvement Goal**:
+A prospective patient's self-selected cosmetic concern or desired change before receiving a **Smile Concept Preview**; canonical options are whiter teeth, straighter smile, close gaps, fix chips or worn edges, improve tooth shape, and I’m not sure yet.
+_Avoid_: treatment recommendation, diagnosis, treatment goal, veneer selection, crown selection, implant selection
+
 ## Relationships
 
 - **Local Dental Search Visibility** is the primary SEO outcome for the website.
@@ -55,6 +59,7 @@ _Avoid_: treatment plan, final result, diagnosis
 - **Priority Service Pages** are Same-Day Crowns, Teeth Cleaning, and Root Canal; Dental Implants are unresolved pending service confirmation.
 - **Service-Specific Pages** support **Local Dental Search Visibility** by matching specific patient searches.
 - **Smile Preview Flow** can support **Patient Conversion**, but its **Smile Concept Preview** must remain clearly non-clinical.
+- **Smile Improvement Goals** are collected before the **Smile Concept Preview** as structured options with optional free text.
 
 ## Example dialogue
 
