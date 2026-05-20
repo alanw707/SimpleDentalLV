@@ -1,16 +1,20 @@
 # FTP Configuration Files (contains sensitive credentials)
 deployconfig.py
 
-# Python Cache
+# Python Cache / virtualenvs
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .venv/
+.venv-*/
 
-# IDE Files
+# IDE / agent local files
 .vscode/
 .idea/
+.claude/
+.cursor/
+.pi/
 *.swp
 *.swo
 
@@ -26,15 +30,29 @@ Thumbs.db
 uploads/
 wp-content/uploads/
 
-# Backup Files
+# Backup / dump / archive files
 *.bak
 *.backup
+*.sql
+*.sqlite
+*.sqlite3
+*.zip
+*.tar
+*.tar.gz
+*.tgz
 
 # Local tooling output
 archive/
+test-results/
+.playwright-mcp/
+_bmad/
+_bmad-output/
 
-# Local env files
+# Local env/config files
 .env
+*.local
+wp-config.php
+tools/verify-image.config.json
 
 # Windows metadata
 *:Zone.Identifier
