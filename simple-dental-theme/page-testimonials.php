@@ -44,11 +44,7 @@ $google_url = !empty($google_meta['google_url']) ? $google_meta['google_url'] : 
                     <?php else : ?>
                         <strong class="rating-number rating-placeholder"><?php echo esc_html(__t('Reviews coming soon')); ?></strong>
                     <?php endif; ?>
-                    <?php if (!empty($google_meta['review_count'])) : ?>
-                        <p><?php echo esc_html(sprintf(__t('Based on %s Google reviews'), $google_meta['review_count'])); ?></p>
-                    <?php else : ?>
-                        <p><?php echo esc_html(__t('Waiting for copied Google review count and rating.')); ?></p>
-                    <?php endif; ?>
+                    <p><?php echo esc_html(__t('Selected Google reviews shared here. Visit Google for the latest reviews.')); ?></p>
                     <?php if ($google_url) : ?>
                         <a href="<?php echo esc_url($google_url); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html(__t('Open Simple Dental on Google')); ?></a>
                     <?php endif; ?>

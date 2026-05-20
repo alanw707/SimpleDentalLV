@@ -48,6 +48,10 @@ _Avoid_: treatment plan, final result, diagnosis
 A prospective patient's self-selected cosmetic concern or desired change before receiving a **Smile Concept Preview**; canonical options are whiter teeth, straighter smile, close gaps, fix chips or worn edges, improve tooth shape, and I’m not sure yet.
 _Avoid_: treatment recommendation, diagnosis, treatment goal, veneer selection, crown selection, implant selection
 
+**Google Review Linkout**:
+A trust element that sends prospective patients to the live Simple Dental Google Business Profile for current review count and review content.
+_Avoid_: review sync, scraped reviews, stale review count
+
 ## Relationships
 
 - **Local Dental Search Visibility** is the primary SEO outcome for the website.
@@ -60,6 +64,7 @@ _Avoid_: treatment recommendation, diagnosis, treatment goal, veneer selection, 
 - **Service-Specific Pages** support **Local Dental Search Visibility** by matching specific patient searches.
 - **Smile Preview Flow** can support **Patient Conversion**, but its **Smile Concept Preview** must remain clearly non-clinical.
 - **Smile Improvement Goals** are collected before the **Smile Concept Preview** as structured options with optional free text.
+- A **Google Review Linkout** supports **Patient Conversion** without requiring local review count accuracy.
 
 ## Example dialogue
 
@@ -74,3 +79,4 @@ _Avoid_: treatment recommendation, diagnosis, treatment goal, veneer selection, 
 - "Emergency Dentistry" should not be targeted unless the practice starts accepting urgent same-day pain or broken-tooth cases.
 - Code mentions implant training on the About page and translation labels, but the service list does not include implant services; use **Mentioned Topic SEO** for the About-page training mention, but do not imply implant services are offered until clarified.
 - Implant SEO wording should be limited to Dr. Chang's advanced implant training unless implant services are added to the service catalog.
+- "Sync Google Reviews" resolved away from full automation for now because Google Business Profile owner access is unavailable; use **Google Review Linkout** until access exists.
