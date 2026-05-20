@@ -32,7 +32,7 @@ Content:
   - Google logo/icon text treatment
   - `5.0` or current rating
   - `★★★★★`
-  - `Based on X Google reviews`
+  - Link to current Google reviews; do not display a local aggregate review count without live owner-authorized sync.
 - 3 featured review cards.
 - CTAs:
   - Primary: `Read All Reviews`
@@ -65,7 +65,7 @@ Recommended page flow:
    - Small disclaimer: `Reviews are copied from Google and may be shortened for display.` if excerpts are used.
 
 3. **All Reviews Grid**
-   - All available reviews, 13 current reviews if all screenshots/content are provided.
+   - All locally copied review quotes available for display.
    - Cards include:
      - Reviewer initial avatar.
      - Reviewer first name/last initial or Google display name.
@@ -202,7 +202,7 @@ Schema:
 Received from Google Business Profile screenshots on 2026-05-14:
 
 - Current visible rating: `5.0`
-- Current visible review count: `13`
+- Current visible review count is intentionally not displayed locally because it can become stale without Google Business Profile API access.
 - Google Business Profile URL used in site CTAs: `https://maps.app.goo.gl/aEKiZbNFp7SJFG11A`
 - Reviews added to static data:
   - Alan Wang
@@ -215,7 +215,7 @@ Received from Google Business Profile screenshots on 2026-05-14:
 
 Remaining optional input:
 
-- Add the remaining Google reviews if the full 13-review set should be displayed.
+- Add remaining copied Google review quotes when available; keep live count on Google only until owner-authorized sync exists.
 - Replace the cropped-name reviewer with the real display name if available.
 
 ## Recommended Build Order
@@ -228,4 +228,4 @@ Remaining optional input:
 6. Test PHP lint, JSON validity, mobile layout, and production URLs.
 
 ## Decision
-Proceed with static Google reviews. Homepage should show only featured review previews; `/testimonials/` should act as the all-reviews archive without a separate featured section.
+Proceed with static Google review quotes. Homepage should show only featured review previews; `/testimonials/` should act as the all-reviews archive without a separate featured section. Do not display a local aggregate Google review count until owner-authorized Google Business Profile sync exists.

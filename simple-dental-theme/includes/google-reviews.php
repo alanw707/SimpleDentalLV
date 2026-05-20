@@ -9,7 +9,6 @@
 function simple_dental_get_google_reviews_meta() {
     return array(
         'rating' => '5.0',
-        'review_count' => '13',
         'google_url' => 'https://maps.app.goo.gl/aEKiZbNFp7SJFG11A',
         'last_updated' => 'May 2026',
     );
@@ -177,9 +176,6 @@ function simple_dental_render_google_reviews_home_section() {
                             <?php echo simple_dental_render_review_stars((int) round((float) $meta['rating'])); ?>
                         <?php else : ?>
                             <strong><?php echo esc_html(__t('Reviews coming soon')); ?></strong>
-                        <?php endif; ?>
-                        <?php if (!empty($meta['review_count'])) : ?>
-                            <span><?php echo esc_html(sprintf(__t('Based on %s Google reviews'), $meta['review_count'])); ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="review-section-actions">
