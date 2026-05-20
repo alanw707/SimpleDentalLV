@@ -15,6 +15,7 @@ require_once get_template_directory() . '/includes/smile-preview-provider.php';
 require_once get_template_directory() . '/includes/captcha.php';
 require_once get_template_directory() . '/includes/contact.php';
 require_once get_template_directory() . '/includes/smile-preview-controller.php';
+require_once get_template_directory() . '/includes/smile-preview-admin.php';
 require_once get_template_directory() . '/includes/page-routing.php';
 require_once get_template_directory() . '/includes/seo.php';
 require_once get_template_directory() . '/includes/google-reviews.php';

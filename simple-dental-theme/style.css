@@ -3397,6 +3397,10 @@ body.menu-open {
     margin-top: 1rem;
 }
 
+.smile-intake-fields {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .smile-lead-fields label,
 .smile-notes {
     display: grid;

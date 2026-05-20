@@ -66,7 +66,7 @@ get_header();
                         </label>
                         <label>
                             <span><?php echo esc_html($t('Phone')); ?> <em><?php echo esc_html($t('optional')); ?></em></span>
-                            <input id="smile-phone" name="phone" type="tel" autocomplete="tel" placeholder="<?php echo esc_attr($t('Best number for consultation follow-up')); ?>">
+                            <input id="smile-phone" name="phone" type="tel" autocomplete="tel" placeholder="<?php echo esc_attr($t('Best phone number')); ?>">
                         </label>
                     </div>
                     <p class="smile-error" id="smile-contact-error" role="alert"></p>

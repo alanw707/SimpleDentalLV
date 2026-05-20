@@ -263,7 +263,21 @@ function simple_dental_ajax_smile_preview_lead() {
                 $headers[] = 'Cc: ' . $cc_email;
             }
         }
-        wp_mail($email_settings['primary'], $subject, $body, $headers);
+        $mail_sent = wp_mail($email_settings['primary'], $subject, $body, $headers);
+        update_option('simple_dental_smile_preview_last_mail_result', array(
+            'sent' => (bool) $mail_sent,
+            'to' => $email_settings['primary'],
+            'subject' => $subject,
+            'checked_at' => current_time('mysql'),
+        ), false);
+    } else {
+        update_option('simple_dental_smile_preview_last_mail_result', array(
+            'sent' => false,
+            'to' => '',
+            'subject' => 'Smile Preview Lead',
+            'checked_at' => current_time('mysql'),
+            'reason' => 'notifications_disabled',
+        ), false);
     }
 
     wp_send_json_success(array('message' => simple_dental_smile_preview_translate('Thanks. Simple Dental LV will follow up about your cosmetic consultation.')));
