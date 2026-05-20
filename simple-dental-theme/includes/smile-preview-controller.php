@@ -190,6 +190,7 @@ function simple_dental_ajax_smile_preview_lead() {
     $phone = isset($_POST['phone']) ? sanitize_text_field(wp_unslash($_POST['phone'])) : '';
     $contact_method = isset($_POST['contactMethod']) ? sanitize_text_field(wp_unslash($_POST['contactMethod'])) : '';
     $goals = isset($_POST['goals']) ? sanitize_text_field(wp_unslash($_POST['goals'])) : '';
+    $improvement_notes = isset($_POST['improvement_notes']) ? sanitize_textarea_field(wp_unslash($_POST['improvement_notes'])) : '';
     $spam_check = isset($_POST['smile_check']) ? trim(sanitize_text_field(wp_unslash($_POST['smile_check']))) : '';
     $honeypot = isset($_POST['website']) ? trim(sanitize_text_field(wp_unslash($_POST['website']))) : '';
     $utm_source = isset($_POST['utm_source']) ? sanitize_text_field(wp_unslash($_POST['utm_source'])) : '';
@@ -206,11 +207,11 @@ function simple_dental_ajax_smile_preview_lead() {
         wp_send_json_error(array('message' => simple_dental_smile_preview_translate('Please answer the anti-spam question.')), 400);
     }
 
-    if ($name === '' || $phone === '') {
-        wp_send_json_error(array('message' => simple_dental_smile_preview_translate('Name and phone are required.')), 400);
+    if ($name === '' || $email === '') {
+        wp_send_json_error(array('message' => simple_dental_smile_preview_translate('Name and email are required.')), 400);
     }
 
-    if ($email !== '' && !is_email($email)) {
+    if (!is_email($email)) {
         wp_send_json_error(array('message' => simple_dental_smile_preview_translate('Please enter a valid email address.')), 400);
     }
 
@@ -220,6 +221,7 @@ function simple_dental_ajax_smile_preview_lead() {
         'phone' => $phone,
         'contact_method' => $contact_method,
         'goals' => $goals,
+        'improvement_notes' => $improvement_notes,
         'utm' => array(
             'utm_source' => $utm_source,
             'utm_medium' => $utm_medium,
@@ -245,7 +247,7 @@ function simple_dental_ajax_smile_preview_lead() {
     if (!empty($email_settings['notifications_enabled'])) {
         $subject = $email_settings['subject_prefix'] . ' Smile Preview Lead';
         $body = "New AI Smile Preview lead from Simple Dental website:\n\n";
-        $body .= "Name: $name\nEmail: $email\nPhone: $phone\nPreferred contact: $contact_method\nSmile goals: $goals\n\n";
+        $body .= "Name: $name\nEmail: $email\nPhone: $phone\nPreferred contact: $contact_method\nSmile goals: $goals\nOther improvement notes: $improvement_notes\n\n";
         $body .= "UTM Source: $utm_source\nUTM Medium: $utm_medium\nUTM Campaign: $utm_campaign\nUTM Content: $utm_content\nUTM Term: $utm_term\n\n";
         $body .= "Submitted: " . current_time('mysql') . "\nIP Address: " . simple_dental_get_client_ip() . "\n";
         $body .= "Note: Uploaded images are processed temporarily for AI generation and are not retained by this site.\n";

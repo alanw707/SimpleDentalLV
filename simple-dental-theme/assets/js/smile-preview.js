@@ -34,6 +34,7 @@
     }
 
     function clearErrors() {
+        setText('smile-contact-error', '');
         setText('smile-photo-error', '');
         setText('smile-goal-error', '');
         setText('smile-consent-error', '');
@@ -64,6 +65,19 @@
     function validate(form, file) {
         let valid = true;
         clearErrors();
+
+        const name = form.querySelector('[name="name"]');
+        const email = form.querySelector('[name="email"]');
+        const emailValue = email && email.value ? email.value.trim() : '';
+        const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+
+        if (!name || !name.value.trim() || !emailValue) {
+            setText('smile-contact-error', message('missingContact', 'Name and email are required before generating your preview.'));
+            valid = false;
+        } else if (!emailLooksValid) {
+            setText('smile-contact-error', message('invalidEmail', 'Please enter a valid email address.'));
+            valid = false;
+        }
 
         if (!file) {
             setText('smile-photo-error', message('missingPhoto', 'Please choose a smile selfie first.'));
@@ -325,40 +339,29 @@
         return Boolean(error && error.canUseFallback === true && error.status === 503);
     }
 
-    async function submitLead(event) {
-        event.preventDefault();
-        const form = event.currentTarget;
-        const error = document.getElementById('smile-lead-error');
-        const success = document.getElementById('smile-lead-success');
+    async function submitLead(form, goalLabels) {
         const config = window.simpleDentalSmilePreview || {};
-
-        if (error) error.textContent = '';
-        if (success) success.textContent = '';
-
         const data = new FormData(form);
         data.append('action', 'simple_dental_smile_preview_lead');
         data.append('nonce', config.nonce || '');
-        data.append('goals', latestGoals.join(', '));
+        data.set('goals', goalLabels.join(', '));
         data.append('lang', config.currentLanguage || 'en');
 
-        try {
-            const response = await fetch(config.ajaxUrl || '/wp-admin/admin-ajax.php', {
-                method: 'POST',
-                credentials: 'same-origin',
-                body: data
-            });
-            const payload = await response.json();
-            const responseMessage = payload && payload.data && payload.data.message ? payload.data.message : message('requestReceived', 'Request received.');
+        const response = await fetch(config.ajaxUrl || '/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: data
+        });
+        const payload = await response.json();
+        const responseMessage = payload && payload.data && payload.data.message ? payload.data.message : message('requestReceived', 'Request received.');
 
-            if (!response.ok || !payload.success) {
-                throw new Error(responseMessage);
-            }
-
-            form.reset();
-            if (success) success.textContent = responseMessage;
-        } catch (err) {
-            if (error) error.textContent = err.message || message('submitFailed', 'Could not submit request. Please call Simple Dental LV.');
+        if (!response.ok || !payload.success) {
+            const err = new Error(responseMessage);
+            err.isLeadError = true;
+            throw err;
         }
+
+        return responseMessage;
     }
 
     function renderPreviewState(state, submitButton) {
@@ -395,7 +398,6 @@
 
     function init() {
         const form = document.getElementById('smile-preview-form');
-        const leadForm = document.getElementById('smile-lead-form');
         const fileInput = document.getElementById('smile-photo');
         const uploadLabel = document.querySelector('.smile-upload__title');
         const uploadPreview = document.getElementById('smile-upload-preview');
@@ -407,10 +409,6 @@
         }
 
         populateUtmFields();
-
-        if (leadForm) {
-            leadForm.addEventListener('submit', submitLead);
-        }
 
         fileInput.addEventListener('change', () => {
             clearErrors();
@@ -457,6 +455,8 @@
             reader.onload = async () => {
                 try {
                     const goals = selectedGoals(form);
+                    const goalLabels = selectedGoalLabels(form);
+                    await submitLead(form, goalLabels);
                     let conceptDataUrl;
                     try {
                         const aiUploadFile = await createAiUploadFile(reader.result, file.name);
@@ -475,7 +475,7 @@
                         grecaptcha.reset();
                     }
                 } catch (err) {
-                    setText('smile-photo-error', err.message || message('previewFailed', 'Could not generate the smile preview.'));
+                    setText(err && err.isLeadError ? 'smile-contact-error' : 'smile-photo-error', err.message || message('previewFailed', 'Could not generate the smile preview.'));
                     transitionPreviewState(PREVIEW_STATES.ERROR, submitButton);
                 }
             };
