@@ -65,3 +65,30 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_REMOTE_PATH: ${{ secrets.FTP_REMOTE_PATH }}
         run: python3 deploy-robust.py
+
+      - name: Verify live stylesheet matches repository
+        run: |
+          expected_hash="$(sha256sum simple-dental-theme/style.css | awk '{print $1}')"
+          live_url="https://www.simpledentallv.com/wp-content/themes/simple-dental-theme/style.css"
+          matched=0
+
+          for attempt in 1 2 3 4 5 6; do
+            live_hash="$(curl -fsSL \
+              -H 'Cache-Control: no-cache' \
+              -H 'Pragma: no-cache' \
+              "${live_url}?v=${GITHUB_SHA}-${attempt}" | sha256sum | awk '{print $1}')"
+
+            if [ "$live_hash" = "$expected_hash" ]; then
+              echo "Live stylesheet verified on attempt $attempt."
+              matched=1
+              break
+            fi
+
+            echo "Live stylesheet mismatch on attempt $attempt."
+            sleep 10
+          done
+
+          if [ "$matched" -ne 1 ]; then
+            echo "::error title=Live theme verification failed::Public style.css does not match the repository after deploy."
+            exit 1
+          fi
