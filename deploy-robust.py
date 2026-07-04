@@ -7,11 +7,13 @@ Supports local `deployconfig.py` usage and `FTP_*` environment variables for CI.
 
 import ftplib
 import os
+import socket
 import sys
 import time
 from pathlib import Path
 
 REQUIRED_FTP_KEYS = ('host', 'username', 'password', 'remote_path')
+FTP_CONNECT_TIMEOUT_SECONDS = int(os.getenv('FTP_CONNECT_TIMEOUT', '30'))
 
 
 def load_ftp_config():
@@ -63,7 +65,7 @@ def connect_ftp():
     """Create FTP connection with retry"""
     for attempt in range(3):
         try:
-            ftp = ftplib.FTP(FTP_CONFIG['host'])
+            ftp = ftplib.FTP(FTP_CONFIG['host'], timeout=FTP_CONNECT_TIMEOUT_SECONDS)
             ftp.login(FTP_CONFIG['username'], FTP_CONFIG['password'])
             ftp.cwd(FTP_CONFIG['remote_path'])
             return ftp
@@ -81,7 +83,7 @@ def upload_file_with_retry(ftp, local_file, remote_file, max_retries=3):
             with open(local_file, 'rb') as file:
                 ftp.storbinary(f'STOR {remote_file}', file)
             return True
-        except (ftplib.error_temp, BrokenPipeError, ConnectionResetError) as e:
+        except (ftplib.error_temp, BrokenPipeError, ConnectionResetError, socket.timeout) as e:
             print(f"Upload attempt {attempt + 1} failed for {os.path.basename(local_file)}: {e}")
             if attempt < max_retries - 1:
                 # Reconnect and try again
@@ -171,6 +173,7 @@ def deploy_theme():
         
     except Exception as e:
         print(f"❌ Error: {e}")
+        sys.exit(1)
 
 def remove_directory_safe(ftp, path):
     """Safely remove directory"""
@@ -231,6 +234,7 @@ def deploy_file(filename):
         print("🎉 File deployment completed!")
     except Exception as e:
         print(f"❌ Error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
