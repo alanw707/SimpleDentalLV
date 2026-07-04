@@ -3465,8 +3465,12 @@ body.menu-open {
 
 @media (max-width: 600px) {
     .smile-hero {
-        padding-top: var(--hero-padding-top-mobile);
+        padding-top: calc(var(--header-height-mobile) + 1.5rem);
         padding-bottom: var(--hero-padding-bottom-mobile);
+    }
+
+    .smile-hero h1 {
+        line-height: 1.02;
     }
 
     .smile-hero__actions,
