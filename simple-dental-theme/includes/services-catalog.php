@@ -91,14 +91,18 @@ function simple_dental_get_service_catalog() {
         'full_denture' => array(
             'name' => 'Full Denture (per arch)',
             'name_key' => 'services.prosthetics.full_denture.name',
-            'price' => '$2000',
+            'price' => '$1,200',
+            'price_from' => true,
+            'price_anchor' => 'full-dentures',
             'description' => 'Complete denture for upper or lower jaw',
             'description_key' => 'services.prosthetics.full_denture.description',
         ),
         'partial_denture' => array(
             'name' => 'Partial Denture',
             'name_key' => 'services.prosthetics.partial_denture.name',
-            'price' => '$1600',
+            'price' => '$1,100',
+            'price_from' => true,
+            'price_anchor' => 'partial-dentures',
             'description' => 'Removable partial denture to replace missing teeth',
             'description_key' => 'services.prosthetics.partial_denture.description',
         ),
@@ -188,7 +192,7 @@ function featured_services_display($atts) {
         $service = $catalog[$service_id];
         echo '<div class="service-card">';
         echo '<h3 class="service-title">' . esc_html(simple_dental_translate_structured_text($service, 'name')) . '</h3>';
-        echo '<div class="service-price">' . esc_html($service['price']) . '</div>';
+        echo simple_dental_render_service_price($service);
         echo '<p class="service-description">' . esc_html(simple_dental_translate_structured_text($service, 'description')) . '</p>';
         echo '</div>';
     }
@@ -257,7 +261,7 @@ function services_by_category_display($atts) {
             $service = $catalog[$service_id];
             echo '<div class="service-card category-card">';
             echo '<h4 class="service-title">' . esc_html(simple_dental_translate_structured_text($service, 'name')) . '</h4>';
-            echo '<div class="service-price">' . esc_html($service['price']) . '</div>';
+            echo simple_dental_render_service_price($service);
             echo '<p class="service-description">' . esc_html(simple_dental_translate_structured_text($service, 'description')) . '</p>';
             echo '</div>';
         }
@@ -280,3 +284,21 @@ function simple_dental_services_display($atts) {
 }
 add_shortcode('simple_dental_services', 'simple_dental_services_display');
 
+/**
+ * Price markup for a service card. Services with several priced options show
+ * the lowest fee and link to the full comparison on the Prices page.
+ */
+function simple_dental_render_service_price($service) {
+    if (empty($service['price_from'])) {
+        return '<div class="service-price">' . esc_html($service['price']) . '</div>';
+    }
+
+    $html = '<div class="service-price">' . esc_html(sprintf(__t('From %s', 'key:services.price.from'), $service['price'])) . '</div>';
+
+    if (!empty($service['price_anchor'])) {
+        $url = simple_dental_with_lang(home_url(simple_dental_get_treatment_guides_path())) . '#' . $service['price_anchor'];
+        $html .= '<p class="service-price-link"><a href="' . esc_url($url) . '">' . esc_html(__t('Compare options and prices', 'key:services.price.compare')) . '</a></p>';
+    }
+
+    return $html;
+}

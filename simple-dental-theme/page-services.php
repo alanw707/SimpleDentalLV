@@ -116,6 +116,8 @@ $booking_url = simple_dental_get_booking_url();
                             <p><?php echo __t('Ready to see how advanced technology makes dental care more comfortable and efficient? Our same-day crown process typically takes 2-3 hours from start to finish.'); ?></p>
                             <a href="tel:7023024787" class="btn btn-primary"><?php echo __t('Call About Same-Day Crowns'); ?></a>
                             <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/same-day-crowns-las-vegas/'))); ?>" class="btn btn-secondary"><?php echo __t('Learn About Same-Day Crowns', 'key:crowns.link.learn'); ?></a>
+                            <a href="<?php echo esc_url(simple_dental_with_lang(home_url(simple_dental_get_treatment_guides_path()))); ?>" class="btn btn-secondary"><?php echo esc_html(__t('Full Price List', 'key:guides.link.prices')); ?></a>
+                            <a href="<?php echo esc_url(simple_dental_with_lang(home_url(simple_dental_get_smile_preview_path()))); ?>" class="btn btn-secondary"><?php echo esc_html(__t('Smile Preview')); ?></a>
                         </div>
                     </div>
                 </div>

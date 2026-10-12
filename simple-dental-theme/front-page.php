@@ -126,10 +126,11 @@ $hero_opening_label = simple_dental_is_open()
             
             <?php echo do_shortcode('[featured_services]'); ?>
             
-            <div style="text-align: center; margin-top: 40px;">
+            <div class="home-pricing-links" style="text-align: center; margin-top: 40px;">
                 <p><strong><?php echo __t('No surprises. No hidden fees.'); ?></strong> <?php echo __t('Patients know upfront what to expect.'); ?></p>
                 <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/services/'))); ?>" class="btn btn-primary"><?php echo __t('View All Services & Pricing'); ?></a>
                 <a href="<?php echo esc_url(simple_dental_with_lang(home_url('/same-day-crowns-las-vegas/'))); ?>" class="btn btn-secondary"><?php echo __t('Learn About Same-Day Crowns', 'key:crowns.link.learn'); ?></a>
+                <a href="<?php echo esc_url(simple_dental_with_lang(home_url(simple_dental_get_treatment_guides_path()))); ?>" class="btn btn-secondary"><?php echo esc_html(__t('Full Price List', 'key:guides.link.prices')); ?></a>
             </div>
         </div>
     </section>

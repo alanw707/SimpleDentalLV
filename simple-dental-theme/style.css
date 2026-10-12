@@ -1148,14 +1148,6 @@ button.menu-toggle::before {
     color: var(--light-gray);
 }
 
-.footer-faq-item { margin-bottom: 12px; }
-.footer-faq-item:last-child { margin-bottom: 0; }
-.footer-faq-item p {
-    margin-bottom: 0;
-    line-height: 1.5;
-    color: var(--light-gray);
-}
-.footer-faq-item strong { color: var(--white); font-weight: 600; }
 .footer-legal-links {
     margin-top: 0.5rem;
 }
@@ -3505,3 +3497,258 @@ body.menu-open {
     color: #155724;
     font-weight: 800;
 }
+
+/* ==========================================================================
+   Treatment Guides & Prices page
+   ========================================================================== */
+
+.treatment-guides {
+    --tg-rule: var(--border-gray);
+    --tg-label: var(--brown-hover);
+    --tg-good: #56733f;
+    --tg-caution: #a4513a;
+    --tg-stage-1: #7f9a68;
+    --tg-stage-2: #c7a54a;
+    --tg-stage-3: #cf8a3e;
+    --tg-stage-4: #b65a3c;
+    --tg-stage-5: #6b4233;
+}
+
+.treatment-guides ::selection { background: var(--soft-taupe); color: var(--text-dark); }
+.treatment-guides a:focus-visible { outline: 2px solid var(--brown-hover); outline-offset: 3px; border-radius: 4px; }
+
+.tg-section { scroll-margin-top: calc(var(--header-height) + var(--wp-admin-bar-height) + 1rem); }
+.tg-section__head { max-width: 46rem; margin-bottom: 2rem; }
+.tg-section__head h2 { margin-bottom: 0.75rem; text-wrap: balance; }
+.tg-section__head p { font-size: 1.125rem; line-height: 1.6; margin: 0; }
+.tg-note { font-size: 0.9375rem; color: var(--text-medium); line-height: 1.6; }
+
+/* Jump navigation */
+
+/* Price list */
+.tg-prices__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 3rem; align-items: start; }
+.tg-prices__intro h2 { margin-bottom: 0.75rem; }
+.tg-prices__intro p { line-height: 1.65; }
+.tg-prices__crown-link a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; color: var(--brown-hover); }
+.tg-prices__groups { display: grid; gap: 2rem; }
+.tg-price-group__title { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.5rem; font-size: 1.25rem; }
+.tg-price-group__title a { color: var(--text-dark); }
+.tg-price-group__title a:hover { color: var(--brown-hover); }
+.tg-price-group__unit { font-size: 0.875rem; font-weight: 500; letter-spacing: 0; color: var(--text-medium); }
+.tg-price-list { margin: 0; border-top: 1px solid var(--tg-rule); }
+.tg-price-list__row { display: flex; align-items: baseline; gap: 0.75rem; padding: 0.7rem 0; border-bottom: 1px solid var(--tg-rule); }
+.tg-price-list__row dt { flex: 1; display: flex; align-items: baseline; gap: 0.75rem; color: var(--text-dark); }
+.tg-price-list__row dt::after { content: ""; flex: 1; min-width: 1.5rem; border-bottom: 1px dotted #b9b2a8; transform: translateY(-0.25em); }
+.tg-price-list__row dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-dark); white-space: nowrap; }
+.tg-price-list__row--total dt,
+.tg-price-list__row--total dd { font-weight: 800; }
+
+/* Option comparison (crowns, partial dentures, full dentures) */
+.tg-options { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--tg-rule); border: 1px solid var(--tg-rule); border-radius: 14px; overflow: hidden; }
+.tg-options--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tg-options--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tg-option { display: grid; grid-template-rows: subgrid; grid-row: span var(--tg-rows); gap: 0; background: var(--white); padding: 1.5rem 1.25rem; }
+.tg-options--3 .tg-option,
+.tg-options--2 .tg-option { padding: 1.75rem 1.5rem; }
+.tg-option > * { margin: 0 0 1.25rem; }
+.tg-option > *:last-child { margin-bottom: 0; }
+.tg-options:focus-visible,
+.tg-stages:focus-visible { outline: 2px solid var(--brown-hover); outline-offset: 3px; }
+.tg-option__name { margin: 0 0 0.25rem; font-size: 1.125rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--text-dark); }
+.tg-option__sub { margin: 0; font-size: 0.875rem; line-height: 1.4; color: var(--text-medium); }
+.tg-option__price { line-height: 1; }
+.tg-option__amount { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--text-dark); }
+.tg-option__unit { font-size: 0.875rem; color: var(--text-medium); }
+.tg-option__desc { font-size: 0.9375rem; line-height: 1.55; color: var(--text-medium); }
+.tg-option__label { display: block; margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.02em; line-height: 1.3; color: var(--tg-label); }
+
+.tg-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.5rem; }
+.tg-list li { position: relative; padding-left: 1.6rem; font-size: 0.9375rem; line-height: 1.45; color: var(--text-dark); }
+.tg-list li::before { content: ""; position: absolute; left: 0; top: 0.2em; width: 1.05rem; height: 1.05rem; background: center / contain no-repeat; }
+.tg-list--pros li::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2356733f' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.5l4 4 8-9'/%3E%3C/svg%3E"); }
+.tg-list--cons li::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23a4513a' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M5 10h10'/%3E%3C/svg%3E"); }
+
+.tg-option > .tg-specs { display: grid; grid-template-rows: subgrid; grid-row: span var(--tg-spec-rows); margin: 0; }
+.tg-specs__row { padding: 0.6rem 0; border-top: 1px solid var(--tg-rule); }
+.tg-specs__row:last-child { padding-bottom: 0; }
+.tg-specs dt { font-size: 0.8125rem; line-height: 1.3; color: var(--text-medium); margin-bottom: 0.2rem; }
+.tg-specs dd { margin: 0; font-size: 0.9375rem; font-weight: 600; line-height: 1.4; color: var(--text-dark); }
+
+.tg-rating { display: inline-flex; gap: 3px; vertical-align: middle; }
+.tg-rating__pip { width: 1.1rem; height: 0.4rem; border-radius: 2px; background: #e3ddd4; }
+.tg-rating__pip.is-on { background: var(--brown-hover); }
+
+/* Implant steps */
+.tg-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.75rem 2rem; margin: 0 0 3rem; padding: 1rem 0 0; list-style: none; counter-reset: tg-step; }
+.tg-step { counter-increment: tg-step; position: relative; padding-top: 1.75rem; border-top: 1px solid #cfc6b8; }
+.tg-step::before { content: counter(tg-step); position: absolute; left: 0; top: -1rem; width: 2rem; height: 2rem; border-radius: 50%; background: var(--brown-hover); color: var(--white); display: grid; place-items: center; font-weight: 700; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+.tg-step__title { margin: 0 0 0.4rem; font-size: 1.25rem; }
+.tg-step__summary { margin: 0 0 0.75rem; font-weight: 600; line-height: 1.5; color: var(--text-dark); }
+.tg-step__points { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; font-size: 0.9375rem; line-height: 1.5; color: var(--text-medium); }
+.tg-step__points li::marker { color: #b9ab98; }
+
+.tg-implant-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; padding: 2rem; background: var(--warm-beige); border-radius: 14px; }
+.tg-implant-facts h3 { margin: 0 0 1rem; font-size: 1.25rem; }
+.tg-implant-facts .tg-price-list,
+.tg-implant-facts .tg-price-list__row { border-color: #dcd3c6; }
+.tg-implant-facts .tg-note { margin: 1rem 0; }
+.tg-implant-facts p:last-child { margin-bottom: 0; }
+
+/* Severity stages (cavities, gum disease) */
+.tg-scale { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); }
+.tg-scale__bar { flex: 1; min-width: 4rem; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--tg-stage-1), var(--tg-stage-2), var(--tg-stage-3), var(--tg-stage-4), var(--tg-stage-5)); }
+
+.tg-stages { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--tg-rule); border: 1px solid var(--tg-rule); border-radius: 14px; overflow: hidden; }
+.tg-stages--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tg-stage { --tg-stage: var(--tg-stage-1); display: grid; grid-template-rows: subgrid; grid-row: span 3; background: var(--white); padding: 1.25rem 1.25rem 1.5rem; border-top: 6px solid var(--tg-stage); }
+.tg-stage--2 { --tg-stage: var(--tg-stage-2); }
+.tg-stage--3 { --tg-stage: var(--tg-stage-3); }
+.tg-stage--4 { --tg-stage: var(--tg-stage-4); }
+.tg-stage--5 { --tg-stage: var(--tg-stage-5); }
+.tg-stage > * { margin: 0 0 1.25rem; }
+.tg-stage > *:last-child { margin-bottom: 0; }
+.tg-stage__name { margin: 0 0 0.25rem; font-size: 1.125rem; line-height: 1.3; letter-spacing: -0.01em; }
+.tg-stage__sub { margin: 0; font-size: 0.875rem; line-height: 1.4; color: var(--text-medium); }
+.tg-stage__treatment { align-self: end; padding-top: 1rem; border-top: 1px solid var(--tg-rule); }
+.tg-stage__treatment p { margin: 0; font-weight: 700; line-height: 1.4; color: var(--text-dark); }
+
+.tg-pocket { display: flex; align-items: center; gap: 0.9rem; }
+.tg-pocket__probe { flex: none; width: 0.6rem; height: 4rem; border-radius: 3px; background: repeating-linear-gradient(180deg, #ece6dc 0 calc(12.5% - 1px), var(--white) calc(12.5% - 1px) 12.5%); overflow: hidden; }
+.tg-pocket__probe span { display: block; background: var(--tg-stage); }
+.tg-pocket__text { margin: 0; }
+.tg-pocket__text .tg-option__label { margin-bottom: 0.15rem; }
+.tg-pocket__text strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--text-dark); }
+
+@media (max-width: 1100px) {
+    .tg-options,
+    .tg-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tg-options--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 641px) and (max-width: 1100px) {
+    .tg-options:not(.tg-options--3):not(.tg-options--2) .tg-option:last-child,
+    .tg-stages--5 .tg-stage:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+    .tg-prices__layout,
+    .tg-implant-facts { grid-template-columns: 1fr; gap: 2rem; }
+    .tg-options--3 { grid-template-columns: 1fr; }
+    .tg-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    /* The fixed mobile header overlaps the hero; an older rule pins this padding with !important */
+    .treatment-guides .page-header-overlay { padding-top: calc(var(--header-height-mobile) + 1.5rem) !important; }
+    .tg-section { scroll-margin-top: calc(var(--header-height-mobile) + var(--wp-admin-bar-height) + 1rem); }
+}
+
+@media (max-width: 640px) {
+    .tg-steps { grid-template-columns: 1fr; }
+    .tg-options,
+    .tg-options--2,
+    .tg-options--3,
+    .tg-stages,
+    .tg-stages--4 { grid-template-columns: none; grid-template-rows: repeat(var(--tg-rows, 3), auto); grid-auto-flow: column; grid-auto-columns: 84%; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #cfc6b8 transparent; margin-right: -1rem; border-right: 0; border-radius: 14px 0 0 14px; }
+    .tg-option,
+    .tg-stage { scroll-snap-align: start; }
+    .tg-option,
+    .tg-options--3 .tg-option,
+    .tg-options--2 .tg-option { padding: 1.5rem 1.25rem; }
+    .tg-section__head p { font-size: 1.0625rem; }
+    .tg-implant-facts { padding: 1.5rem 1.25rem; }
+    .tg-scale { flex-wrap: wrap; }
+    .tg-scale__bar { order: 3; flex-basis: 100%; }
+    .tg-scale span:last-child { margin-left: auto; text-align: right; }
+}
+
+/* Collapsible guides on the Prices page */
+.tg-guide { background: var(--white); border: 1px solid var(--tg-rule); border-radius: 14px; scroll-margin-top: calc(var(--header-height) + var(--wp-admin-bar-height) + 1rem); }
+.tg-guide + .tg-guide { margin-top: 0.75rem; }
+.tg-guide__summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1.5rem; row-gap: 0.25rem; align-items: center; padding: 1.25rem 1.5rem; cursor: pointer; list-style: none; border-radius: 14px; }
+.tg-guide__summary::-webkit-details-marker { display: none; }
+.tg-guide__summary::after { content: ""; grid-column: 2; grid-row: 1 / span 2; width: 0.7rem; height: 0.7rem; border-right: 2px solid var(--brown-hover); border-bottom: 2px solid var(--brown-hover); transform: rotate(45deg); transition: transform 0.2s ease; }
+.tg-guide[open] > .tg-guide__summary::after { transform: rotate(-135deg); }
+.tg-guide__summary:hover .tg-guide__title { color: var(--brown-hover); }
+.tg-guide__summary:focus-visible { outline: 3px solid var(--brown-hover); outline-offset: 2px; }
+.tg-guide__title { grid-column: 1; font-size: 1.25rem; font-weight: 700; line-height: 1.3; color: var(--text-dark); }
+.tg-guide__intro { grid-column: 1; max-width: 46rem; line-height: 1.5; color: var(--text-medium); }
+.tg-guide[open] > .tg-guide__summary { border-bottom: 1px solid var(--tg-rule); border-radius: 14px 14px 0 0; }
+.tg-guide__body { padding: 1.5rem; }
+.tg-guides__more { margin: 1.5rem 0 0; }
+.tg-guides__more a,
+.service-price-link a { color: var(--brown-hover); font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; }
+.service-price-link { margin: -0.25rem 0 0.75rem; font-size: 0.9375rem; }
+.service-price-link a { display: inline-block; padding: 0.6rem 0; }
+
+.footer-section .footer-links li { padding: 0; }
+.footer-links a { display: inline-block; padding: 0.7rem 0; }
+.home-pricing-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+.home-pricing-links p { flex-basis: 100%; }
+.tg-price-group__title a { display: inline-block; padding: 0.6rem 0; text-decoration: underline; text-decoration-color: var(--tg-rule); text-underline-offset: 0.25em; }
+.tg-price-group__title a:hover { text-decoration-color: currentColor; }
+.tg-prices__crown-link a,
+.tg-guides__more a { display: inline-block; padding: 0.6rem 0; }
+
+@media print {
+    .site-header { position: static; }
+    .mobile-menu-overlay, .scroll-to-top, .header-call, .menu-toggle { display: none !important; }
+}
+
+/* Phone header: call button beside the menu, full-width menu with 48px rows */
+.header-call { display: none; }
+
+@media (max-width: 1100px) {
+    .header-content {
+        grid-template-columns: minmax(0, 1fr) 44px 44px;
+        grid-template-areas: "logo call hamburger";
+    }
+
+    .header-call {
+        grid-area: call;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--brown-hover);
+        color: var(--white);
+    }
+
+    .site-header .header-call,
+    .site-header .header-call:hover,
+    .site-header .header-call:focus { color: var(--white); }
+
+    .site-header .header-call:focus-visible,
+    .site-header button.menu-toggle:focus-visible { outline: 3px solid var(--text-dark) !important; outline-offset: 2px; }
+
+    .tg-scale { flex-wrap: wrap; }
+    .tg-scale__bar { order: 3; flex-basis: 100%; }
+    .tg-scale span:last-child { margin-left: auto; text-align: right; }
+
+    .main-navigation ul {
+        left: 15px;
+        right: 15px;
+        width: auto !important;
+        max-width: none;
+    }
+
+    .main-navigation a {
+        min-height: 48px !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem;
+    }
+
+    .main-navigation .language-switcher-wrapper { padding: 0.5rem 1rem; }
+    .main-navigation .language-switcher-wrapper select { min-height: 44px; }
+}
+
+@media (max-width: 640px) {
+    .tg-guide__summary { padding: 1rem; column-gap: 1rem; }
+    .tg-guide__title { font-size: 1.125rem; }
+    .tg-guide__body { padding: 1rem; }
+    .tg-guide__intro { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .tg-guide[open] .tg-guide__intro { display: block; }
+}
+

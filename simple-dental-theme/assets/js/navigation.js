@@ -37,14 +37,14 @@
 
         // Close mobile menu when a menu item is clicked
         $(document).on('click', '.main-navigation a', function() {
-            if ($(window).width() <= 768) {
+            if ($(window).width() <= 1100) {
                 closeMenu();
             }
         });
 
         // Handle window resize - close menu on desktop
         $(window).resize(function() {
-            if ($(window).width() > 768) {
+            if ($(window).width() > 1100) {
                 closeMenu();
             }
         });
@@ -62,18 +62,36 @@
 
         // Helper function to close menu consistently
         function closeMenu() {
-            $('.menu-toggle')
+            var wasOpen = $('body').hasClass('menu-open');
+            var $toggle = $('.menu-toggle')
                 .removeClass('active')
-                .attr('aria-expanded', 'false')
-                .focus();
+                .attr('aria-expanded', 'false');
+            if (wasOpen) {
+                $toggle.focus();
+            }
             $('.main-navigation ul').removeClass('active');
             $('body').removeClass('menu-open');
         }
 
         // Clear any stale mobile menu state on desktop loads.
-        if ($(window).width() > 768) {
+        if ($(window).width() > 1100) {
             closeMenu();
         }
+
+        // Collapsible guides: open the one named in the URL hash, and all of them for printing
+        function openDetailsFromHash() {
+            var id = window.location.hash.slice(1);
+            var target = id ? document.getElementById(id) : null;
+            if (target && target.tagName === 'DETAILS') {
+                target.open = true;
+                target.scrollIntoView();
+            }
+        }
+        $(window).on('hashchange', openDetailsFromHash);
+        openDetailsFromHash();
+        window.addEventListener('beforeprint', function() {
+            $('details.tg-guide').prop('open', true);
+        });
 
         // Smooth scroll for anchor links
         function getHeaderOffset() {
@@ -89,6 +107,9 @@
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
+                    if (target.is('details')) {
+                        target.prop('open', true);
+                    }
                     var duration = isFaqJump ? 200 : 1000;
                     $('html, body').animate({
                         scrollTop: target.offset().top - getHeaderOffset()

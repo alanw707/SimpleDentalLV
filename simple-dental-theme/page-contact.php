@@ -125,15 +125,10 @@ $booking_url = simple_dental_get_booking_url();
                 
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <h4><?php echo __t('When do you open?'); ?></h4>
-                        <p><?php echo sprintf(__t('Our opening date is %s at our new location on S Jones Blvd.'), simple_dental_get_opening_date_display()); ?></p>
+                        <h4><?php echo esc_html(__t('Do you accept insurance?')); ?></h4>
+                        <p><?php echo esc_html(__t('We accept most major insurance plans and will verify your benefits.')); ?></p>
                     </div>
-                    
-                    <div class="faq-item">
-                        <h4><?php echo __t('Do you accept insurance?'); ?></h4>
-                        <p><?php echo __t('We\'ll provide details about insurance acceptance closer to our opening date. Our transparent pricing makes it easy to know costs upfront.'); ?></p>
-                    </div>
-                    
+
                     <div class="faq-item">
                         <h4><?php echo __t('What makes you different?'); ?></h4>
                         <p><?php echo __t("You'll always see the same doctor, get transparent pricing, and receive only the care you actually need — no pressure, no upselling."); ?></p>

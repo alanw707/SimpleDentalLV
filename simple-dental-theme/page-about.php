@@ -96,8 +96,7 @@ $booking_url = simple_dental_get_booking_url();
                 <div class="about-location">
                     <div class="location-content">
                         <div class="location-info">
-                            <h2><?php echo __t('Coming to Las Vegas'); ?></h2>
-                            <h3><?php echo sprintf(__t('🎉 Opening %s!'), simple_dental_get_opening_date_display()); ?></h3>
+                            <h2><?php echo esc_html(__t('Find Us in Las Vegas', 'key:about.location.h2')); ?></h2>
                             <p class="address"><strong>204 S Jones Blvd, Las Vegas, NV 89107</strong></p>
                             
                             <div class="location-highlight">
@@ -106,7 +105,7 @@ $booking_url = simple_dental_get_booking_url();
                                 <p><?php echo __t("Look for us right off Jones Blvd, and enjoy stress-free parking and easy access — because your visit should start simple before you even step inside."); ?></p>
                             </div>
                             
-                            <p><?php echo sprintf(__t("Simple Dental's opening date is %s. Our brand-new, modern office is designed to make your dental visits simple, honest, and stress-free."), simple_dental_get_opening_date_display()); ?></p>
+                            <p><?php echo esc_html(__t('Our modern office is designed to make your dental visits simple, honest, and stress-free.', 'key:about.location.copy')); ?></p>
                             
                             <div class="opening-features">
                                 <div class="feature-list">

@@ -40,6 +40,22 @@ function simple_dental_get_seo_data() {
         ));
     }
 
+    if (simple_dental_is_dental_health_request()) {
+        return array_merge($default, array(
+            'title' => function_exists('__t') ? __t('Cavity & Gum Disease Stages Explained | Simple Dental Las Vegas', 'key:health.seo.title') : 'Cavity & Gum Disease Stages Explained | Simple Dental Las Vegas',
+            'description' => function_exists('__t') ? __t('See how cavities and gum disease progress stage by stage, the signs to watch for, and how each cavity stage is treated at Simple Dental in Las Vegas.', 'key:health.seo.description') : 'See how cavities and gum disease progress stage by stage, the signs to watch for, and how each cavity stage is treated at Simple Dental in Las Vegas.',
+            'image' => simple_dental_media_url('hero-services-operatory.jpg', 'large'),
+        ));
+    }
+
+    if (simple_dental_is_treatment_guides_request()) {
+        return array_merge($default, array(
+            'title' => function_exists('__t') ? __t('Dental Prices & Treatment Options | Simple Dental Las Vegas', 'key:guides.seo.title_v2') : 'Dental Prices & Treatment Options | Simple Dental Las Vegas',
+            'description' => function_exists('__t') ? __t('Listed prices for crowns, partial dentures, and full dentures at Simple Dental in Las Vegas, with guides comparing each option and the implant process.', 'key:guides.seo.description_v2') : 'Listed prices for crowns, partial dentures, and full dentures at Simple Dental in Las Vegas, with guides comparing each option and the implant process.',
+            'image' => simple_dental_media_url('hero-services-operatory.jpg', 'large'),
+        ));
+    }
+
     if (is_page('services')) {
         return array_merge($default, array(
             'title' => 'Dental Services & Transparent Pricing | Simple Dental Las Vegas',
@@ -130,6 +146,14 @@ function simple_dental_rank_math_robots($robots) {
         );
     }
 
+    // Virtual routes have no backing WP page, so Rank Math treats them as 404 and noindexes them.
+    if (simple_dental_is_same_day_crowns_request() || simple_dental_is_testimonials_request() || simple_dental_is_smile_preview_request() || simple_dental_is_treatment_guides_request() || simple_dental_is_dental_health_request()) {
+        return array(
+            'index' => 'index',
+            'follow' => 'follow',
+        );
+    }
+
     return $robots;
 }
 add_filter('rank_math/frontend/robots', 'simple_dental_rank_math_robots', 20);
@@ -156,6 +180,14 @@ function simple_dental_get_base_canonical_url() {
 
     if (simple_dental_is_smile_preview_request()) {
         return home_url(simple_dental_get_smile_preview_path());
+    }
+
+    if (simple_dental_is_dental_health_request()) {
+        return home_url(simple_dental_get_dental_health_path());
+    }
+
+    if (simple_dental_is_treatment_guides_request()) {
+        return home_url(simple_dental_get_treatment_guides_path());
     }
 
     if (is_singular()) {
@@ -259,7 +291,7 @@ function simple_dental_add_seo_meta() {
         echo '<link rel="canonical" href="' . esc_url($canonical_url) . '">' . "\n";
     }
 
-    if ($rank_math_active && (simple_dental_is_same_day_crowns_request() || simple_dental_is_testimonials_request() || simple_dental_is_smile_preview_request())) {
+    if ($rank_math_active && (simple_dental_is_same_day_crowns_request() || simple_dental_is_testimonials_request() || simple_dental_is_smile_preview_request() || simple_dental_is_treatment_guides_request() || simple_dental_is_dental_health_request())) {
         echo '<link rel="canonical" href="' . esc_url($canonical_url) . '">' . "\n";
     }
 
@@ -343,7 +375,15 @@ function simple_dental_get_services_schema() {
             'availability' => 'https://schema.org/InStock',
         );
 
-        if (preg_match('/^\$(\d+(?:\.\d{2})?)$/', $service['price'], $matches)) {
+        $price_value = str_replace(',', '', $service['price']);
+
+        if (!empty($service['price_from']) && preg_match('/^\$(\d+(?:\.\d{2})?)$/', $price_value, $matches)) {
+            $offer['priceSpecification'] = array(
+                '@type' => 'PriceSpecification',
+                'minPrice' => $matches[1],
+                'priceCurrency' => 'USD',
+            );
+        } elseif (preg_match('/^\$(\d+(?:\.\d{2})?)$/', $price_value, $matches)) {
             $offer['price'] = $matches[1];
         } else {
             $offer['description'] = $service['name'] . ' pricing: ' . $service['price'];
@@ -490,6 +530,8 @@ function simple_dental_get_locale_sitemap_page_paths() {
         '/same-day-crowns-las-vegas/',
         '/testimonials/',
         '/smile-preview/',
+        '/treatment-guides/',
+        '/cavity-gum-disease-guide/',
     );
 }
 
@@ -498,7 +540,7 @@ function simple_dental_get_locale_sitemap_languages() {
 }
 
 function simple_dental_get_sitemap_languages_for_path($path) {
-    if ($path === simple_dental_get_same_day_crowns_path() || $path === simple_dental_get_testimonials_path() || $path === simple_dental_get_smile_preview_path()) {
+    if ($path === simple_dental_get_same_day_crowns_path() || $path === simple_dental_get_testimonials_path() || $path === simple_dental_get_smile_preview_path() || $path === simple_dental_get_treatment_guides_path() || $path === simple_dental_get_dental_health_path()) {
         return array('en', 'es', 'zh-CN', 'zh-TW');
     }
 
@@ -518,6 +560,8 @@ function simple_dental_get_page_lastmod_for_path($path) {
         simple_dental_get_same_day_crowns_path() => 'page-same-day-crowns.php',
         simple_dental_get_testimonials_path() => 'page-testimonials.php',
         simple_dental_get_smile_preview_path() => 'page-smile-preview.php',
+        simple_dental_get_treatment_guides_path() => 'page-treatment-guides.php',
+        simple_dental_get_dental_health_path() => 'page-dental-health.php',
     );
 
     if (isset($virtual_templates[$path])) {

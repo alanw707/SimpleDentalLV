@@ -33,15 +33,13 @@ $footer_status_label = simple_dental_is_open()
                 </div>
 
                 <div class="footer-section">
-                    <h4><?php echo __t('Common Questions'); ?></h4>
-                    <div class="footer-faq-item">
-                        <p><strong><?php echo __t('Do you accept insurance?'); ?></strong><br>
-                        <?php echo __t('We accept most major insurance plans and will verify your benefits.'); ?></p>
-                    </div>
-                    <div class="footer-faq-item">
-                        <p><strong><?php echo __t('One doctor, always?'); ?></strong><br>
-                        <?php echo __t("Yes, you'll see the same experienced doctor every visit."); ?></p>
-                    </div>
+                    <h4><?php echo esc_html(__t('More', 'key:footer.more.title')); ?></h4>
+                    <ul class="footer-links">
+                        <li><a href="<?php echo esc_url(simple_dental_with_lang(home_url('/faq/'))); ?>"><?php echo esc_html(__t('FAQ')); ?></a></li>
+                        <li><a href="<?php echo esc_url(simple_dental_with_lang(home_url(simple_dental_get_same_day_crowns_path()))); ?>"><?php echo esc_html(__t('Same-Day Crowns', 'key:footer.more.crowns')); ?></a></li>
+                        <li><a href="<?php echo esc_url(simple_dental_with_lang(home_url(simple_dental_get_smile_preview_path()))); ?>"><?php echo esc_html(__t('Smile Preview')); ?></a></li>
+                        <li><a href="<?php echo esc_url(simple_dental_with_lang(home_url(simple_dental_get_dental_health_path()))); ?>"><?php echo esc_html(__t('Cavity & Gum Guides', 'key:health.link')); ?></a></li>
+                    </ul>
                 </div>
             </div>
 

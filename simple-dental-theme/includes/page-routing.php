@@ -43,8 +43,16 @@ function simple_dental_is_smile_preview_request() {
     return simple_dental_get_normalized_request_path() === simple_dental_get_smile_preview_path();
 }
 
+function simple_dental_is_treatment_guides_request() {
+    return simple_dental_get_normalized_request_path() === simple_dental_get_treatment_guides_path();
+}
+
 function simple_dental_render_custom_template($template_file) {
     status_header(200);
+    // WordPress already sent 404 no-cache headers for these virtual routes.
+    header_remove('Cache-Control');
+    header_remove('Expires');
+    header_remove('Pragma');
     global $wp_query;
     if ($wp_query) {
         $wp_query->is_404 = false;
@@ -80,3 +88,25 @@ function simple_dental_render_smile_preview_page() {
     simple_dental_render_custom_template('page-smile-preview.php');
 }
 add_action('template_redirect', 'simple_dental_render_smile_preview_page', 1);
+
+function simple_dental_is_dental_health_request() {
+    return simple_dental_get_normalized_request_path() === simple_dental_get_dental_health_path();
+}
+
+function simple_dental_render_dental_health_page() {
+    if (!simple_dental_is_dental_health_request()) {
+        return;
+    }
+
+    simple_dental_render_custom_template('page-dental-health.php');
+}
+add_action('template_redirect', 'simple_dental_render_dental_health_page', 1);
+
+function simple_dental_render_treatment_guides_page() {
+    if (!simple_dental_is_treatment_guides_request()) {
+        return;
+    }
+
+    simple_dental_render_custom_template('page-treatment-guides.php');
+}
+add_action('template_redirect', 'simple_dental_render_treatment_guides_page', 1);
