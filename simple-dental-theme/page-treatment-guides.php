@@ -48,7 +48,8 @@ $price_groups = simple_dental_get_full_price_list($guides);
                         <div class="tg-price-group">
                             <h3 class="tg-price-group__title">
                                 <?php if ($group['id']) : ?>
-                                    <a href="#<?php echo esc_attr($group['id']); ?>"><?php echo esc_html($group['title']); ?></a> <span class="tg-price-group__unit"><?php echo esc_html($group['unit']); ?></span>
+                                    <a href="#<?php echo esc_attr($group['id']); ?>"><?php echo esc_html($group['title']); ?></a><?php if ($group['unit']) : ?> <span class="tg-price-group__unit"><?php echo esc_html($group['unit']); ?></span><?php endif; ?>
+                                    <a class="tg-price-group__more" href="#<?php echo esc_attr($group['id']); ?>" aria-hidden="true" tabindex="-1"><?php echo esc_html(__t('View guide', 'key:guides.prices.view_guide')); ?></a>
                                 <?php else : ?>
                                     <?php echo esc_html($group['title']); ?>
                                 <?php endif; ?>
@@ -123,6 +124,17 @@ $price_groups = simple_dental_get_full_price_list($guides);
                             <li><?php echo esc_html($benefit); ?></li>
                         <?php endforeach; ?>
                     </ul>
+                </div>
+                <div class="tg-fees">
+                    <h3><?php echo esc_html($implants['fees_title']); ?></h3>
+                    <dl class="tg-price-list">
+                        <?php foreach ($implants['fees'] as $fee) : ?>
+                            <div class="tg-price-list__row">
+                                <dt><?php echo esc_html($fee['name']); ?></dt>
+                                <dd><?php echo esc_html($fee['price']); ?></dd>
+                            </div>
+                        <?php endforeach; ?>
+                    </dl>
                     <p class="tg-note"><?php echo esc_html($implants['price_note']); ?></p>
                     <p><a href="tel:7023024787" class="btn btn-primary"><?php echo esc_html(__t('Call (702) 302-4787')); ?></a></p>
                 </div>

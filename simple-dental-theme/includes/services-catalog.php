@@ -98,7 +98,7 @@ function simple_dental_get_service_catalog() {
             'description_key' => 'services.prosthetics.full_denture.description',
         ),
         'partial_denture' => array(
-            'name' => 'Partial Denture',
+            'name' => 'Partial Denture (per arch)',
             'name_key' => 'services.prosthetics.partial_denture.name',
             'price' => '$1,100',
             'price_from' => true,
@@ -209,7 +209,7 @@ function new_patient_special_display($atts) {
     ob_start();
     ?>
     <div class="new-patient-special">
-        <h3><?php echo __t('Opening Promotion', 'key:promo.new_patient.heading'); ?></h3>
+        <h3><?php echo __t('New Patient Offers', 'key:promo.new_patient.heading'); ?></h3>
         <div class="special-offers">
             <article class="special-offer-card special-offer-card--starter">
                 <h4><?php echo __t('New Patient Exam + X-rays', 'key:promo.new_patient.exam.name'); ?></h4>

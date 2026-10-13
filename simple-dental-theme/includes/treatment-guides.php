@@ -39,6 +39,11 @@ function simple_dental_get_treatment_guides_data() {
     $label_metal = $t('spec.metal', 'Metal');
     $label_add_teeth = $t('spec.add_teeth', 'Add teeth later');
     $label_colors = $t('spec.colors', 'Shade choices');
+    $label_crown_type = $t('spec.crown_type', 'Crown type');
+
+    // Every final crown is made same-day; PMMA is the only temporary.
+    $crown_same_day = $t('crowns.type.same_day', 'Final crown, made same day');
+    $crown_temporary = $t('crowns.type.temporary', 'Longer-wearing temporary crown, not a final crown');
 
     $weeks_short = $t('time.2_3_weeks', 'About 2–3 weeks');
     $weeks_long = $t('time.4_6_weeks', 'About 4–6 weeks');
@@ -53,9 +58,9 @@ function simple_dental_get_treatment_guides_data() {
             'options' => array(
                 array(
                     'name' => $t('crowns.pmma.name', 'PMMA temporary crown'),
-                    'sub' => $t('crowns.pmma.sub', 'Temporary crown'),
+                    'sub' => $t('crowns.pmma.sub', 'Longer-wearing temporary crown'),
                     'price' => '$350',
-                    'desc' => $t('crowns.pmma.desc', 'PMMA is a durable acrylic resin most often used for temporary crowns.'),
+                    'desc' => $t('crowns.pmma.desc', 'PMMA is a durable acrylic resin. This is a temporary crown made to be worn a little longer, not a final crown.'),
                     'pros' => array(
                         $t('crowns.pmma.pro1', 'Lowest price'),
                         $t('crowns.pmma.pro2', 'Quick to make'),
@@ -70,6 +75,7 @@ function simple_dental_get_treatment_guides_data() {
                         array($label_looks, 2),
                         array($label_strength, 2),
                         array($label_durability, 1),
+                        array($label_crown_type, $crown_temporary),
                         array($label_best_for, $t('crowns.pmma.best', 'Temporary use, any tooth')),
                         array($label_material, $t('crowns.pmma.material', 'Acrylic resin (PMMA)')),
                     ),
@@ -94,6 +100,7 @@ function simple_dental_get_treatment_guides_data() {
                         array($label_looks, 3),
                         array($label_strength, 3),
                         array($label_durability, 3),
+                        array($label_crown_type, $crown_same_day),
                         array($label_best_for, $t('crowns.camo.best', 'Front teeth or premolars with lighter bite force')),
                         array($label_material, $t('crowns.camo.material', 'Resin-based ceramic')),
                     ),
@@ -118,6 +125,7 @@ function simple_dental_get_treatment_guides_data() {
                         array($label_looks, 4),
                         array($label_strength, 3),
                         array($label_durability, 4),
+                        array($label_crown_type, $crown_same_day),
                         array($label_best_for, $t('crowns.obsidian.best', 'Front teeth, or anywhere appearance matters most')),
                         array($label_material, $t('crowns.obsidian.material', 'Lithium disilicate all-ceramic')),
                     ),
@@ -140,6 +148,7 @@ function simple_dental_get_treatment_guides_data() {
                         array($label_looks, 4),
                         array($label_strength, 4),
                         array($label_durability, 4),
+                        array($label_crown_type, $crown_same_day),
                         array($label_best_for, $t('crowns.azr.best', 'Front or back teeth, balancing looks and strength')),
                         array($label_material, $t('crowns.azr.material', 'High-translucency zirconia')),
                     ),
@@ -162,6 +171,7 @@ function simple_dental_get_treatment_guides_data() {
                         array($label_looks, 3),
                         array($label_strength, 5),
                         array($label_durability, 5),
+                        array($label_crown_type, $crown_same_day),
                         array($label_best_for, $t('crowns.szr.best', 'Back teeth and molars with heavy bite force')),
                         array($label_material, $t('crowns.szr.material', 'High-strength zirconia')),
                     ),
@@ -198,7 +208,7 @@ function simple_dental_get_treatment_guides_data() {
                     'summary' => $t('implants.s3.summary', 'Allow time for the bone to heal and become strong.'),
                     'points' => array(
                         $t('implants.s3.p1', 'The bone graft integrates with your natural bone.'),
-                        $t('implants.s3.p2', 'Usually 3–6 months, depending on the case.'),
+                        $t('implants.s3.p2', 'Usually 3–4 months before the implant can be placed, depending on the case.'),
                         $t('implants.s3.p3', 'You may wear a temporary tooth during this time if needed.'),
                     ),
                 ),
@@ -232,13 +242,13 @@ function simple_dental_get_treatment_guides_data() {
             ),
             'timeline_title' => $t('implants.timeline.title', 'Typical timeline'),
             'timeline' => array(
-                array($t('implants.timeline.r1', 'Extraction and bone graft'), $t('implants.timeline.v1', '0–3 months')),
-                array($t('implants.timeline.r2', 'Implant placement and healing'), $t('implants.timeline.v2', '3–6 months')),
+                array($t('implants.timeline.r1', 'Extraction, bone graft and healing'), $t('implants.timeline.v1', '3–4 months')),
+                array($t('implants.timeline.r2', 'Implant placement and healing'), $t('implants.timeline.v2', '+ 3–4 months')),
                 array($t('implants.timeline.r3', 'Abutment and gum shaping'), $t('implants.timeline.v3', '+ 2–3 weeks')),
                 array($t('implants.timeline.r4', 'Final crown'), $t('implants.timeline.v4', '+ 1–2 weeks')),
             ),
             'timeline_total_label' => $t('implants.timeline.total_label', 'Total treatment time'),
-            'timeline_total' => $t('implants.timeline.total', 'About 6–12 months'),
+            'timeline_total' => $t('implants.timeline.total', 'About 7–9 months'),
             'timeline_note' => $t('implants.timeline.note', 'Timing varies with each case.'),
             'benefits_title' => $t('implants.benefits.title', 'Why patients choose implants'),
             'benefits' => array(
@@ -248,7 +258,14 @@ function simple_dental_get_treatment_guides_data() {
                 $t('implants.benefits.b4', 'Success rate over 95%'),
                 $t('implants.benefits.b5', 'Can last many years with proper care'),
             ),
-            'price_note' => $t('implants.price_note', 'Implant fees depend on how many of these steps your case needs. Call us and we will explain your options and cost before any treatment begins.'),
+            'unit' => '',
+            'fees_title' => $t('implants.fees.title', 'Implant fees'),
+            'fees' => array(
+                array('name' => $t('implants.s4.title', 'Implant placement'), 'price' => '$2,500'),
+                array('name' => $t('implants.fees.abutment', 'Abutment'), 'price' => '$500'),
+                array('name' => $t('implants.fees.crown', 'Implant crown'), 'price' => '$1,000'),
+            ),
+            'price_note' => $t('implants.price_note', 'Each fee is charged separately. Dr. Chang confirms which of the steps above your case needs, and the total cost, before any treatment begins.'),
         ),
 
         'cavities' => array(
@@ -380,7 +397,7 @@ function simple_dental_get_treatment_guides_data() {
             'nav' => $t('partials.nav', 'Partial dentures'),
             'title' => $t('partials.title', 'Removable partial dentures compared'),
             'intro' => $t('partials.intro', 'Different materials and different ways of making them. Each has its strengths.'),
-            'unit' => $t('unit.each', 'each'),
+            'unit' => $t('unit.per_arch', 'per arch'),
             'options' => array(
                 array(
                     'name' => $t('partials.printed.name', '3D-printed partial denture'),
@@ -468,7 +485,7 @@ function simple_dental_get_treatment_guides_data() {
             'nav' => $t('dentures.nav', 'Full dentures'),
             'title' => $t('dentures.title', 'Full dentures compared'),
             'intro' => $t('dentures.intro', 'The same function, made two different ways. Materials, time, and price differ.'),
-            'unit' => $t('unit.each', 'each'),
+            'unit' => $t('unit.per_arch', 'per arch'),
             'options' => array(
                 array(
                     'name' => $t('dentures.printed.name', '3D-printed economy denture'),
@@ -532,13 +549,15 @@ function simple_dental_get_treatment_guides_data() {
 function simple_dental_get_treatment_price_list($guides) {
     $groups = array();
 
-    foreach (array('crowns', 'partials', 'dentures') as $guide_key) {
-        if (empty($guides[$guide_key]['options'])) {
+    foreach (array('crowns', 'implants', 'partials', 'dentures') as $guide_key) {
+        // Implants list a fee per step rather than options to compare.
+        $priced = !empty($guides[$guide_key]['options']) ? $guides[$guide_key]['options'] : (isset($guides[$guide_key]['fees']) ? $guides[$guide_key]['fees'] : array());
+        if (empty($priced)) {
             continue;
         }
 
         $rows = array();
-        foreach ($guides[$guide_key]['options'] as $option) {
+        foreach ($priced as $option) {
             $rows[] = array(
                 'name' => $option['name'],
                 'price' => $option['price'],
@@ -558,8 +577,8 @@ function simple_dental_get_treatment_price_list($guides) {
 
 /**
  * Every published fee in the order patients ask about them: routine care
- * first, then crowns, extractions, root canals, dentures, and the rest.
- * Crown and denture groups come from the guides and link to them.
+ * first, then crowns, extractions, root canals, implants, dentures, and the
+ * rest. Crown, implant and denture groups come from the guides and link to them.
  */
 function simple_dental_get_full_price_list($guides) {
     $catalog = simple_dental_get_service_catalog();
@@ -604,6 +623,7 @@ function simple_dental_get_full_price_list($guides) {
         $guide_groups[$guides['crowns']['id']],
         $catalog_group('extraction', $categories['extraction']['service_ids']),
         $catalog_group('endodontics', $categories['endodontics']['service_ids']),
+        $guide_groups[$guides['implants']['id']],
         $guide_groups[$guides['partials']['id']],
         $full_dentures,
         $catalog_group('other', $categories['other']['service_ids']),
