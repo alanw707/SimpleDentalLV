@@ -83,7 +83,7 @@ add_action('wp_head', 'simple_dental_favicon');
  */
 function simple_dental_scripts() {
     // Main theme stylesheet
-    wp_enqueue_style('simple-dental-style', get_stylesheet_uri(), array(), '1.1.4');
+    wp_enqueue_style('simple-dental-style', get_stylesheet_uri(), array(), '1.1.5');
     
     // Google Fonts
     wp_enqueue_style('simple-dental-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);

@@ -8,6 +8,8 @@
 get_header();
 
 $booking_url = simple_dental_get_booking_url();
+// Show the booking link without scheme or trailing slash so it fits narrow cards.
+$booking_label = untrailingslashit(preg_replace('#^https?://(www\.)?#', '', home_url(SIMPLE_DENTAL_BOOKING_PATH)));
 ?>
 
 <main id="primary" class="site-main">
@@ -37,7 +39,7 @@ $booking_url = simple_dental_get_booking_url();
                             <div class="contact-row-details">
                                 <div class="detail-item">
                                     <h4><?php echo __t('Book Online'); ?></h4>
-                                    <p><a href="<?php echo esc_url($booking_url); ?>"><?php echo esc_html(home_url(SIMPLE_DENTAL_BOOKING_PATH)); ?></a></p>
+                                    <p><a href="<?php echo esc_url($booking_url); ?>"><?php echo esc_html($booking_label); ?></a></p>
                                 </div>
                                 <div class="detail-item">
                                     <h4><?php echo __t('Phone'); ?></h4>
@@ -141,7 +143,7 @@ $booking_url = simple_dental_get_booking_url();
                     
                     <div class="faq-item">
                         <h4><?php echo __t('How do I schedule an appointment?'); ?></h4>
-                        <p><?php echo wp_kses_post(sprintf(__t('Book online at %s, or call us at %s and our team will help you choose a time that works.'), '<a href="' . esc_url($booking_url) . '">' . esc_html(home_url(SIMPLE_DENTAL_BOOKING_PATH)) . '</a>', '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
+                        <p><?php echo wp_kses_post(sprintf(__t('Book online at %s, or call us at %s and our team will help you choose a time that works.'), '<a href="' . esc_url($booking_url) . '">' . esc_html($booking_label) . '</a>', '<a href="tel:7023024787">(702) 302-4787</a>')); ?></p>
                     </div>
                     
                     <div class="faq-item">
