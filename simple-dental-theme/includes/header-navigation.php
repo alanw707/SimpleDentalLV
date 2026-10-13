@@ -54,9 +54,9 @@ function simple_dental_render_header_navigation() {
     );
     foreach ($secondary as $index => $item) {
         $aria_current = simple_dental_header_navigation_is_current($item['path'], $current_path) ? ' aria-current="page"' : '';
-        echo '<li class="menu-secondary' . (0 === $index ? ' menu-secondary--first' : '') . '"><a href="' . esc_url(simple_dental_with_lang(home_url($item['path']))) . '"' . $aria_current . '><span class="menu-text">' . esc_html($item['label']) . '</span></a></li>';
+        echo '<li class="menu-secondary' . (0 === $index ? ' menu-secondary--first' : '') . '"><a href="' . esc_url(simple_dental_with_lang(home_url($item['path']))) . '"' . $aria_current . '><span class="menu-icon" aria-hidden="true"></span><span class="menu-text">' . esc_html($item['label']) . '</span></a></li>';
     }
-    echo '<li class="menu-secondary menu-secondary--book"><a href="' . esc_url(simple_dental_get_booking_url()) . '"><span class="menu-text">' . esc_html(__t('Book Online')) . '</span></a></li>';
+    echo '<li class="menu-secondary menu-secondary--book"><a href="' . esc_url(simple_dental_get_booking_url()) . '"><span class="menu-icon" aria-hidden="true"></span><span class="menu-text">' . esc_html(__t('Book Online')) . '</span></a></li>';
 
     echo '</ul>';
 }

@@ -84,7 +84,7 @@ function simple_dental_get_service_catalog() {
         'molar_root_canal' => array(
             'name' => 'Molar Root Canal',
             'name_key' => 'services.endodontics.molar.name',
-            'price' => '$1000',
+            'price' => '$1,000',
             'description' => 'Root canal therapy for back teeth',
             'description_key' => 'services.endodontics.molar.description',
         ),

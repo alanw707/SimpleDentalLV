@@ -17,7 +17,7 @@ $services_url = simple_dental_with_lang(home_url('/services/'));
 $crowns_url = simple_dental_with_lang(home_url('/same-day-crowns-las-vegas/'));
 $health_url = simple_dental_with_lang(home_url(simple_dental_get_dental_health_path()));
 $guides = simple_dental_get_treatment_guides_data();
-$price_groups = array_merge(simple_dental_get_treatment_price_list($guides), simple_dental_get_general_price_list());
+$price_groups = simple_dental_get_full_price_list($guides);
 ?>
 
 <main id="primary" class="site-main service-landing treatment-guides">

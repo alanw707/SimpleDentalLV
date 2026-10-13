@@ -42,7 +42,7 @@ body.admin-bar {
 
 :root {
     --primary-brown: #826B4F;
-    --brown-hover: #7A6249;
+    --brown-hover: #6B563F;
     --brown-light: #A68B5B;
     --dark-gray: #2c2c2c;
     --medium-gray: #6b6b6b;
@@ -278,9 +278,9 @@ a:hover {
 }
 
 .scroll-to-top:focus-visible,
-.simple-contact-form input:focus-visible,
-.simple-contact-form textarea:focus-visible {
-    outline: 3px solid var(--brown-hover);
+.simple-contact-form .form-row input:focus-visible,
+.simple-contact-form .form-row textarea:focus-visible {
+    outline: 3px solid var(--brown-hover) !important;
     outline-offset: 2px;
 }
 
@@ -2733,7 +2733,7 @@ body.menu-open {
 /* Same-Day Crowns landing page */
 .service-landing .service-eyebrow {
     margin: 0 0 0.75rem;
-    color: var(--accent-coral);
+    color: var(--primary-brown);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -3796,8 +3796,12 @@ body.menu-open {
 @media (max-width: 1100px) {
     .main-navigation .menu-secondary { display: block; }
     .main-navigation .menu-secondary--first { border-top: 6px solid var(--off-white); }
-    /* No icons here, so indent to the same text column as the main links */
-    .main-navigation .menu-secondary a { padding-left: calc(1rem + 36px) !important; color: var(--text-medium); font-weight: 500; }
+    .main-navigation .menu-secondary a { color: var(--text-medium); font-weight: 500; }
+    .main-navigation .menu-secondary a:hover,
+    .main-navigation .menu-secondary a:focus-visible { color: var(--white); }
+    .main-navigation .menu-secondary a[aria-current="page"] { color: var(--primary-brown); }
+    .main-navigation .menu-secondary a[aria-current="page"]:hover { color: var(--white); }
+    .main-navigation .menu-secondary .menu-icon { display: inline-block; flex: none; }
     .main-navigation .menu-secondary--book a { color: var(--brown-hover); font-weight: 700; }
 }
 
@@ -3810,5 +3814,32 @@ body.menu-open {
     .tg-compare__best { display: block; margin-top: 0.15rem; font-weight: 400; font-size: 0.875rem; line-height: 1.4; color: var(--text-medium); }
     .tg-compare tr:last-child th,
     .tg-compare tr:last-child td { border-bottom: 0; }
+}
+
+.page-header .service-eyebrow { color: var(--white); }
+.contact-card h4 { color: var(--primary-brown); }
+.policy-page a,
+.policy-page h2,
+.policy-page li { overflow-wrap: anywhere; }
+
+/* Full fee list: two columns beside the intro on wide screens */
+@media (min-width: 1101px) {
+    .tg-prices__layout { grid-template-columns: minmax(0, 0.62fr) minmax(0, 2fr); }
+    .tg-prices__groups { display: block; columns: 2; column-gap: 3rem; }
+    .tg-price-group { break-inside: avoid; margin-bottom: 2rem; }
+}
+
+/* Phones: fees come before the longer brand and technology sections */
+@media (max-width: 768px) {
+    .home .site-main { display: flex; flex-direction: column; }
+    .home .site-main > * { order: 3; }
+    .home .site-main > .hero { order: 0; }
+    .home .site-main > .home-promo { order: 1; }
+    .home .site-main > .home-services { order: 2; }
+
+    .services-section > .container { display: flex; flex-direction: column; }
+    .services-section > .container > .technology-section { order: 1; }
+    .services-section > .container > .services-additional { order: 2; }
+    .services-section > .container > .services-cta { order: 3; }
 }
 

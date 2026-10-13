@@ -83,7 +83,7 @@ add_action('wp_head', 'simple_dental_favicon');
  */
 function simple_dental_scripts() {
     // Main theme stylesheet
-    wp_enqueue_style('simple-dental-style', get_stylesheet_uri(), array(), '1.1.10');
+    wp_enqueue_style('simple-dental-style', get_stylesheet_uri(), array(), '1.1.12');
     
     // Google Fonts
     wp_enqueue_style('simple-dental-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
@@ -106,7 +106,7 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  * One-time cache purge after theme content updates.
  */
 function simple_dental_purge_cache_after_reviews_update() {
-    $version = 'site-ux-2026-10-13-1';
+    $version = 'site-ux-2026-10-13-2';
     if (get_option('simple_dental_cache_purge_version') === $version) {
         return;
     }

@@ -103,7 +103,7 @@ $hero_opening_label = simple_dental_is_open()
     </section>
 
     <!-- New Patient Special Section -->
-    <section class="section" style="background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%);">
+    <section class="section home-promo" style="background: linear-gradient(135deg, var(--warm-beige) 0%, var(--off-white) 100%);">
         <div class="container">
             <div style="text-align: center; margin-bottom: 2rem;">
                 <h2><?php echo __t('Start Your Journey to Better Oral Health'); ?></h2>
@@ -117,7 +117,7 @@ $hero_opening_label = simple_dental_is_open()
     </section>
 
     <!-- Services Preview Section -->
-    <section class="section section-alt" id="services">
+    <section class="section section-alt home-services" id="services">
         <div class="container">
             <h2 style="text-align: center; margin-bottom: 40px;"><?php echo __t('Our Most Popular Services'); ?></h2>
             <p style="text-align: center; margin-bottom: 2rem; font-size: 1.125rem; color: var(--text-medium);">

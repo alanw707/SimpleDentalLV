@@ -557,39 +557,57 @@ function simple_dental_get_treatment_price_list($guides) {
 }
 
 /**
- * Fees from the services catalog that have no comparison guide, grouped by
- * category, so the Prices page lists every published fee in one place.
+ * Every published fee in the order patients ask about them: routine care
+ * first, then crowns, extractions, root canals, dentures, and the rest.
+ * Crown and denture groups come from the guides and link to them.
  */
-function simple_dental_get_general_price_list() {
+function simple_dental_get_full_price_list($guides) {
     $catalog = simple_dental_get_service_catalog();
-    // Crowns and dentures are priced by option in the guides above.
-    $skip = array('same_day_crown', 'full_denture', 'partial_denture');
-    $groups = array();
+    $categories = get_dental_services_data();
+    $guide_groups = array();
+    foreach (simple_dental_get_treatment_price_list($guides) as $group) {
+        $guide_groups[$group['id']] = $group;
+    }
 
-    foreach (get_dental_services_data() as $category) {
+    $catalog_group = function ($category_key, $service_ids) use ($catalog, $categories) {
         $rows = array();
-        foreach ($category['service_ids'] as $service_id) {
-            if (in_array($service_id, $skip, true) || empty($catalog[$service_id])) {
+        foreach ($service_ids as $service_id) {
+            if (empty($catalog[$service_id])) {
                 continue;
             }
-
             $rows[] = array(
                 'name' => simple_dental_translate_structured_text($catalog[$service_id], 'name'),
                 'price' => $catalog[$service_id]['price'],
             );
         }
 
-        if ($rows) {
-            $groups[] = array(
-                'id' => '',
-                'title' => simple_dental_translate_structured_text($category, 'title'),
-                'unit' => '',
-                'rows' => $rows,
-            );
-        }
+        return array(
+            'id' => '',
+            'title' => simple_dental_translate_structured_text($categories[$category_key], 'title'),
+            'unit' => '',
+            'rows' => $rows,
+        );
+    };
+
+    // The reline belongs with the dentures it adjusts, not in a group of its own.
+    $full_dentures = $guide_groups[$guides['dentures']['id']];
+    if (!empty($catalog['denture_reline'])) {
+        $full_dentures['rows'][] = array(
+            'name' => simple_dental_translate_structured_text($catalog['denture_reline'], 'name'),
+            'price' => $catalog['denture_reline']['price'],
+        );
     }
 
-    return $groups;
+    return array(
+        $catalog_group('preventive', $categories['preventive']['service_ids']),
+        $catalog_group('restorative', array('tooth_colored_filling', 'core_buildup')),
+        $guide_groups[$guides['crowns']['id']],
+        $catalog_group('extraction', $categories['extraction']['service_ids']),
+        $catalog_group('endodontics', $categories['endodontics']['service_ids']),
+        $guide_groups[$guides['partials']['id']],
+        $full_dentures,
+        $catalog_group('other', $categories['other']['service_ids']),
+    );
 }
 
 /**
