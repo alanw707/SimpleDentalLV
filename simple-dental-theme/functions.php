@@ -106,7 +106,7 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  * One-time cache purge after theme content updates.
  */
 function simple_dental_purge_cache_after_reviews_update() {
-    $version = 'site-ux-2026-10-13-3';
+    $version = 'site-ux-2026-10-13-4';
     if (get_option('simple_dental_cache_purge_version') === $version) {
         return;
     }
