@@ -117,22 +117,26 @@ add_action('wp_ajax_nopriv_simple_dental_contact', 'simple_dental_ajax_contact_f
 function simple_dental_contact_form() {
     ob_start();
     ?>
-    <div id="contact-form-messages"></div>
+    <div id="contact-form-messages" role="status" aria-live="polite"></div>
     
     <form id="simple-contact-form" class="simple-contact-form">
         <?php wp_nonce_field('simple_dental_contact_nonce', 'contact_form_nonce'); ?>
         
         <div class="form-row">
-            <input type="text" name="contact_name" id="contact_name" placeholder="<?php echo __t('Your Name*'); ?>" required>
-            <input type="email" name="contact_email" id="contact_email" placeholder="<?php echo __t('Your Email*'); ?>" required>
+            <label class="screen-reader-text" for="contact_name"><?php echo esc_html(__t('Your Name*')); ?></label>
+            <input type="text" name="contact_name" id="contact_name" autocomplete="name" placeholder="<?php echo esc_attr(__t('Your Name*')); ?>" required>
+            <label class="screen-reader-text" for="contact_email"><?php echo esc_html(__t('Your Email*')); ?></label>
+            <input type="email" name="contact_email" id="contact_email" autocomplete="email" placeholder="<?php echo esc_attr(__t('Your Email*')); ?>" required>
         </div>
         
         <div class="form-row">
-            <input type="tel" name="contact_phone" id="contact_phone" placeholder="<?php echo __t('Your Phone Number'); ?>">
+            <label class="screen-reader-text" for="contact_phone"><?php echo esc_html(__t('Your Phone Number')); ?></label>
+            <input type="tel" name="contact_phone" id="contact_phone" autocomplete="tel" placeholder="<?php echo esc_attr(__t('Your Phone Number')); ?>">
         </div>
         
         <div class="form-row">
-            <textarea name="contact_message" id="contact_message" placeholder="<?php echo __t('Your Message*'); ?>" rows="5" required></textarea>
+            <label class="screen-reader-text" for="contact_message"><?php echo esc_html(__t('Your Message*')); ?></label>
+            <textarea name="contact_message" id="contact_message" placeholder="<?php echo esc_attr(__t('Your Message*')); ?>" rows="5" required></textarea>
         </div>
         
         <?php if (simple_dental_has_captcha_field()) : ?>

@@ -20,7 +20,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'Alan Wang',
             'initials' => 'AW',
             'rating' => 5,
-            'date' => '4 weeks ago',
             'featured' => false,
             'text' => 'Simple Dental LV 超出了我的預期。從走進診所的那一刻起，工作人員就非常貼心又友善。醫師潔牙的技術很好，手法溫柔但非常仔細，也會清楚解釋每個步驟。診所環境乾淨、現代、井然有序。這是我做過最好的潔牙體驗之一，很高興找到一家值得信賴的牙科診所。',
         ),
@@ -28,7 +27,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'Robert Wu',
             'initials' => 'RW',
             'rating' => 5,
-            'date' => 'a week ago',
             'featured' => true,
             'text' => 'Dr Chang is super friendly!! He calms me down when I feel very nervous and makes a crown for me works very well. Very good experience, highly recommend.',
         ),
@@ -36,7 +34,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'Vivian',
             'initials' => 'V',
             'rating' => 5,
-            'date' => 'a week ago',
             'featured' => true,
             'text' => 'Highly recommend this dental office! The clinic is beautiful, clean, and welcoming. The staff are friendly, professional, and made the whole experience very comfortable. Dr. Chang is very professional, and you can really feel the care and attention they give to their patients.',
         ),
@@ -44,7 +41,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'J L',
             'initials' => 'JL',
             'rating' => 5,
-            'date' => '2 weeks ago',
             'featured' => true,
             'text' => 'Really happy with my experience here. The clinic feels clean and up-to-date, and everything was handled smoothly. Dr. Chang was patient, friendly, and took the time to explain things clearly, which I appreciated. The staff made the visit easy, and the location is very convenient. I’d come back and recommend it to others.',
         ),
@@ -52,7 +48,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'Anna Sun',
             'initials' => 'AS',
             'rating' => 5,
-            'date' => '2 weeks ago',
             'featured' => false,
             'text' => 'I had an excellent experience at this dental clinic. The facility is equipped with modern, state-of-the-art technology, which made the entire process smooth and efficient. The dentist was not only highly skilled but also incredibly friendly and patient, taking the time to explain everything clearly. The staff created a warm and welcoming atmosphere, and the clinic itself is clean, comfortable, and thoughtfully designed. Another big plus is the convenient location—it’s very easy to access. I would highly recommend this clinic to anyone looking for quality dental care.',
         ),
@@ -60,7 +55,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'Ashley Yu',
             'initials' => 'AY',
             'rating' => 5,
-            'date' => 'a month ago',
             'featured' => false,
             'text' => 'I had a really lovely experience at Dr. Chang’s office. From the moment I walked in, the clinic felt fresh, bright, and very clean. The space has a simple and welcoming feel that made me feel comfortable right away. Dr. Chang made the whole visit feel calm and reassuring. He was caring, patient, and very skilled, which helped me feel comfortable throughout the entire appointment. I especially appreciated how he checked in during the visit to make sure I was doing okay and felt at ease. What also stood out to me was his honesty. He explained things clearly and never made me feel pushed toward treatments that were not truly needed. That kind of sincerity and openness means a lot to me when choosing a dentist. The office is modern, thoughtfully arranged, and everything felt well managed from beginning to end. Overall, it was such a smooth and positive experience. I would absolutely recommend Dr. Chang to anyone looking for a dentist who is trustworthy, attentive, and provides excellent care.',
         ),
@@ -68,7 +62,6 @@ function simple_dental_get_google_reviews() {
             'name' => 'Google reviewer',
             'initials' => 'G',
             'rating' => 5,
-            'date' => 'a month ago',
             'featured' => false,
             'text' => 'We had a wonderful experience at this dental office! Dr. Chang did an amazing job cleaning my son’s teeth — he was incredibly thorough, and he felt absolutely no pain during the entire process. The staff was very professional and made us feel comfortable from start to finish. The clinic itself was also very clean and well-maintained, which made the visit even more pleasant. Highly recommend to any one looking for a great pediatric dental experience!',
         ),
@@ -117,7 +110,6 @@ function simple_dental_render_google_review_card($review, $is_featured = false, 
     $name = isset($review['name']) ? $review['name'] : __t('Google reviewer');
     $initials = !empty($review['initials']) ? $review['initials'] : strtoupper(substr($name, 0, 1));
     $rating = isset($review['rating']) ? (int) $review['rating'] : 5;
-    $date = isset($review['date']) ? $review['date'] : '';
     $text = isset($review['text']) ? $review['text'] : '';
     if ($compact) {
         $text = simple_dental_get_review_excerpt($text, 30);
@@ -131,7 +123,7 @@ function simple_dental_render_google_review_card($review, $is_featured = false, 
             <div class="review-avatar" aria-hidden="true"><?php echo esc_html($initials); ?></div>
             <div>
                 <h3 class="reviewer-name"><?php echo esc_html($name); ?></h3>
-                <p class="review-source"><?php echo esc_html(__t('Google review')); ?><?php echo $date ? ' · ' . esc_html($date) : ''; ?></p>
+                <p class="review-source"><?php echo esc_html(__t('Google review')); ?></p>
             </div>
         </div>
         <?php echo simple_dental_render_review_stars($rating); ?>

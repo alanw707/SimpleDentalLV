@@ -45,5 +45,18 @@ function simple_dental_render_header_navigation() {
         echo '<li><a href="' . esc_url(simple_dental_with_lang(home_url($item['path']))) . '"' . $aria_current . '><svg class="menu-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $item['icon'] . '</svg><span class="menu-text">' . esc_html($item['label']) . '</span></a></li>';
     }
 
+    // FAQ, crowns and Smile Preview live in the footer on desktop; phones get them in the menu too.
+    $secondary = array(
+        array('path' => '/faq/', 'label' => __t('FAQ')),
+        array('path' => simple_dental_get_same_day_crowns_path(), 'label' => __t('Same-Day Crowns', 'key:footer.more.crowns')),
+        array('path' => simple_dental_get_smile_preview_path(), 'label' => __t('Smile Preview')),
+        array('path' => simple_dental_get_dental_health_path(), 'label' => __t('Cavity & Gum Guides', 'key:health.link')),
+    );
+    foreach ($secondary as $index => $item) {
+        $aria_current = simple_dental_header_navigation_is_current($item['path'], $current_path) ? ' aria-current="page"' : '';
+        echo '<li class="menu-secondary' . (0 === $index ? ' menu-secondary--first' : '') . '"><a href="' . esc_url(simple_dental_with_lang(home_url($item['path']))) . '"' . $aria_current . '><span class="menu-text">' . esc_html($item['label']) . '</span></a></li>';
+    }
+    echo '<li class="menu-secondary menu-secondary--book"><a href="' . esc_url(simple_dental_get_booking_url()) . '"><span class="menu-text">' . esc_html(__t('Book Online')) . '</span></a></li>';
+
     echo '</ul>';
 }

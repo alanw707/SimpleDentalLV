@@ -100,7 +100,7 @@
             return headerHeight + adminBarHeight;
         }
 
-        $('a[href*="#"]:not([href="#"])').click(function() {
+        $('a[href*="#"]:not([href="#"]):not(.skip-link)').click(function() {
             var isFaqJump = $(this).closest('.faq-panel-nav').length;
             if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && 
                 location.hostname === this.hostname) {

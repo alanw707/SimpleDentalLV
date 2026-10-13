@@ -83,7 +83,7 @@ add_action('wp_head', 'simple_dental_favicon');
  */
 function simple_dental_scripts() {
     // Main theme stylesheet
-    wp_enqueue_style('simple-dental-style', get_stylesheet_uri(), array(), '1.1.5');
+    wp_enqueue_style('simple-dental-style', get_stylesheet_uri(), array(), '1.1.10');
     
     // Google Fonts
     wp_enqueue_style('simple-dental-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
@@ -92,7 +92,7 @@ function simple_dental_scripts() {
     wp_enqueue_script('simple-dental-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.1.0', true);
     
     // CRITICAL FIX: Re-enable navigation script for mobile menu functionality
-    wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array('jquery'), '1.1.1', true);
+    wp_enqueue_script('simple-dental-nav', get_template_directory_uri() . '/assets/js/navigation.js', array('jquery'), '1.1.2', true);
 
     if (function_exists('simple_dental_is_smile_preview_request') && simple_dental_is_smile_preview_request()) {
         wp_enqueue_script('simple-dental-smile-preview', get_template_directory_uri() . '/assets/js/smile-preview.js', array(), '1.0.2', true);
@@ -106,7 +106,7 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  * One-time cache purge after theme content updates.
  */
 function simple_dental_purge_cache_after_reviews_update() {
-    $version = 'site-ia-2026-10-12-3';
+    $version = 'site-ux-2026-10-13-1';
     if (get_option('simple_dental_cache_purge_version') === $version) {
         return;
     }

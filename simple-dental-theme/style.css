@@ -41,7 +41,7 @@ body.admin-bar {
    ========================================================================== */
 
 :root {
-    --primary-brown: #8B7355;
+    --primary-brown: #826B4F;
     --brown-hover: #7A6249;
     --brown-light: #A68B5B;
     --dark-gray: #2c2c2c;
@@ -272,9 +272,16 @@ a:hover {
 .btn:focus-visible,
 .language-switcher-wrapper select:focus-visible,
 .language-switcher-wrapper a:focus-visible {
-    outline: 3px solid rgba(139, 115, 85, 0.35);
-    outline-offset: 4px;
+    outline: 3px solid var(--brown-hover);
+    outline-offset: 3px;
     border-radius: 0.5rem;
+}
+
+.scroll-to-top:focus-visible,
+.simple-contact-form input:focus-visible,
+.simple-contact-form textarea:focus-visible {
+    outline: 3px solid var(--brown-hover);
+    outline-offset: 2px;
 }
 
 .header-cta .btn {
@@ -555,7 +562,7 @@ a:hover {
 
 .new-patient-special .btn {
     background-color: var(--white);
-    color: var(--warm-coral);
+    color: var(--brown-hover);
     border-color: var(--white);
     font-weight: 700;
     padding: 1rem 2.5rem;
@@ -1047,15 +1054,24 @@ a:hover {
    Scroll Animations
    ========================================================================== */
 
-.service-card, .contact-card {
+/* Only hide cards for the reveal when the script that reveals them can run */
+.js .service-card, .js .contact-card {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.service-card.fade-in, .contact-card.fade-in {
+.js .service-card.fade-in, .js .contact-card.fade-in {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js .service-card, .js .contact-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 /* ==========================================================================
@@ -1198,12 +1214,23 @@ button.menu-toggle::before {
 .scroll-arrow { line-height: 1; font-size: 18px; }
 
 @media (max-width: 768px) {
-    .footer-bottom-content { flex-direction: column; text-align: center; }
+    .footer-bottom-content { flex-direction: column; align-items: stretch; gap: 0.75rem; text-align: center; }
+    /* The 18rem flex-basis is a width on desktop; in a column it became 288px of height */
     .footer-bottom-left,
     .footer-bottom-right {
+        flex: none;
         width: 100%;
         text-align: center;
     }
+    .footer-bottom-left { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 1.5rem; }
+    .footer-bottom-left > p:first-child { flex-basis: 100%; }
+    .footer-legal-links { margin-top: 0; }
+    .footer-legal-links a { display: inline-block; padding: 0.75rem 0; }
+    .site-footer { padding: 32px 0 16px; }
+    .footer-content { gap: 20px; margin-bottom: 20px; }
+    .footer-section h4 { margin-bottom: 8px; }
+    .footer-section p { margin-bottom: 0.5rem; }
+    .footer-section h4 { font-size: 1.125rem; }
     .footer-bottom-right p {
         margin-right: auto;
         margin-left: auto;
@@ -3636,7 +3663,10 @@ body.menu-open {
 
 @media (max-width: 900px) {
     .tg-prices__layout,
-    .tg-implant-facts { grid-template-columns: 1fr; gap: 2rem; }
+    .tg-implant-facts { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+    .tg-implant-facts .btn { min-width: 0; max-width: 100%; white-space: normal; }
+    .tg-timeline .tg-price-list__row dd { white-space: normal; text-align: right; }
+    .tg-timeline .tg-price-list__row dt { min-width: 0; }
     .tg-options--3 { grid-template-columns: 1fr; }
     .tg-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -3695,6 +3725,7 @@ body.menu-open {
 .tg-guides__more a { display: inline-block; padding: 0.6rem 0; }
 
 @media print {
+    .js .service-card, .js .contact-card { opacity: 1; transform: none; }
     .site-header { position: static; }
     .mobile-menu-overlay, .scroll-to-top, .header-call, .menu-toggle { display: none !important; }
 }
@@ -3754,5 +3785,30 @@ body.menu-open {
     .tg-guide__body { padding: 1rem; }
     .tg-guide__intro { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .tg-guide[open] .tg-guide__intro { display: block; }
+}
+
+/* Phone summary of every option, shown above the swipeable cards */
+.tg-compare { display: none; }
+
+/* Secondary menu links are phone-only; desktop has them in the footer */
+.main-navigation .menu-secondary { display: none; }
+
+@media (max-width: 1100px) {
+    .main-navigation .menu-secondary { display: block; }
+    .main-navigation .menu-secondary--first { border-top: 6px solid var(--off-white); }
+    /* No icons here, so indent to the same text column as the main links */
+    .main-navigation .menu-secondary a { padding-left: calc(1rem + 36px) !important; color: var(--text-medium); font-weight: 500; }
+    .main-navigation .menu-secondary--book a { color: var(--brown-hover); font-weight: 700; }
+}
+
+@media (max-width: 640px) {
+    .tg-compare { display: table; width: 100%; margin: 0 0 1.25rem; border-collapse: collapse; font-size: 0.9375rem; }
+    .tg-compare th,
+    .tg-compare td { padding: 0.65rem 0; border-bottom: 1px solid var(--tg-rule); vertical-align: top; text-align: left; }
+    .tg-compare th { font-weight: 700; color: var(--text-dark); padding-right: 1rem; }
+    .tg-compare td { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; color: var(--text-dark); }
+    .tg-compare__best { display: block; margin-top: 0.15rem; font-weight: 400; font-size: 0.875rem; line-height: 1.4; color: var(--text-medium); }
+    .tg-compare tr:last-child th,
+    .tg-compare tr:last-child td { border-bottom: 0; }
 }
 

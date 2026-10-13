@@ -557,6 +557,42 @@ function simple_dental_get_treatment_price_list($guides) {
 }
 
 /**
+ * Fees from the services catalog that have no comparison guide, grouped by
+ * category, so the Prices page lists every published fee in one place.
+ */
+function simple_dental_get_general_price_list() {
+    $catalog = simple_dental_get_service_catalog();
+    // Crowns and dentures are priced by option in the guides above.
+    $skip = array('same_day_crown', 'full_denture', 'partial_denture');
+    $groups = array();
+
+    foreach (get_dental_services_data() as $category) {
+        $rows = array();
+        foreach ($category['service_ids'] as $service_id) {
+            if (in_array($service_id, $skip, true) || empty($catalog[$service_id])) {
+                continue;
+            }
+
+            $rows[] = array(
+                'name' => simple_dental_translate_structured_text($catalog[$service_id], 'name'),
+                'price' => $catalog[$service_id]['price'],
+            );
+        }
+
+        if ($rows) {
+            $groups[] = array(
+                'id' => '',
+                'title' => simple_dental_translate_structured_text($category, 'title'),
+                'unit' => '',
+                'rows' => $rows,
+            );
+        }
+    }
+
+    return $groups;
+}
+
+/**
  * Render a 1–5 rating as pips with a text alternative.
  */
 function simple_dental_render_guide_rating($score) {
@@ -584,6 +620,20 @@ function simple_dental_render_guide_options($guide) {
 
     $spec_count = count($guide['options'][0]['specs']);
     $row_count = ($has_desc ? 5 : 4) + $spec_count;
+
+    // Narrow screens show one card at a time, so lead with every option side by side.
+    $best_label = simple_dental_guide_t('spec.best_for', 'Best for');
+    echo '<table class="tg-compare"><caption class="screen-reader-text">' . esc_html($guide['title']) . '</caption><tbody>';
+    foreach ($guide['options'] as $option) {
+        $best = '';
+        foreach ($option['specs'] as $spec) {
+            if ($spec[0] === $best_label) {
+                $best = $spec[1];
+            }
+        }
+        echo '<tr><th scope="row">' . esc_html($option['name']) . '<span class="tg-compare__best">' . esc_html($best) . '</span></th><td>' . esc_html($option['price']) . '</td></tr>';
+    }
+    echo '</tbody></table>';
 
     echo '<div class="tg-options tg-options--' . (int) $count . '" style="--tg-rows: ' . (int) $row_count . '; --tg-spec-rows: ' . (int) $spec_count . ';" tabindex="0" role="group" aria-label="' . esc_attr($guide['title']) . '">';
 

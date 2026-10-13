@@ -17,7 +17,7 @@ $services_url = simple_dental_with_lang(home_url('/services/'));
 $crowns_url = simple_dental_with_lang(home_url('/same-day-crowns-las-vegas/'));
 $health_url = simple_dental_with_lang(home_url(simple_dental_get_dental_health_path()));
 $guides = simple_dental_get_treatment_guides_data();
-$price_groups = simple_dental_get_treatment_price_list($guides);
+$price_groups = array_merge(simple_dental_get_treatment_price_list($guides), simple_dental_get_general_price_list());
 ?>
 
 <main id="primary" class="site-main service-landing treatment-guides">
@@ -46,7 +46,13 @@ $price_groups = simple_dental_get_treatment_price_list($guides);
                 <div class="tg-prices__groups">
                     <?php foreach ($price_groups as $group) : ?>
                         <div class="tg-price-group">
-                            <h3 class="tg-price-group__title"><a href="#<?php echo esc_attr($group['id']); ?>"><?php echo esc_html($group['title']); ?></a> <span class="tg-price-group__unit"><?php echo esc_html($group['unit']); ?></span></h3>
+                            <h3 class="tg-price-group__title">
+                                <?php if ($group['id']) : ?>
+                                    <a href="#<?php echo esc_attr($group['id']); ?>"><?php echo esc_html($group['title']); ?></a> <span class="tg-price-group__unit"><?php echo esc_html($group['unit']); ?></span>
+                                <?php else : ?>
+                                    <?php echo esc_html($group['title']); ?>
+                                <?php endif; ?>
+                            </h3>
                             <dl class="tg-price-list">
                                 <?php foreach ($group['rows'] as $row) : ?>
                                     <div class="tg-price-list__row">
