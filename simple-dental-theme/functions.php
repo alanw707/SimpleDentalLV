@@ -382,6 +382,27 @@ function simple_dental_get_external_booking_url() {
 }
 
 /**
+ * Paths that should redirect visitors to the external scheduler.
+ *
+ * Includes the localized variants of the booking URL (for example
+ * /zh-cn/book-now/), because the locale rewrite rules otherwise render a
+ * "Content Not Found" page instead of the scheduler.
+ *
+ * @return array
+ */
+function simple_dental_get_booking_path_aliases() {
+    return array(
+        '/book-now/',
+        '/booknow/',
+        '/book/',
+        '/booking/',
+        '/appointment/',
+        '/appointments/',
+        '/schedule/',
+    );
+}
+
+/**
  * Redirect friendly booking paths to the external scheduler.
  */
 function simple_dental_redirect_booking_paths() {
@@ -391,7 +412,10 @@ function simple_dental_redirect_booking_paths() {
 
     $request_path = '/' . trim((string) $request_path, '/') . '/';
 
-    if (in_array($request_path, array('/book-now/', '/booknow/'), true)) {
+    // Treat a locale-prefixed booking path the same as the English one.
+    $request_path = preg_replace('#^/(es|zh-cn|zh-tw)/#', '/', $request_path);
+
+    if (in_array($request_path, simple_dental_get_booking_path_aliases(), true)) {
         wp_redirect(simple_dental_get_external_booking_url(), 302);
         exit;
     }
