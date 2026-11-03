@@ -106,7 +106,7 @@ add_action('wp_enqueue_scripts', 'simple_dental_scripts');
  * One-time cache purge after theme content updates.
  */
 function simple_dental_purge_cache_after_reviews_update() {
-    $version = 'site-ux-2026-10-13-4';
+    $version = 'site-ux-2026-11-03-booking';
     if (get_option('simple_dental_cache_purge_version') === $version) {
         return;
     }
@@ -119,6 +119,13 @@ function simple_dental_purge_cache_after_reviews_update() {
     do_action('litespeed_purge_url', home_url(simple_dental_get_smile_preview_path()));
     do_action('litespeed_purge_url', home_url(simple_dental_get_treatment_guides_path()));
     do_action('litespeed_purge_url', home_url(simple_dental_get_dental_health_path()));
+
+    // Clear cached "Content Not Found" pages for booking paths in every locale.
+    foreach (array('', 'es/', 'zh-cn/', 'zh-tw/') as $locale_prefix) {
+        foreach (simple_dental_get_booking_path_aliases() as $booking_path) {
+            do_action('litespeed_purge_url', home_url('/' . $locale_prefix . ltrim($booking_path, '/')));
+        }
+    }
 
     update_option('simple_dental_cache_purge_version', $version, false);
 }
