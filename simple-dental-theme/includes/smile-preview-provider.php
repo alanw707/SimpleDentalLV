@@ -34,7 +34,7 @@ function simple_dental_smile_preview_provider_model() {
     }
 
     $env_model = getenv('SIMPLE_DENTAL_OPENAI_IMAGE_MODEL');
-    return $env_model ? $env_model : 'gpt-image-2';
+    return $env_model ? $env_model : 'gpt-image-2.6-sunburst';
 }
 
 function simple_dental_smile_preview_provider_prompt($goal_prompts) {
@@ -53,7 +53,9 @@ function simple_dental_openai_smile_preview_post_fields($file_path, $mime_type, 
         'image[]' => curl_file_create($file_path, $mime_type, basename($file_path)),
     );
 
-    if ($model !== 'gpt-image-2') {
+    // Only the gpt-image-1 family accepts input_fidelity; gpt-image-2 and the
+    // gpt-image-2.6 models reject it and always use high input fidelity.
+    if (strpos($model, 'gpt-image-1') === 0) {
         $post_fields['input_fidelity'] = 'high';
     }
 
